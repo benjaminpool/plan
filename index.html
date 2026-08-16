@@ -134,11 +134,10 @@ tbody tr:last-child td{border-bottom:0}
 .miss{color:var(--bad)!important}
 
 /* ---------- coach mode ---------- */
-.coach{display:none;border-left:3px solid var(--navy3);background:#EDF1F7;padding:11px 14px;border-radius:0 8px 8px 0;margin:0 0 14px;font-size:.9rem}
-body.coachmode .coach{display:block}
-.coach .cl{font-size:.68rem;font-weight:800;letter-spacing:.1em;color:var(--navy3);text-transform:uppercase;display:block;margin-bottom:4px}
-.coachtoggle{display:flex;align-items:center;gap:8px;font-size:.8rem;color:#C7D3E4;margin:8px 0 0}
-.coachtoggle input{width:auto}
+
+
+
+
 
 /* ---------- misc ---------- */
 .pill{display:inline-block;background:var(--soft);border:1px solid var(--line);border-radius:20px;padding:3px 10px;font-size:.78rem;margin:0 5px 5px 0}
@@ -220,7 +219,7 @@ button.btn.red.armed{background:var(--bad);color:#fff;border-color:var(--bad)}
     </div>
     <div class="whoami" id="whoami">Six months to the version of you that doesn't have to think about it.</div>
     <nav id="nav"></nav>
-    <label class="coachtoggle"><input type="checkbox" id="coachChk"> Coach mode</label>
+    
   </div>
 </header>
 
@@ -269,7 +268,7 @@ button.btn.red.armed{background:var(--bad);color:#fff;border-color:var(--bad)}
     <h3>Six to twelve months, and then the rest of your life</h3>
     <p>The commitment window is six to twelve months. Not because it takes that long to lose weight — it doesn't — but because that's roughly how long it takes for a way of eating and training to stop being a thing you're doing and start being a thing you are. Short challenges work and then unwind. That's the whole reason for the timeline.</p>
     <p>What you're actually buying is <strong>accountability and adjustment</strong>. Every two weeks we look at real data and change one thing. That's it. Everything else in this file is here so you don't have to hold it in your head.</p>
-    <div class="coach"><span class="cl">Coach note</span>Ben — this framing is straight from your own words on the intake call ("this is a 6 to 12 month plan... for the rest of your life" / "the majority of it is going to be the accountability part"). Keep saying it that way. It's the promise she agreed to and it's the one that survives a bad week.</div>
+    
   </div>
 
   <div class="card">
@@ -304,6 +303,8 @@ button.btn.red.armed{background:var(--bad);color:#fff;border-color:var(--bad)}
       <li><strong>It will tell you when it doesn't know.</strong> Every claim is graded, including the ones where the honest answer is that the research hasn't been done.</li>
     </ul>
     <p class="quiet">Built by <span id="brandName">Benjamin Pool</span>. If you want someone in your corner while you do this, there's a button at the bottom of the Numbers tab.</p>
+    <div class="rule"></div>
+    <p class="quiet" style="margin-bottom:0"><strong>Use of this program.</strong> Free for your own use — keep it, copy it, send it to a friend, use it forever. It is <strong>not</strong> licensed for commercial use: coaches, trainers and gyms may not use it, rebrand it or any part of it as part of a paid service without written permission. If you'd like to use it with your own clients, just ask.</p>
   </div>
 </section>
 
@@ -384,7 +385,7 @@ button.btn.red.armed{background:var(--bad);color:#fff;border-color:var(--bad)}
         <div class="choice" id="s_scale"></div>
       </div>
       <div id="scaleExplain"></div>
-      <div class="coach"><span class="cl">Coach note</span>Whatever she picks, the choice itself is data. If she picks daily-with-trend and then quietly stops logging in week 5, that's a conversation — not a compliance problem. If she picks no-scale and later asks to add it, that's progress. Ask about it at every check-in; don't make it a test.</div>
+      
       <div class="btnrow"><button class="btn ghost" onclick="wiz(2)">Back</button><button class="btn" onclick="wiz(4)">Next</button></div>
     </div>
 
@@ -431,7 +432,7 @@ button.btn.red.armed{background:var(--bad);color:#fff;border-color:var(--bad)}
       <p>So this is not your metabolism. It's a <strong>starting hypothesis</strong>. Three weeks of your own intake and weight data will beat every equation ever published, and from your second check-in onward we run on your numbers, not the formula.</p>
       <p style="margin-bottom:0">Expect the real number to land 200&ndash;400 calories away from this one, in either direction. That is normal. It is not evidence that anything is broken.</p>
     </div>
-    <div class="coach"><span class="cl">Coach note</span>Pre-framing this is the single best inoculation against "my metabolism is damaged." She's had that thought before — she told you about the fatigue in the 140s. Get ahead of it in week one, not week nine.</div>
+    
   </div>
 
   <div class="card">
@@ -461,13 +462,7 @@ button.btn.red.armed{background:var(--bad);color:#fff;border-color:var(--bad)}
       <button class="btn ghost" id="copyBtn" onclick="showPlan()">Copy it instead</button>
     </div>
     <textarea id="planText" rows="10" class="hide" style="margin-top:12px;font-family:ui-monospace,Menlo,Consolas,monospace;font-size:.82rem"></textarea>
-    <div class="coach"><span class="cl">Coach settings</span>
-      <div class="row r2" style="margin-top:8px">
-        <div class="field"><label>Coach name</label><input type="text" id="s_coachname"></div>
-        <div class="field"><label>Coach email</label><input type="text" id="s_coachemail"></div>
-      </div>
-      <p class="quiet" style="margin-bottom:0">Change these before you share the file and every copy points at you. Nothing is transmitted — the button just opens the visitor's own mail client with the text pre-written, so you never handle anyone's data unless they choose to hit send.</p>
-    </div>
+    
   </div>
 </section>
 
@@ -497,7 +492,7 @@ button.btn.red.armed{background:var(--bad);color:#fff;border-color:var(--bad)}
     <p>For most people the eating that breaks a plan happens at night. It usually isn't hunger. It shows up at the end of a day that had nothing in it for you — after the work, the cooking, the everyone else. That is not a willpower problem and it will not be fixed by a rule against it.</p>
     <p>So the day is built with a real evening slot in it — calories and food you actually like, budgeted in advance, yours. Front-loading protein earlier makes it smaller. It doesn't make it disappear, and it isn't supposed to.</p>
     <p class="quiet">On the evidence: late eating does not cause fat gain independent of how much you eat in total. <span class="tag t-a">Strong</span> Plans that ban evening eating fail because the eating happens anyway and then the whole plan feels broken. <span class="tag t-d">Reasoning</span></p>
-    <div class="coach"><span class="cl">Coach note</span>When evening eating is depletion rather than hunger, the intervention isn't dietary. Ask at check-ins what else in that person's day belongs to them. If the honest answer is nothing, the evening slot is doing all the work alone and it will eventually lose. Listen for caretaker language — "I'm always buying and cooking for everyone else" — it's the clearest tell.</div>
+    
   </div>
 
   <div class="card">
@@ -547,7 +542,7 @@ button.btn.red.armed{background:var(--bad);color:#fff;border-color:var(--bad)}
         </ul>
       </div>
     </div>
-    <div class="coach"><span class="cl">Coach note</span>With any returning athlete, motor learning comes back far faster than connective tissue adapts — so technique looks ready long before the tendons are. Connective tissue is the rate limiter, not muscle and not motivation. That is what the third guardrail below is for.</div>
+    
   </div>
 
   <div class="card">
@@ -627,7 +622,7 @@ button.btn.red.armed{background:var(--bad);color:#fff;border-color:var(--bad)}
         <tr><td>Over 2.5 hours, or a competition day</td><td>up to 90 g/hour</td><td>Needs mixed sugars to absorb that fast. Practise it long before you need it.</td></tr>
       </tbody>
     </table></div>
-    <div class="coach"><span class="cl">Coach note</span>This is the fuelling call most coaches get wrong in the well-meaning direction. A client in a deficit who eats back a 60-minute easy session is a client who quietly stalls and can't work out why. Reserve the carbs for the sessions that earn them.</div>
+    
   </div>
 
   <div class="card">
@@ -686,7 +681,7 @@ button.btn.red.armed{background:var(--bad);color:#fff;border-color:var(--bad)}
     <p>Every decision you make in a day draws down the same account. Not a metaphorical one — the part of your brain that runs threat and urgency is small, it gets depleted, and micro-decisions drain it faster than big ones.</p>
     <p>Which is why a plan that asks "is this okay? can I have that? do I need to swap this?" forty times a day doesn't fail on day three. It fails on <strong>day forty</strong>, when you've simply run out. And it doesn't feel like running out. It feels like not caring anymore. That feeling is the most reliable early warning sign there is.</p>
     <p><strong>What this program does about it:</strong> the engine makes the food decisions. The lifting is written down before you get there. Your evening is budgeted in advance. You spend your judgment on the things that actually need you.</p>
-    <div class="coach"><span class="cl">Coach note</span>Naming this early gives a client a category for something they have only ever experienced as a personal failing — and it lands hardest with people who say things like "I don't want to have to think about food." Come back to this language every single time someone describes a stall as not caring anymore.</div>
+    
   </div>
 
   <div class="card">
@@ -727,7 +722,7 @@ button.btn.red.armed{background:var(--bad);color:#fff;border-color:var(--bad)}
     <p>Some people live and die by the scale. Others need to see the shape of the thing improving — what they can lift, how they move in week ten versus week two, whether they're still standing in the third game.</p>
     <p>Those are different people and they need different feedback. If the scale is your instrument, we watch the trend. If it isn't, we watch performance, and the scale becomes almost incidental.</p>
     <p class="quiet">Tell your coach which one you are. If you don't know yet, you'll find out around week six, and that's a perfectly good time to switch.</p>
-    <div class="coach"><span class="cl">Coach note</span>Run this deliberately around week 6&ndash;8 rather than waiting to find out during a stall. Scale people and performance people need different feedback, and giving the wrong one to either is how good clients quietly disengage.</div>
+    
   </div>
 </section>
 
@@ -750,7 +745,7 @@ button.btn.red.armed{background:var(--bad);color:#fff;border-color:var(--bad)}
     <div class="kicker">Check-in</div>
     <h2>The engine that decides what changes</h2>
     <p class="lede">This is the actual product. Every two weeks you put in real numbers and it tells you what to adjust and why — so the decision is made by a rule you agreed to in advance, not by how the last fortnight felt.</p>
-    <div class="coach"><span class="cl">Coach note</span>Ben — this is your trading brain applied to a body. The rule is written before the emotion. The most important rule in here is the adherence gate: <strong>never adjust a plan that wasn't followed.</strong> Changing calories after a 60%-adherence fortnight is how coaches end up chasing noise and clients end up eating 1,200 calories by month five.</div>
+    
   </div>
 
   <div class="card">
@@ -1042,7 +1037,7 @@ const DEF={
   scale:"trend", event:"", eventwhen:"",
   food:{},           /* name -> "no" | "fav"  (evening items and sides) */
   meals:{},          /* recipe name -> "no" | "fav" */
-  checkins:[], week:1, coach:false, day:null, recent:[], done:{}, _step:1, _built:false
+  checkins:[], week:1, day:null, recent:[], done:{}, _step:1, _built:false
 };
 let S=JSON.parse(JSON.stringify(DEF));
 
@@ -1776,6 +1771,40 @@ function makeList(){
     + `<p class="quiet" style="margin-top:12px">Totals across your last ${r.length} day${r.length>1?'s':''}, at full recipe size — so this feeds everyone, not just you. Buy for the pattern rather than the exact day; that's what the swap button is for.</p>`;
 }
 
+/* ---------- send to a coach ----------
+   Their ANSWERS only — never the calculated output. The analysis is the part
+   the program does; it stays in the program. Nothing is transmitted: this only
+   opens the visitor's own mail client with the text already written. */
+function planText(){
+  const L=[];
+  L.push(`Name: ${S.name||'(not given)'}`);
+  L.push(`${S.sex==='m'?'Male':'Female'}, ${S.age}, ${S.ft}'${S.inch}", ${S.wt} lb${S.goal?`, goal ${S.goal} lb`:''}`);
+  L.push(`Sport: ${sportName()} — ${S.court} session${S.court===1?'':'s'} a week, about ${S.courtmin} min each`);
+  L.push(`Days outside training: ${(ACTS.find(x=>x[0]===S.act)||[])[1]||S.act}`);
+  L.push(`Lifting at: ${(GYMS.find(g=>g[0]===S.gym)||[])[1]||S.gym}`);
+  L.push(`Working around: ${(S.inj.length&&!S.inj.includes('none'))?S.inj.join(', '):'nothing flagged'}`);
+  L.push(`Scale preference: ${(SCALES.find(x=>x[0]===S.scale)||[])[1]||S.scale}`);
+  if(S.event) L.push(`Aiming at: ${S.event}${S.eventwhen?' ('+S.eventwhen+')':''}`);
+  if(S.notes) L.push(`In their words: ${S.notes}`);
+  const no=Object.keys(S.meals).filter(k=>S.meals[k]==='no');
+  const fav=Object.keys(S.meals).filter(k=>S.meals[k]==='fav');
+  if(no.length)  L.push(`Won't eat: ${no.join(', ')}`);
+  if(fav.length) L.push(`Favourites: ${fav.join(', ')}`);
+  L.push('');
+  L.push("I've filled in the program and I'd like to talk about coaching.");
+  return L.join('\n');
+}
+function sendToCoach(){
+  const subj=`Program from ${S.name||'someone new'} — ${sportName()}`;
+  window.location.href='mailto:'+encodeURIComponent(S.coachEmail||'')
+    +'?subject='+encodeURIComponent(subj)+'&body='+encodeURIComponent(planText());
+}
+function showPlan(){
+  const t=$('planText'); if(!t) return;
+  t.value=planText(); t.classList.remove('hide'); t.select();
+  try{ document.execCommand('copy'); $('copyBtn').textContent='Copied to clipboard';
+       setTimeout(()=>$('copyBtn').textContent='Copy it instead',2200); }catch(e){}
+}
 function printDay(){window.print();}
 function printPanel(){window.print();}
 
@@ -1854,34 +1883,26 @@ function mark(id){S.done=S.done||{};S.done[id]=!S.done[id];save();renderLift();}
    ============================================================ */
 const SEASON=[
  {p:"Phase 1 — Foundation (weeks 1–8)"},
- {w:"Weeks 1–2",t:"Protein and lifting, from day one",b:["Hit your protein number. That's the whole nutrition task for two weeks — don't count anything else yet.","Two lifting sessions a week, deliberately too easy.","Pick your scale approach and start collecting. No interpreting.","Eat at the calorie number without weighing food. Use the engine."],
-  c:"The old programme spent eight weeks on a food list before protein appeared. Protein and lifting are the two levers with the best evidence, so they go first. Everything else is sequencing."},
- {w:"Weeks 3–4",t:"Portions by hand",b:["Learn palm / fist / cupped hand / thumb so you can eat anywhere without a plan.","Lifting: still light, technique locked.","First check-in. Almost certainly: change nothing."],
-  c:"First check-in is usually a hold. Say so in advance so it doesn't read as failure."},
- {w:"Weeks 5–6",t:"Precision, if you want it",b:["Optional: a food scale for a fortnight, to calibrate your eye. Optional means optional.","Load starts going on the bar.","Impact work begins, if the toe allows."],
-  c:"The old plan mandated a scale and MyFitnessPal here. For someone who says food shouldn't rule her life, a mandate is the wrong tool — it's offered as calibration, with a defined end date."},
- {w:"Weeks 7–8",t:"Your real numbers",b:["Two weeks of honest intake logging — this is what replaces the equation.","Check-in: first adjustment based on your data rather than a formula."],
-  c:"This is where the equation gets thrown away. Pre-frame that the empirical number will differ by 200–400 kcal and that this is expected."},
+ {w:"Weeks 1–2",t:"Protein and lifting, from day one",b:["Hit your protein number. That's the whole nutrition task for two weeks — don't count anything else yet.","Two lifting sessions a week, deliberately too easy.","Pick your scale approach and start collecting. No interpreting.","Eat at the calorie number without weighing food. Use the engine."]},
+ {w:"Weeks 3–4",t:"Portions by hand",b:["Learn palm / fist / cupped hand / thumb so you can eat anywhere without a plan.","Lifting: still light, technique locked.","First check-in. Almost certainly: change nothing."]},
+ {w:"Weeks 5–6",t:"Precision, if you want it",b:["Optional: a food scale for a fortnight, to calibrate your eye. Optional means optional.","Load starts going on the bar.","Impact work begins, if the toe allows."]},
+ {w:"Weeks 7–8",t:"Your real numbers",b:["Two weeks of honest intake logging — this is what replaces the equation.","Check-in: first adjustment based on your data rather than a formula."]},
  {p:"Phase 2 — Build (weeks 9–16)"},
- {w:"Weeks 9–10",t:"The heavy block begins",b:["Lifting moves to 4–5 sets of 5. This is the most important block in the programme.","Nutrition holds steady — one variable at a time."],
-  c:"Do not change calories in the same fortnight the training changes. You won't know which did what."},
+ {w:"Weeks 9–10",t:"The heavy block begins",b:["Lifting moves to 4–5 sets of 5. This is the most important block in the programme.","Nutrition holds steady — one variable at a time."]},
  {w:"Weeks 11–12",t:"Sport volume and fuelling",b:["Sport sessions up if recovery allows.","Learn the fuelling rules: under an hour, nothing. Over an hour, 30–60 g of carbs.","Run the sweat test once."]},
- {w:"Weeks 13–14",t:"Maintenance fortnight",b:["Calories go up to maintenance for two weeks. On purpose. Not a break in the plan — part of it.","Training continues as normal.","Expect the scale to jump 1–2 lb of water. It is not fat."],
-  c:"Sold honestly as adherence and sanity, not metabolic protection. The evidence for scheduled diet breaks improving fat loss is genuinely mixed; the evidence that people stick with things longer when they get a breather is better."},
+ {w:"Weeks 13–14",t:"Maintenance fortnight",b:["Calories go up to maintenance for two weeks. On purpose. Not a break in the plan — part of it.","Training continues as normal.","Expect the scale to jump 1–2 lb of water. It is not fat."]},
  {w:"Weeks 15–16",t:"Back in, recalibrated",b:["Return to the deficit at the number your own data says, not the original one.","Retest a few lifts to see what the heavy block bought you."]},
  {p:"Phase 3 — Season (weeks 17–24)"},
  {w:"Weeks 17–18",t:"Sharpen",b:["Power work goes in at the front of every session.","Sport work gets specific: deceleration, changing direction, first-step speed.","Pick the event if you haven't."]},
  {w:"Weeks 19–20",t:"Play",b:["Rehearse competition-day fuelling in a hard training session. Nothing new on the day.","Nutrition holds. Nobody sharpens and cuts at the same time."]},
- {w:"Weeks 21–22",t:"Compete",b:["Play the thing.","Calories come up around competition. You cannot compete underfed."],
-  c:"This is the payoff and it should feel like one. The scale is irrelevant this fortnight."},
- {w:"Weeks 23–24",t:"Exit properly",b:["Calories rise deliberately toward maintenance over 2–3 weeks, carbohydrate first.","Focus shifts from weight to what you can lift and how you move.","Decide together what the next six months look like."],
-  c:"Honest labelling matters here: reverse dieting has essentially no evidence base. Adding calories back gradually is defensible for adherence and for avoiding a panic when water weight returns. Don't sell it as repairing a metabolism."}
+ {w:"Weeks 21–22",t:"Compete",b:["Play the thing.","Calories come up around competition. You cannot compete underfed."]},
+ {w:"Weeks 23–24",t:"Exit properly",b:["Calories rise deliberately toward maintenance over 2–3 weeks, carbohydrate first.","Focus shifts from weight to what you can lift and how you move.","Decide together what the next six months look like."]}
 ];
 function renderSeason(){
   $('seasonOut').innerHTML=SEASON.map(x=>{
     if(x.p) return `<div class="phase">${x.p}</div>`;
     return `<div class="week"><h4>${x.w} — ${x.t}</h4><ul class="clean">${x.b.map(b=>'<li>'+b+'</li>').join('')}</ul>
-      ${x.c?`<div class="coach"><span class="cl">Coach note</span>${x.c}</div>`:''}</div>`;
+      </div>`;
   }).join('');
 }
 
@@ -1983,46 +2004,46 @@ function runCheckin(){
     cls='v-stop'; title='Change nothing. The plan wasn\'t run.';
     action=`Hold at ${kcal>0?c.intake:c.intake} kcal and ${c.proTarget} g protein.`;
     body=`Protein was hit on ${proDays} of 14 days and ${lifts} lifting sessions got done. That's not a criticism — it's a measurement problem. We genuinely do not know what this plan does yet, because it hasn't been run.<br><br><strong>Adjusting calories now would be guessing.</strong> The next fortnight has one job: find out what's actually in the way. Time? Food not in the house? The evening? Something else entirely?`;
-    rule="ADHERENCE GATE — protein <9/14 days or lifting <3 sessions. Never adjust a plan that wasn't followed. This is the rule that stops a client ratcheting down to 1,200 kcal over six months while the real problem was that nobody bought chicken.";
+    rule='';
   }
   else if(flags.includes('strength')||flags.includes('energy')&&flags.includes('sleep')){
     cls='v-add'; title='Eat more. Something is under-recovered.';
     const add=150;
     action=`Raise intake to about ${Math.round(kcal+add)} kcal. Protein unchanged at ${c.proTarget} g.`;
     body=`You ran the plan properly, and ${CI.str==='down'?'your lifts are going backwards':'your energy and sleep are both struggling'}. Losing weight is supposed to cost you something; it is not supposed to cost you your training. Strength holds up fine in a deficit when the deficit is the right size — when it starts falling, the deficit is too big, or sleep is doing the damage.<br><br>Weight loss slows down for a fortnight. That is the correct trade.`;
-    rule=`RECOVERY OVERRIDE, fires before any rate rule. Strength decline or the combination of poor energy + poor sleep beats a good-looking rate every time. Sleep is the highest-leverage variable in this whole programme and it's also the one most likely to be disrupted at her age — build the plan to survive bad sleep weeks rather than punishing them.`;
+    rule='';
   }
   else if(ratePct>1.0){
     cls='v-add'; title='Too fast. Add calories.';
     action=`Raise intake to about ${Math.round(kcal+175)} kcal.`;
     body=`You came down ${round(perWk,2)} lb a week, which is ${round(ratePct,2)}% of your bodyweight — above the 0.5–0.75% band. Faster is not better here. In the one trial that compared them directly, the fast group lost the same total weight and lost lean mass doing it, while the slow group <em>gained</em> lean mass.<br><br>Nothing has gone wrong. We're just steering back into the lane.`;
-    rule="RATE HIGH (>1.0%/wk). Add ~175 kcal. Faster loss buys nothing and costs lean tissue.";
+    rule='';
   }
   else if(ratePct>=0.4){
     cls='v-hold'; title='Working. Change nothing.';
     action=`Hold everything. ${Math.round(kcal)} kcal, ${c.proTarget} g protein.`;
     body=`Down ${round(perWk,2)} lb a week — ${round(ratePct,2)}% of bodyweight, right in the band. Your own numbers say your real daily burn is around <strong>${empTDEE} kcal</strong>.<br><br>The hardest thing a coach does is nothing. When something is working, changing it is how you find out what was working.`;
-    rule="IN BAND (0.4–1.0%/wk) with adherence. Hold. Boredom is not a reason to adjust.";
+    rule='';
   }
   else if(lostTotal < -0.4){
     if(-lostTotal < 2.5 && !prevSlow){
       cls='v-hold'; title='Up a little. Almost certainly water.';
       action=`Hold at ${Math.round(kcal)} kcal. Confirm next fortnight.`;
       body=`The trend is up ${round(-lostTotal,1)} lb over two weeks. Before we touch anything: a genuine two-pound fat gain would require eating about 7,000 calories more than you burned, which is not what happened here. Glycogen, sodium, gut contents and hormonal fluid shifts move a body several pounds without any fat changing hands.<br><br>So we do nothing, and we look again in two weeks. If it's still up then, it's real and we act on it.`;
-      rule="SMALL GAIN, FIRST OCCURRENCE. Do not act on one fortnight. A 2 lb 'gain' is roughly 7,000 kcal — implausible on a followed plan, and far more likely to be fluid. Escalates automatically if the next check-in is also slow or up.";
+      rule='';
     } else {
       cls='v-cut'; title='Weight is up, and the plan was followed.';
       const tgt=Math.max(floor, Math.min(kcal-200, empTDEE-350));
       action=`Set intake to about ${Math.round(tgt)} kcal.`;
       body=`Weight is up across ${prevSlow?'two check-ins now':'this fortnight'} while you ran the plan properly. That means the original calorie estimate was simply too high for you — which the Numbers tab warned about, because the honest error bar on any of those equations is around ±500 calories.<br><br>Your own data now puts your real burn nearer <strong>${empTDEE} kcal</strong>. So we use your number instead of the formula's, and the change is capped at 200 calories so we're not overcorrecting on noisy data. <strong>This is the equation being wrong, not you.</strong>`;
-      rule=`CONFIRMED GAIN WITH ADHERENCE. Rebuild from empirical TDEE, cut capped at 200 kcal, floored at the energy-availability minimum (${floor}). Cap and floor both matter — two weeks of scale data is noisy enough that an uncapped correction will overshoot.`;
+      rule='';
     }
   }
   else if(!prevSlow){
     cls='v-hold'; title='Probably fine. Hold one more fortnight.';
     action=`Hold at ${Math.round(kcal)} kcal.`;
     body=`Down ${round(perWk,2)} lb a week. That's below target — but it is also well inside the range that water, gut contents and hormonal fluid shifts produce on their own. One slow fortnight is not a stall; it's noise wearing a costume.<br><br>If the next fortnight looks the same, we act. Two data points beat one, every time.`;
-    rule="SLOW BUT WITHIN NOISE (0.15–0.4%/wk), first occurrence. Require confirmation before acting. This is the rule that stops a coach chasing water weight — and note it checks the previous check-in, so a second slow fortnight in a row escalates automatically instead of holding forever.";
+    rule='';
   }
   else {
     const canCut = (kcal-120) >= floor;
@@ -2030,12 +2051,12 @@ function runCheckin(){
       cls='v-cut'; title='Genuinely stalled. Small cut.';
       action=`Drop intake to about ${Math.round(kcal-120)} kcal. Protein stays at ${c.proTarget} g.`;
       body=`${prevSlow?'Two check-ins in a row now':'Two weeks, plan run properly'}, and essentially nothing moved. Your real burn appears to be around <strong>${empTDEE} kcal</strong>, lower than the starting estimate — normal, and exactly why we stopped using the formula.<br><br>The cut is small on purpose. Big cuts feel decisive, then cost you sleep, training quality and adherence, and you end up back here in a month with less room left to move.`;
-      rule=`STALL WITH ADHERENCE, headroom above the floor (${floor}). Cut ~120 kcal only, and only down to the floor. Small cuts preserve future room to manoeuvre; big ones spend it in one go.`;
+      rule='';
     } else {
       cls='v-stop'; title='Stalled — and we are not cutting further.';
       action=`Two weeks at maintenance, roughly ${Math.round(empTDEE)} kcal. Then back into a deficit.`;
       body=`You're stalled, but you're already at or near the energy-availability floor of <strong>${floor} kcal</strong>. Cutting below that is where the fatigue, the poor sleep and the flat training came from last time, and it is not on the table.<br><br>So we go the other way: two weeks at maintenance, training unchanged. Expect the scale to rise 1–2 lb of water — that is water, not fat, and it comes back off. Then we restart the deficit from a better place.`;
-      rule=`STALL AT THE FLOOR. Never cut below the EA floor (${floor}). Prescribe a maintenance block instead. This is the branch that separates this programme from every plan that ratchets a woman down to 1,100 calories and calls it discipline.`;
+      rule='';
     }
   }
 
@@ -2060,7 +2081,7 @@ function runCheckin(){
        <div class="stat"><span class="l">Lifting</span><span class="n">${lifts}</span><div class="x">${adhLift>=0.75?'good':'this is the gap'}</div></div>
        <div class="stat"><span class="l">Sleep</span><span class="n">${sleep||'—'}/14</span><div class="x">decent nights</div></div>
      </div>
-     <div class="coach"><span class="cl">Rule that fired</span>${rule}</div>
+     
    </div>`;
 
   S.checkins=S.checkins||[];
@@ -2125,27 +2146,14 @@ function doAvg(){
   $('c_now').value=a; $('avgOut').textContent=`Trend = ${a} lb (from ${v.length} day${v.length>1?'s':''})`;
 }
 function boot(){
-  const bn=$('brandName'); if(bn) bn.textContent=S.coachName||'your coach';
   fillForm(); renderWizard(); paintHeader(); renderNumbers(); renderCIChips(); renderHist(); renderDay(); renderCourt();
   ['rstFood','rstAll'].forEach(id=>{const b=$(id); if(b){b.dataset.armed='';b.classList.remove('armed');}});
   const lbl={rstFood:'Reset just my food choices',rstAll:'Reset everything and start over'};
   Object.keys(lbl).forEach(id=>{const b=$(id); if(b) b.textContent=lbl[id];});
-  const allowCoach=/[?&]coach\b/.test(location.search);
-  const on=allowCoach && !!S.coach;
-  $('coachChk').checked=on; document.body.classList.toggle('coachmode',on);
 }
 function init(){
   buildNav();
-  /* Coach mode is for the coach, not the visitor. The toggle only appears when
-     the URL carries ?coach — bookmark that version and it's always there.
-     Everyone else gets a clean page with no idea it exists. */
-  try{
-    const wantCoach=/[?&]coach\b/.test(location.search);
-    const tog=document.querySelector('.coachtoggle');
-    if(tog && !wantCoach) tog.style.display='none';
-  }catch(e){}
   try{ const raw=localStorage.getItem('comeback_v1'); if(raw) S=Object.assign(JSON.parse(JSON.stringify(DEF)),JSON.parse(raw)); }catch(e){}
-  $('coachChk').onchange=e=>{S.coach=e.target.checked;document.body.classList.toggle('coachmode',S.coach);save();};
   ['s_name','s_age','s_ft','s_in','s_wt','s_goal','s_bf','s_court','s_courtmin','s_notes','s_sportname'].forEach(id=>{
     const e=$(id); if(e) e.onchange=()=>{readWizard();paintHeader();renderNumbers();renderCourt();save();};
   });
