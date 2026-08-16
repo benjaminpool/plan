@@ -1,0 +1,2163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The Comeback — Training &amp; Nutrition Program</title>
+<style>
+:root{
+  --navy:#0B1F3A; --navy2:#12294D; --navy3:#1B3A69; --gold:#C8A24B; --gold2:#E4C579;
+  --bg:#F7F5F1; --card:#FFFFFF; --ink:#16202E; --mut:#5D6B7E; --line:#E2E0DA;
+  --good:#2E7D5B; --warn:#B4802A; --bad:#A4453A; --soft:#F0EEE8;
+}
+*{box-sizing:border-box}
+html,body{margin:0;padding:0}
+body{
+  font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Inter,Roboto,Helvetica,Arial,sans-serif;
+  background:var(--bg); color:var(--ink); line-height:1.6; font-size:16px;
+  -webkit-text-size-adjust:100%;
+}
+h1,h2,h3,h4{line-height:1.25; margin:0 0 .5em}
+h1{font-size:1.7rem; letter-spacing:-.02em}
+h2{font-size:1.3rem; letter-spacing:-.01em; color:var(--navy)}
+h3{font-size:1.05rem; color:var(--navy)}
+h4{font-size:.95rem; color:var(--navy3); text-transform:uppercase; letter-spacing:.06em; font-weight:700}
+p{margin:0 0 1em}
+a{color:var(--navy3)}
+small{font-size:.82rem}
+
+/* ---------- header ---------- */
+header{
+  background:linear-gradient(160deg,var(--navy) 0%, var(--navy2) 60%, var(--navy3) 130%);
+  color:#fff; padding:20px 18px 0;
+}
+.hwrap{max-width:1080px;margin:0 auto}
+.brand{display:flex;align-items:baseline;gap:12px;flex-wrap:wrap}
+.brand h1{color:#fff;margin:0;font-size:1.55rem}
+.brand .sub{color:var(--gold2);font-size:.85rem;letter-spacing:.1em;text-transform:uppercase;font-weight:700}
+.whoami{color:#C7D3E4;font-size:.88rem;margin:6px 0 14px}
+nav{display:flex;gap:2px;overflow-x:auto;padding-bottom:0;scrollbar-width:thin}
+nav button{
+  background:transparent;border:0;color:#C7D3E4;padding:11px 14px;font-size:.9rem;
+  cursor:pointer;white-space:nowrap;border-bottom:3px solid transparent;font-family:inherit;font-weight:600;
+}
+nav button:hover{color:#fff}
+nav button.on{color:#fff;border-bottom-color:var(--gold)}
+
+/* ---------- layout ---------- */
+main{max-width:1080px;margin:0 auto;padding:22px 18px 90px}
+.panel{display:none}
+.panel.on{display:block}
+.card{
+  background:var(--card);border:1px solid var(--line);border-radius:12px;
+  padding:20px;margin:0 0 16px;box-shadow:0 1px 2px rgba(11,31,58,.04)
+}
+.card.tight{padding:14px 16px}
+.grid{display:grid;gap:16px}
+@media(min-width:760px){ .g2{grid-template-columns:1fr 1fr} .g3{grid-template-columns:repeat(3,1fr)} }
+
+/* ---------- bits ---------- */
+.kicker{color:var(--gold);font-weight:700;font-size:.75rem;letter-spacing:.12em;text-transform:uppercase;margin-bottom:6px}
+.lede{font-size:1.06rem;color:var(--navy2)}
+.rule{height:1px;background:var(--line);margin:18px 0}
+.tag{display:inline-block;font-size:.7rem;font-weight:700;letter-spacing:.06em;padding:2px 7px;border-radius:20px;text-transform:uppercase;vertical-align:middle}
+.t-a{background:#DDEEE5;color:#1F5C43}
+.t-b{background:#E6EDF7;color:#26456F}
+.t-c{background:#F4EEDD;color:#7A5E1B}
+.t-d{background:#F6E9E3;color:#8A4A32}
+.t-e{background:#F3E1DE;color:#8C332A}
+.stat{background:var(--soft);border:1px solid var(--line);border-radius:10px;padding:14px;text-align:center}
+.stat .n{font-size:1.55rem;font-weight:800;color:var(--navy);letter-spacing:-.02em;display:block}
+.stat .l{font-size:.74rem;text-transform:uppercase;letter-spacing:.07em;color:var(--mut);font-weight:700}
+.stat .x{font-size:.78rem;color:var(--mut);margin-top:3px}
+.note{border-left:3px solid var(--gold);background:#FBF7EC;padding:12px 14px;border-radius:0 8px 8px 0;margin:0 0 14px}
+.note.warn{border-left-color:var(--bad);background:#FBF0EE}
+.note.ok{border-left-color:var(--good);background:#EFF6F2}
+.note p:last-child{margin-bottom:0}
+.quiet{color:var(--mut);font-size:.9rem}
+ul,ol{margin:0 0 1em;padding-left:1.25em}
+li{margin-bottom:.4em}
+.clean{list-style:none;padding-left:0}
+.clean li{padding-left:1.4em;position:relative}
+.clean li:before{content:"—";position:absolute;left:0;color:var(--gold);font-weight:700}
+
+/* ---------- controls ---------- */
+label{display:block;font-size:.8rem;font-weight:700;color:var(--navy3);text-transform:uppercase;letter-spacing:.05em;margin:0 0 5px}
+input[type=text],input[type=number],select,textarea{
+  width:100%;padding:10px 11px;border:1px solid #CFCCC4;border-radius:8px;font-size:1rem;
+  font-family:inherit;background:#fff;color:var(--ink)
+}
+input:focus,select:focus,textarea:focus{outline:2px solid var(--gold);outline-offset:1px;border-color:var(--gold)}
+.field{margin-bottom:14px}
+.row{display:grid;gap:12px}
+@media(min-width:620px){.row.r2{grid-template-columns:1fr 1fr}.row.r3{grid-template-columns:repeat(3,1fr)}.row.r4{grid-template-columns:repeat(4,1fr)}}
+button.btn{
+  background:var(--navy);color:#fff;border:0;border-radius:8px;padding:11px 18px;font-size:.92rem;
+  font-weight:700;cursor:pointer;font-family:inherit
+}
+button.btn:hover{background:var(--navy3)}
+button.btn.gold{background:var(--gold);color:#241C05}
+button.btn.gold:hover{background:var(--gold2)}
+button.btn.ghost{background:transparent;color:var(--navy);border:1.5px solid var(--navy)}
+button.btn.ghost:hover{background:var(--soft)}
+button.btn.sm{padding:6px 11px;font-size:.8rem}
+.btnrow{display:flex;gap:10px;flex-wrap:wrap;margin-top:6px}
+.choice{display:flex;gap:8px;flex-wrap:wrap}
+.choice button{
+  background:#fff;border:1.5px solid #CFCCC4;border-radius:20px;padding:7px 14px;font-size:.85rem;
+  cursor:pointer;font-family:inherit;color:var(--mut);font-weight:600
+}
+.choice button.on{border-color:var(--navy);background:var(--navy);color:#fff}
+table{width:100%;border-collapse:collapse;font-size:.9rem}
+th,td{text-align:left;padding:9px 10px;border-bottom:1px solid var(--line);vertical-align:top}
+th{font-size:.72rem;text-transform:uppercase;letter-spacing:.06em;color:var(--mut);font-weight:800}
+tbody tr:last-child td{border-bottom:0}
+.scroll{overflow-x:auto}
+
+/* ---------- meals ---------- */
+.meal{border:1px solid var(--line);border-radius:10px;margin-bottom:12px;overflow:hidden;background:#fff}
+.meal .mh{background:var(--navy);color:#fff;padding:9px 14px;display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap}
+.meal .mh .name{font-weight:800;font-size:.9rem;letter-spacing:.04em;text-transform:uppercase}
+.meal .mh .mac{font-size:.78rem;color:#C7D3E4;font-variant-numeric:tabular-nums}
+.item{display:flex;justify-content:space-between;align-items:center;gap:10px;padding:10px 14px;border-bottom:1px solid var(--line)}
+.item:last-child{border-bottom:0}
+.item .fn{font-weight:600;font-size:.94rem}
+.item .fs{font-size:.8rem;color:var(--mut)}
+.item .fm{font-size:.78rem;color:var(--mut);font-variant-numeric:tabular-nums;white-space:nowrap}
+.swap{background:var(--soft);border:1px solid var(--line);border-radius:7px;padding:5px 10px;font-size:.75rem;cursor:pointer;font-family:inherit;font-weight:700;color:var(--navy3);white-space:nowrap}
+.swap:hover{background:var(--gold);color:#241C05;border-color:var(--gold)}
+.totbar{display:flex;gap:10px;flex-wrap:wrap;padding:12px 14px;background:var(--soft);border-radius:10px;margin-bottom:14px;font-variant-numeric:tabular-nums}
+.totbar div{flex:1;min-width:90px;text-align:center}
+.totbar b{display:block;font-size:1.2rem;color:var(--navy)}
+.totbar span{font-size:.72rem;text-transform:uppercase;letter-spacing:.06em;color:var(--mut);font-weight:700}
+.hit{color:var(--good)!important}
+.miss{color:var(--bad)!important}
+
+/* ---------- coach mode ---------- */
+.coach{display:none;border-left:3px solid var(--navy3);background:#EDF1F7;padding:11px 14px;border-radius:0 8px 8px 0;margin:0 0 14px;font-size:.9rem}
+body.coachmode .coach{display:block}
+.coach .cl{font-size:.68rem;font-weight:800;letter-spacing:.1em;color:var(--navy3);text-transform:uppercase;display:block;margin-bottom:4px}
+.coachtoggle{display:flex;align-items:center;gap:8px;font-size:.8rem;color:#C7D3E4;margin:8px 0 0}
+.coachtoggle input{width:auto}
+
+/* ---------- misc ---------- */
+.pill{display:inline-block;background:var(--soft);border:1px solid var(--line);border-radius:20px;padding:3px 10px;font-size:.78rem;margin:0 5px 5px 0}
+.week{border:1px solid var(--line);border-radius:10px;padding:14px;margin-bottom:10px;background:#fff}
+.week h4{margin-bottom:6px}
+.phase{background:var(--navy);color:#fff;padding:10px 14px;border-radius:8px;margin:18px 0 12px;font-weight:800;letter-spacing:.05em;font-size:.85rem;text-transform:uppercase}
+.chk{display:flex;align-items:flex-start;gap:9px;margin-bottom:8px;font-size:.94rem}
+.chk input{width:auto;margin-top:4px;flex-shrink:0;width:17px;height:17px;accent-color:var(--gold)}
+.done{text-decoration:line-through;color:var(--mut)}
+.foodpick{display:flex;flex-wrap:wrap;gap:6px}
+.foodpick button{
+  background:#fff;border:1.5px solid #CFCCC4;border-radius:18px;padding:5px 11px;font-size:.82rem;
+  cursor:pointer;font-family:inherit;color:var(--mut)
+}
+.foodpick button.on{border-color:var(--good);background:#EFF6F2;color:var(--good);font-weight:700}
+.foodpick button.off{border-color:#E3D5D2;background:#FBF3F1;color:#B48A83;text-decoration:line-through}
+.savebar{
+  position:fixed;bottom:0;left:0;right:0;background:var(--navy);color:#fff;padding:9px 16px;
+  display:flex;gap:10px;align-items:center;justify-content:center;flex-wrap:wrap;z-index:50;
+  box-shadow:0 -2px 10px rgba(11,31,58,.2);font-size:.85rem
+}
+.savebar button{font-size:.8rem;padding:7px 13px}
+.savebar .st{color:#C7D3E4;font-size:.78rem}
+@media print{
+  header,nav,.savebar,.swap,button{display:none!important}
+  .panel{display:block!important;page-break-before:always}
+  body{background:#fff}
+  .card{border:1px solid #ccc;box-shadow:none}
+}
+
+/* ---------- recipes ---------- */
+.recipe{background:var(--soft);border-top:1px solid var(--line);padding:16px 14px}
+.rgrid{display:grid;gap:18px}
+@media(min-width:700px){.rgrid{grid-template-columns:0.9fr 1.1fr}}
+.recipe h4{margin-bottom:8px}
+ul.ingl{list-style:none;padding:0;margin:0;font-size:.88rem}
+ul.ingl li{display:flex;justify-content:space-between;gap:12px;padding:4px 0;border-bottom:1px dotted var(--line)}
+ul.ingl li:last-child{border-bottom:0}
+ul.ingl b{white-space:nowrap;color:var(--navy);font-variant-numeric:tabular-nums}
+ol.meth{margin:0;padding-left:1.15em;font-size:.9rem}
+ol.meth li{margin-bottom:.55em}
+.meal .pill{font-size:.68rem;padding:1px 7px;margin:0 0 0 5px;vertical-align:middle}
+
+.hide{display:none!important}
+.wizstep{display:none}
+.wizstep.on{display:block}
+.dots{display:flex;gap:8px;margin-bottom:18px;flex-wrap:wrap}
+.dots button{
+  background:#fff;border:1.5px solid #CFCCC4;border-radius:8px;padding:7px 13px;font-size:.82rem;
+  cursor:pointer;font-family:inherit;color:var(--mut);font-weight:700;display:flex;align-items:center;gap:7px
+}
+.dots button:hover{border-color:var(--navy3);color:var(--navy3)}
+.dots button.on{border-color:var(--navy);background:var(--navy);color:#fff}
+.dots button b{
+  display:inline-flex;align-items:center;justify-content:center;width:18px;height:18px;border-radius:50%;
+  background:var(--line);color:var(--navy);font-size:.7rem
+}
+.dots button.on b{background:var(--gold);color:#241C05}
+.danger{border:1px solid #E5CBC6;background:#FDF7F6;border-radius:12px;padding:18px}
+button.btn.red{background:#fff;color:var(--bad);border:1.5px solid #E0B4AD}
+button.btn.red:hover{background:var(--bad);color:#fff;border-color:var(--bad)}
+button.btn.red.armed{background:var(--bad);color:#fff;border-color:var(--bad)}
+.bignum{font-size:2.4rem;font-weight:800;color:var(--navy);letter-spacing:-.03em;line-height:1}
+.verdict{border-radius:10px;padding:16px;margin-bottom:14px;border:1px solid}
+.v-hold{background:#EFF6F2;border-color:#BFDCCF}
+.v-cut{background:#FBF7EC;border-color:#E8DCBB}
+.v-add{background:#EDF1F7;border-color:#C6D3E6}
+.v-stop{background:#FBF0EE;border-color:#EBCBC5}
+.verdict h3{margin-bottom:6px}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="hwrap">
+    <div class="brand">
+      <h1 id="hdrTitle">The Comeback</h1>
+      <span class="sub">Training &amp; Nutrition</span>
+    </div>
+    <div class="whoami" id="whoami">Six months to the version of you that doesn't have to think about it.</div>
+    <nav id="nav"></nav>
+    <label class="coachtoggle"><input type="checkbox" id="coachChk"> Coach mode</label>
+  </div>
+</header>
+
+<main>
+
+<!-- ============ START HERE ============ -->
+<section class="panel on" id="p-start">
+  <div class="card">
+    <div class="kicker">Start here</div>
+    <h2>You are not on a diet. You're in a comeback.</h2>
+    <p class="lede">Everything you've tried before was subtraction — eat less, cut this out, give that up. This is the first thing that's addition. You eat to perform. You lift so you can move the way you want to move on a court. The scale stops being a verdict on you and becomes an instrument, like a serve speed.</p>
+    <p>That isn't a motivational reframe. It changes the actual programming. An athlete preparing for a season eats enough to train hard, protects muscle on purpose, and measures things to make decisions — not to feel good or bad about herself. That's what the next six months look like.</p>
+    <div class="note">
+      <p><strong>The one sentence this whole program is built on:</strong> you like structure, and you want creative freedom inside it. So the structure handles every decision that doesn't need you — and leaves the ones that do.</p>
+    </div>
+  </div>
+
+  <div class="grid g2">
+    <div class="card">
+      <div class="kicker">What this is</div>
+      <h3>Four things, one system</h3>
+      <ul class="clean">
+        <li><strong>Food</strong> — a target, and an engine that builds your day around it so you never plan a meal.</li>
+        <li><strong>Strength</strong> — 24 weeks of progressive lifting. This is the part that decides whether the weight you lose comes off your waist or off your frame.</li>
+        <li><strong>Court</strong> — warm-up, the physical qualities pickleball actually asks for, and how to fuel a tournament day.</li>
+        <li><strong>Head</strong> — the patterns underneath all of it. Taught in the moment it matters, not as a lecture.</li>
+      </ul>
+      <p class="quiet">They aren't four programs. Court play is why the lifting matters. Lifting is what makes the food work. The head stuff is what keeps you here in week fourteen.</p>
+    </div>
+    <div class="card">
+      <div class="kicker">What this isn't</div>
+      <h3>Things you will not find in here</h3>
+      <ul class="clean">
+        <li>A food list you're allowed to eat from.</li>
+        <li>A cleanse, a detox, a reset, or a parasite protocol.</li>
+        <li>A 1,200-calorie day.</li>
+        <li>A rule that you can't eat at night.</li>
+        <li>A claim I can't show you the evidence for.</li>
+      </ul>
+      <p class="quiet">Every factual claim in this program is graded in the <strong>Truth</strong> tab, including the ones where the honest answer is "we don't actually know."</p>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="kicker">The deal</div>
+    <h3>Six to twelve months, and then the rest of your life</h3>
+    <p>The commitment window is six to twelve months. Not because it takes that long to lose weight — it doesn't — but because that's roughly how long it takes for a way of eating and training to stop being a thing you're doing and start being a thing you are. Short challenges work and then unwind. That's the whole reason for the timeline.</p>
+    <p>What you're actually buying is <strong>accountability and adjustment</strong>. Every two weeks we look at real data and change one thing. That's it. Everything else in this file is here so you don't have to hold it in your head.</p>
+    <div class="coach"><span class="cl">Coach note</span>Ben — this framing is straight from your own words on the intake call ("this is a 6 to 12 month plan... for the rest of your life" / "the majority of it is going to be the accountability part"). Keep saying it that way. It's the promise she agreed to and it's the one that survives a bad week.</div>
+  </div>
+
+  <div class="card">
+    <div class="kicker">Honesty policy</div>
+    <h3>How to read the evidence tags</h3>
+    <p>Anywhere this program makes a factual claim, you'll see one of these. They're not decoration — they tell you how much weight to put on it.</p>
+    <table>
+      <tbody>
+        <tr><td><span class="tag t-a">Strong</span></td><td>Multiple good randomized trials, or a solid meta-analysis. Bet on it.</td></tr>
+        <tr><td><span class="tag t-b">Moderate</span></td><td>Real trials exist, but they're small, short, or in people not quite like you. Reasonable to act on.</td></tr>
+        <tr><td><span class="tag t-c">Observed</span></td><td>Consistent patterns in populations, but nobody has run the experiment. Suggestive, not proof.</td></tr>
+        <tr><td><span class="tag t-d">Reasoning</span></td><td>It makes biological sense and I'm doing it for that reason — but it hasn't been demonstrated. Labeled so you know.</td></tr>
+        <tr><td><span class="tag t-e">Not true</span></td><td>Commonly repeated, and the evidence says otherwise.</td></tr>
+      </tbody>
+    </table>
+    <p class="quiet" style="margin-top:12px">If a coach, an app, or an ad can't tell you which of these applies to what they're selling you, that's information too.</p>
+  </div>
+
+  <div class="card">
+    <div class="kicker">Before anything else</div>
+    <h3>Set it up</h3>
+    <p>The <strong>Setup</strong> tab takes about five minutes. It asks for your numbers, how you want to handle the scale, what you've got to train with, and — the part that matters most — which foods you'll actually eat. After that, everything else in here configures itself around you.</p>
+    <div class="btnrow"><button class="btn gold" onclick="go('setup')">Go to Setup</button></div>
+  </div>
+
+  <div class="card">
+    <div class="kicker">Before you start</div>
+    <h3>Three things about how this works</h3>
+    <ul class="clean">
+      <li><strong>It's free and there's no signup.</strong> No account, no email required, nothing to cancel.</li>
+      <li><strong>Nothing you type leaves your device.</strong> There is no server here. Everything is stored in your own browser, and the <em>Save my data</em> button at the bottom writes a file you keep. If you want a coach to see it, there's a button for that and you have to press it.</li>
+      <li><strong>It will tell you when it doesn't know.</strong> Every claim is graded, including the ones where the honest answer is that the research hasn't been done.</li>
+    </ul>
+    <p class="quiet">Built by <span id="brandName">Benjamin Pool</span>. If you want someone in your corner while you do this, there's a button at the bottom of the Numbers tab.</p>
+  </div>
+</section>
+
+<!-- ============ SETUP ============ -->
+<section class="panel" id="p-setup">
+  <div class="card">
+    <div class="kicker">Setup</div>
+    <h2>Five minutes, once — and changeable any time</h2>
+    <p class="quiet">Jump to any step. Nothing here is locked, and changing a number updates every calculation in the file straight away.</p>
+    <div class="dots" id="wizDots"></div>
+
+    <!-- step 1 -->
+    <div class="wizstep on" id="w1">
+      <h3>1. You</h3>
+      <div class="row r2">
+        <div class="field"><label>First name (or whatever you want on this)</label><input type="text" id="s_name" placeholder="e.g. Sam"></div>
+        <div class="field"><label>Age</label><input type="number" id="s_age" value="45"></div>
+      </div>
+      <div class="field">
+        <label>Sex</label>
+        <div class="choice" id="s_sex"></div>
+        <small class="quiet">Asked because the metabolism and lean-mass equations genuinely differ — using the wrong one is worth a few hundred calories a day. It changes nothing else in the program.</small>
+      </div>
+      <div class="row r3">
+        <div class="field"><label>Height — feet</label><input type="number" id="s_ft" value="5"></div>
+        <div class="field"><label>Height — inches</label><input type="number" id="s_in" value="2"></div>
+        <div class="field"><label>Weight today (lb)</label><input type="number" id="s_wt" value="180"></div>
+      </div>
+      <div class="row r2">
+        <div class="field">
+          <label>Goal weight (lb) — optional</label>
+          <input type="number" id="s_goal" value="160">
+          <small class="quiet">A direction, not a promise. We'll tell you honestly how long it takes.</small>
+        </div>
+        <div class="field">
+          <label>Body fat % — only if you've had a DXA</label>
+          <input type="number" id="s_bf" placeholder="leave blank if unknown">
+          <small class="quiet">Blank is fine. We'll estimate and say so.</small>
+        </div>
+      </div>
+      <div class="btnrow"><button class="btn" onclick="wiz(2)">Next</button></div>
+    </div>
+
+    <!-- step 2 -->
+    <div class="wizstep" id="w2">
+      <h3>2. Your week</h3>
+      <div class="field">
+        <label>Outside of training, how active are your days?</label>
+        <div class="choice" id="s_act"></div>
+        <small class="quiet">Be honest and lean low. Nearly everyone overestimates this, and overestimating it is what makes the first calorie target wrong.</small>
+      </div>
+      <div class="field">
+        <label>What do you actually do, besides lift?</label>
+        <div class="choice" id="s_sport"></div>
+        <input type="text" id="s_sportname" placeholder="name it" class="hide" style="margin-top:8px;max-width:280px">
+      </div>
+      <div class="row r2">
+        <div class="field"><label id="lblCourt">Sessions per week (now)</label><input type="number" id="s_court" value="2"></div>
+        <div class="field"><label>Typical session length (minutes)</label><input type="number" id="s_courtmin" value="60"></div>
+      </div>
+      <div class="field">
+        <label>Where will you lift?</label>
+        <div class="choice" id="s_gym"></div>
+      </div>
+      <div class="field">
+        <label>Anything I need to program around? (tick all)</label>
+        <div class="choice" id="s_inj"></div>
+      </div>
+      <div class="field"><label>Anything else — in your words</label><textarea id="s_notes" rows="2" placeholder="injuries, meds, schedule constraints, things you've been told to avoid"></textarea></div>
+      <div class="btnrow"><button class="btn ghost" onclick="wiz(1)">Back</button><button class="btn" onclick="wiz(3)">Next</button></div>
+    </div>
+
+    <!-- step 3 -->
+    <div class="wizstep" id="w3">
+      <h3>3. The scale — your call</h3>
+      <p>This is a real decision and it's yours. All three of these work. Here's the honest tradeoff on each, and you can change your mind any week without it being a thing.</p>
+      <div class="field">
+        <div class="choice" id="s_scale"></div>
+      </div>
+      <div id="scaleExplain"></div>
+      <div class="coach"><span class="cl">Coach note</span>Whatever she picks, the choice itself is data. If she picks daily-with-trend and then quietly stops logging in week 5, that's a conversation — not a compliance problem. If she picks no-scale and later asks to add it, that's progress. Ask about it at every check-in; don't make it a test.</div>
+      <div class="btnrow"><button class="btn ghost" onclick="wiz(2)">Back</button><button class="btn" onclick="wiz(4)">Next</button></div>
+    </div>
+
+    <!-- step 4 -->
+    <div class="wizstep" id="w4">
+      <h3>4. Food — the important one</h3>
+      <p>These are the actual meals the program will cook for you. Tap anything you <strong>won't eat</strong> and it never appears. Tap again to mark a <strong>favourite</strong> and it turns up more often. Leave the rest alone — neutral is fine, and neutral should be most of them.</p>
+      <p class="quiet">Tap once = won't eat. Tap twice = favourite. Tap three times = back to neutral.</p>
+      <div id="foodPicker"></div>
+      <div class="btnrow"><button class="btn ghost" onclick="wiz(3)">Back</button><button class="btn gold" onclick="finishWiz()">Save &amp; rebuild my program</button></div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="kicker">Starting over</div>
+    <h3>Reset</h3>
+    <p>Nothing in here is permanent. If you want a clean slate — or you're setting this up for someone else — wipe it and start again.</p>
+    <div class="note"><p style="margin-bottom:0"><strong>Before you do:</strong> hit <strong>Save my data</strong> in the bar at the bottom first if you want a copy. Reset can't be undone, and you can always load a saved file back in.</p></div>
+    <div class="danger">
+      <div class="btnrow">
+        <button class="btn red" id="rstFood" onclick="resetFood()">Reset just my food choices</button>
+        <button class="btn red" id="rstAll" onclick="resetAll()">Reset everything and start over</button>
+      </div>
+      <p class="quiet" style="margin:10px 0 0">Each button asks once more before it does anything.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============ NUMBERS ============ -->
+<section class="panel" id="p-numbers">
+  <div class="card">
+    <div class="kicker">Your numbers</div>
+    <h2>Calculated, not assigned</h2>
+    <p class="lede">Nobody handed you a plan number off a shelf. These come from your body, your training, and a floor set by physiology — and all of them move as you do.</p>
+    <div class="grid g3" id="numStats"></div>
+  </div>
+
+  <div class="card">
+    <div class="kicker">The first thing you should know</div>
+    <h3>How wrong this starting number could be</h3>
+    <div id="errorBars"></div>
+    <div class="note">
+      <p><strong>Say it plainly:</strong> any calculator has about a one-in-three chance of being off by more than 150 calories on your resting metabolism, and once an activity factor is added, the honest error bar on your daily needs is roughly ±500&ndash;600 calories. <span class="tag t-a">Strong</span></p>
+      <p>So this is not your metabolism. It's a <strong>starting hypothesis</strong>. Three weeks of your own intake and weight data will beat every equation ever published, and from your second check-in onward we run on your numbers, not the formula.</p>
+      <p style="margin-bottom:0">Expect the real number to land 200&ndash;400 calories away from this one, in either direction. That is normal. It is not evidence that anything is broken.</p>
+    </div>
+    <div class="coach"><span class="cl">Coach note</span>Pre-framing this is the single best inoculation against "my metabolism is damaged." She's had that thought before — she told you about the fatigue in the 140s. Get ahead of it in week one, not week nine.</div>
+  </div>
+
+  <div class="card">
+    <div class="kicker">The floor</div>
+    <h3>Why you're not eating less than this</h3>
+    <div id="eaBox"></div>
+  </div>
+
+  <div class="card">
+    <div class="kicker">Protein</div>
+    <h3>The one number that does the most work</h3>
+    <div id="proBox"></div>
+  </div>
+
+  <div class="card">
+    <div class="kicker">Pace</div>
+    <h3>How fast, and how long</h3>
+    <div id="paceBox"></div>
+  </div>
+
+  <div class="card">
+    <div class="kicker">If you want a human in the loop</div>
+    <h3>Send this to a coach</h3>
+    <p>Everything in this file lives on your device and is never sent anywhere. If you'd like someone to actually look at it, this button opens your email with a summary already written — your numbers, your sport, what you're working around. You can read it before you send it, edit it, or close it and never think about it again.</p>
+    <div class="btnrow">
+      <button class="btn gold" onclick="sendToCoach()">Email my plan to a coach</button>
+      <button class="btn ghost" id="copyBtn" onclick="showPlan()">Copy it instead</button>
+    </div>
+    <textarea id="planText" rows="10" class="hide" style="margin-top:12px;font-family:ui-monospace,Menlo,Consolas,monospace;font-size:.82rem"></textarea>
+    <div class="coach"><span class="cl">Coach settings</span>
+      <div class="row r2" style="margin-top:8px">
+        <div class="field"><label>Coach name</label><input type="text" id="s_coachname"></div>
+        <div class="field"><label>Coach email</label><input type="text" id="s_coachemail"></div>
+      </div>
+      <p class="quiet" style="margin-bottom:0">Change these before you share the file and every copy points at you. Nothing is transmitted — the button just opens the visitor's own mail client with the text pre-written, so you never handle anyone's data unless they choose to hit send.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============ KITCHEN ============ -->
+<section class="panel" id="p-kitchen">
+  <div class="card">
+    <div class="kicker">The kitchen</div>
+    <h2>You don't plan meals. You get given ones that already work.</h2>
+    <p class="lede">Every decision you make about food costs you something. Not calories — attention. By evening there's none left, which is exactly when the decisions get hardest. So this hands you a whole day of real meals, with the recipe and the shopping attached, and you overrule any of it whenever you feel like it.</p>
+    <div class="note">
+      <p><strong>How it builds your day:</strong> protein first, calories second. That's backwards from every app you've used, and it's deliberate — protein is what protects muscle while you're losing, and muscle is the entire point. Calories are just the envelope it has to fit inside. <span class="tag t-a">Strong</span></p>
+      <p style="margin-bottom:0"><strong>Every recipe feeds your whole household</strong>, with your portion marked. You cook once, everyone eats the same dinner, and you serve yourself the amount that fits your numbers. No separate sad plate.</p>
+    </div>
+    <div class="btnrow">
+      <button class="btn gold" onclick="buildDay()">Build me a day</button>
+      <button class="btn ghost" onclick="buildDay(true)">Build a training day</button>
+      <button class="btn ghost sm" onclick="printDay()">Print / save this day</button>
+    </div>
+    <p class="quiet" style="margin-top:10px">Don't fancy something? Hit <strong>swap</strong> and you get a different meal that keeps your numbers intact. Hit <strong>recipe</strong> to see how to cook it and what to buy. Swap as many times as you like — that isn't cheating, it's the entire feature.</p>
+  </div>
+
+  <div id="dayOut"></div>
+
+  <div class="card">
+    <div class="kicker">The evening</div>
+    <h3>There is a slot for this on purpose</h3>
+    <p>For most people the eating that breaks a plan happens at night. It usually isn't hunger. It shows up at the end of a day that had nothing in it for you — after the work, the cooking, the everyone else. That is not a willpower problem and it will not be fixed by a rule against it.</p>
+    <p>So the day is built with a real evening slot in it — calories and food you actually like, budgeted in advance, yours. Front-loading protein earlier makes it smaller. It doesn't make it disappear, and it isn't supposed to.</p>
+    <p class="quiet">On the evidence: late eating does not cause fat gain independent of how much you eat in total. <span class="tag t-a">Strong</span> Plans that ban evening eating fail because the eating happens anyway and then the whole plan feels broken. <span class="tag t-d">Reasoning</span></p>
+    <div class="coach"><span class="cl">Coach note</span>When evening eating is depletion rather than hunger, the intervention isn't dietary. Ask at check-ins what else in that person's day belongs to them. If the honest answer is nothing, the evening slot is doing all the work alone and it will eventually lose. Listen for caretaker language — "I'm always buying and cooking for everyone else" — it's the clearest tell.</div>
+  </div>
+
+  <div class="card">
+    <div class="kicker">Shopping</div>
+    <h3>This week's list</h3>
+    <p class="quiet">Adds up every ingredient across the days you've generated, at full recipe size — so it feeds the household, not just you. Hit "Build me a day" a few times first, then come back.</p>
+    <div class="btnrow"><button class="btn ghost sm" onclick="makeList()">Make my list</button></div>
+    <div id="shopOut"></div>
+  </div>
+
+  <div class="card">
+    <div class="kicker">When you're out</div>
+    <h3>No app, no scale, no numbers</h3>
+    <p>You will be at restaurants. You'll be at your kid's tournament with a concession stand. Here's the whole system for those days, and it is deliberately crude:</p>
+    <ul class="clean">
+      <li><strong>Protein the size of your palm</strong>, at every meal. Two palms if it's the main event.</li>
+      <li><strong>Vegetables the size of your fist</strong>, as much as you like.</li>
+      <li><strong>Starch the size of one cupped hand.</strong></li>
+      <li><strong>Fat the size of your thumb</strong> — that's the oil, the butter, the dressing, the cheese.</li>
+    </ul>
+    <p class="quiet">Hand portions are genuinely useful and genuinely imprecise. They're worth about ±20%, which is close enough on the days that don't matter — and most days don't matter. <span class="tag t-b">Moderate</span></p>
+  </div>
+</section>
+
+<!-- ============ STRENGTH ============ -->
+<section class="panel" id="p-strength">
+  <div class="card">
+    <div class="kicker">Strength</div>
+    <h2>The part the old plan didn't have at all</h2>
+    <p class="lede">If you only did one thing from this entire program, it would be this. Not the food. Lifting is what decides whether the weight you lose comes off your waist or off the frame you need to play on.</p>
+    <div class="grid g2">
+      <div>
+        <h4>What it actually buys you</h4>
+        <ul class="clean">
+          <li><strong>It protects muscle in a deficit.</strong> Diet alone loses roughly 2&ndash;3 kg of lean tissue per 10 kg lost. Diet plus training cuts that by about half. <span class="tag t-a">Strong</span></li>
+          <li><strong>Strength still goes up while you're losing.</strong> Lean mass gain is blunted in a deficit; strength gain is not. <span class="tag t-a">Strong</span></li>
+          <li><strong>It is the best-evidenced injury prevention that exists.</strong> Across 26,000+ athletes, strength training cut injury risk by around two thirds and overuse injury nearly in half. Stretching did nothing. <span class="tag t-a">Strong in athletes generally</span> <span class="tag t-b">Extrapolated to you</span></li>
+          <li><strong>Loaded spine work builds bone.</strong> Heavy squats, deadlifts and pressing raised lumbar spine density about 2.9% over eight months in postmenopausal women. <span class="tag t-b">Moderate</span></li>
+        </ul>
+      </div>
+      <div>
+        <h4>What I'm not going to claim</h4>
+        <ul class="clean">
+          <li><strong>Lifting does not build hip bone.</strong> In the trial everyone cites, femoral neck density rose 0.3% — statistically it beat the control group only because <em>they lost 2%</em>. It prevents loss there. It doesn't build. <span class="tag t-b">Moderate</span></li>
+          <li><strong>No exercise trial has ever shown fracture reduction.</strong> Bone density is a stand-in. The likely real protection is that you get strong enough not to fall. <span class="tag t-d">Reasoning</span></li>
+          <li><strong>That trial studied women averaging 65, and excluded anyone within five years of menopause</strong> — meaning you'd have been screened out of it. Applying it to you is reasoning downward in age. Sensible, not proven. <span class="tag t-d">Reasoning</span></li>
+        </ul>
+      </div>
+    </div>
+    <div class="coach"><span class="cl">Coach note</span>With any returning athlete, motor learning comes back far faster than connective tissue adapts — so technique looks ready long before the tendons are. Connective tissue is the rate limiter, not muscle and not motivation. That is what the third guardrail below is for.</div>
+  </div>
+
+  <div class="card">
+    <div class="kicker">The rules</div>
+    <h3>Four guardrails</h3>
+    <ol>
+      <li><strong>Two sessions a week is the dose that produced every result above.</strong> Three is fine if your sport volume allows. Do not go past three while you're in a deficit and adding training.</li>
+      <li><strong>Add weight only when you finish every prescribed rep with clean technique on two sessions in a row.</strong> Not when you feel good. Not when the number looks small.</li>
+      <li><strong>Never progress load, training volume and sport volume in the same week.</strong> Pick one.</li>
+      <li><strong>You do not need to train to failure.</strong> Leaving one or two reps in the tank produces the same adaptations with less wreckage. <span class="tag t-a">Strong</span></li>
+    </ol>
+  </div>
+
+  <div class="card">
+    <div class="kicker">The 24 weeks</div>
+    <h3>Your program</h3>
+    <p class="quiet">Substitutions are applied automatically based on what you flagged in Setup.</p>
+    <div id="liftOut"></div>
+  </div>
+
+  <div class="card">
+    <div class="kicker">Impact</div>
+    <h3>The hip-bone problem, stated honestly</h3>
+    <p>Bone responds to load where the load is. Heavy lifting loads the spine. <strong>Jumping</strong> loads the hip — roughly +1.5% at the femoral neck, from something like 50 low jumps a day spread out across the day rather than done all at once. <span class="tag t-b">Moderate</span></p>
+    <p>If you flagged a foot, toe or knee problem, this is a genuine conflict rather than a puzzle I can solve for you. Jumping is the stimulus your hip wants, and the sore joint is what has to absorb it. Options, in order of preference:</p>
+    <ul class="clean">
+      <li>Flat, bilateral, low-amplitude hops in a <strong>stiff-soled or rocker shoe</strong>, which keeps the big toe out of the range that hurts.</li>
+      <li>Fewer contacts, more often — 10&ndash;20 a day beats 50 in one go, and spacing the jumps out actually increases the bone response anyway. <span class="tag t-b">Moderate</span></li>
+      <li>If it hurts, skip it and accept a weaker hip stimulus. A joint you can train on is worth more than a fraction of a percent of femoral neck density.</li>
+    </ul>
+    <p class="quiet">This is a footwear-and-podiatry question before it's a training question. A rigid forefoot or rocker sole does more for a stiff big toe than any exercise will. <span class="tag t-d">Reasoning</span></p>
+  </div>
+</section>
+
+<!-- ============ SPORT ============ -->
+<section class="panel" id="p-court">
+  <div class="card">
+    <div class="kicker" id="sportKicker">Your sport</div>
+    <h2 id="sportH">The reason any of this matters</h2>
+    <p class="lede" id="sportLede">This is the target. Not a number on a scale — something you want to be able to do, done in a body that isn't arguing with you.</p>
+    <div class="row r2">
+      <div class="field"><label>Your target — an event, a distance, a date (optional)</label><input type="text" id="s_event" placeholder="e.g. spring doubles tournament"></div>
+      <div class="field"><label>Roughly when?</label><input type="text" id="s_eventwhen" placeholder="e.g. April"></div>
+    </div>
+    <p class="quiet">Put something here even if it's soft. Everything in this program periodizes toward a date, and "someday" doesn't periodize.</p>
+    <div id="sportCost"></div>
+  </div>
+
+  <div class="card">
+    <div class="kicker">Before you go</div>
+    <h3>Ten minutes, and an honest note about what it does</h3>
+    <div class="note warn">
+      <p style="margin-bottom:0"><strong>The warm-up is not your injury prevention.</strong> Static stretching does not reduce injury rates — that's about as settled as this field gets. <span class="tag t-a">Strong</span> Your injury prevention is the lifting you do on other days. The warm-up is here for how you perform in the first ten minutes, and because the balance and activation pieces carry a modest signal of their own. <span class="tag t-b">Moderate</span></p>
+    </div>
+    <div class="scroll"><table>
+      <thead><tr><th>Block</th><th>Time</th><th>What</th></tr></thead>
+      <tbody id="warmRows"></tbody>
+    </table></div>
+    <p class="quiet" style="margin-top:12px">Static stretching after, or on its own. It won't prevent anything, it's fine for range of motion, and it feels good — which counts for adherence.</p>
+  </div>
+
+  <div class="card">
+    <div class="kicker">Risk</div>
+    <h3 id="riskH">What actually hurts people doing this</h3>
+    <div id="riskOut"></div>
+  </div>
+
+  <div class="card">
+    <div class="kicker">Fuel</div>
+    <h3>What a session costs, and when to feed it</h3>
+    <div id="fuelOut"></div>
+    <div class="scroll"><table>
+      <thead><tr><th>Session</th><th>Carbs during</th><th>Why</th></tr></thead>
+      <tbody>
+        <tr><td>Under 60 min</td><td><strong>Nothing.</strong> Water.</td><td id="fuelShort">—</td></tr>
+        <tr><td>60&ndash;150 min</td><td>30&ndash;60 g/hour</td><td>One sports drink, or a banana and water. <span class="tag t-a">Strong</span></td></tr>
+        <tr><td>Over 2.5 hours, or a competition day</td><td>up to 90 g/hour</td><td>Needs mixed sugars to absorb that fast. Practise it long before you need it.</td></tr>
+      </tbody>
+    </table></div>
+    <div class="coach"><span class="cl">Coach note</span>This is the fuelling call most coaches get wrong in the well-meaning direction. A client in a deficit who eats back a 60-minute easy session is a client who quietly stalls and can't work out why. Reserve the carbs for the sessions that earn them.</div>
+  </div>
+
+  <div class="card">
+    <div class="kicker">Sweat</div>
+    <h3>Do this once, use it forever</h3>
+    <ol>
+      <li>Empty your bladder. Weigh yourself with nothing on, before a typical session.</li>
+      <li>Track every ounce you drink while you're going.</li>
+      <li>Weigh again after, towel dry, nothing on.</li>
+      <li>Sweat rate = (weight before &minus; weight after + what you drank) &divide; hours.</li>
+    </ol>
+    <div class="row r3">
+      <div class="field"><label>Before (lb)</label><input type="number" step="0.1" id="sw_pre" oninput="sweat()"></div>
+      <div class="field"><label>After (lb)</label><input type="number" step="0.1" id="sw_post" oninput="sweat()"></div>
+      <div class="field"><label>Drank (fl oz)</label><input type="number" id="sw_drank" oninput="sweat()"></div>
+    </div>
+    <div class="row r2">
+      <div class="field"><label>Hours</label><input type="number" step="0.25" id="sw_hrs" value="1.5" oninput="sweat()"></div>
+      <div class="field"><label>Conditions</label><input type="text" id="sw_cond" placeholder="e.g. 88&deg;F, humid"></div>
+    </div>
+    <div id="sweatOut"></div>
+    <p class="quiet">Aim to keep losses under 2% of bodyweight. Do <strong>not</strong> drink past your sweat losses — over-drinking on a schedule is genuinely dangerous and it disproportionately affects smaller, slower participants. In heat, 300&ndash;700 mg of sodium per litre. <span class="tag t-a">Strong</span></p>
+  </div>
+
+  <div class="card">
+    <div class="kicker">Competition day</div>
+    <h3>The protocol</h3>
+    <div class="scroll"><table>
+      <thead><tr><th>When</th><th>What</th></tr></thead>
+      <tbody>
+        <tr><td>Night before</td><td>Normal carbs and a bit more. No new foods. Sleep beats everything else on this list.</td></tr>
+        <tr><td>2&ndash;3 h before</td><td id="tt_pre">&mdash;</td></tr>
+        <tr><td>45&ndash;60 min before the effort that matters</td><td id="tt_caf">&mdash;</td></tr>
+        <tr><td>During</td><td>30&ndash;60 g carbs per hour once you pass an hour. Fluid to your measured sweat rate.</td></tr>
+        <tr><td>Under an hour between efforts</td><td>Liquid carbs only, 30&ndash;60 g. No solid food — it won't clear in time.</td></tr>
+        <tr><td>1&ndash;3 h between efforts</td><td id="tt_gap">&mdash;</td></tr>
+        <tr><td>Hot day, between efforts</td><td>Cold fluid or an ice slushy, shade, hat off, cold towel on the neck.</td></tr>
+        <tr><td>After</td><td id="tt_post">&mdash;</td></tr>
+      </tbody>
+    </table></div>
+    <div class="note warn"><p style="margin-bottom:0"><strong>The rule that overrides everything above: nothing new on the day.</strong> Every gel, every drink, every caffeine dose gets rehearsed in a hard training session first. Stomachs end more race and tournament days than fitness does.</p></div>
+  </div>
+</section>
+
+<!-- ============ MIND ============ -->
+<section class="panel" id="p-mind">
+  <div class="card">
+    <div class="kicker">The head</div>
+    <h2>Taught in the moment, not in a module</h2>
+    <p class="lede">Psychology in most programs is a chapter you skip. Here it's attached to the specific place it goes wrong, because that's the only time it's useful.</p>
+  </div>
+
+  <div class="card">
+    <div class="kicker">Pattern 1</div>
+    <h3>Decision fatigue</h3>
+    <p>Every decision you make in a day draws down the same account. Not a metaphorical one — the part of your brain that runs threat and urgency is small, it gets depleted, and micro-decisions drain it faster than big ones.</p>
+    <p>Which is why a plan that asks "is this okay? can I have that? do I need to swap this?" forty times a day doesn't fail on day three. It fails on <strong>day forty</strong>, when you've simply run out. And it doesn't feel like running out. It feels like not caring anymore. That feeling is the most reliable early warning sign there is.</p>
+    <p><strong>What this program does about it:</strong> the engine makes the food decisions. The lifting is written down before you get there. Your evening is budgeted in advance. You spend your judgment on the things that actually need you.</p>
+    <div class="coach"><span class="cl">Coach note</span>Naming this early gives a client a category for something they have only ever experienced as a personal failing — and it lands hardest with people who say things like "I don't want to have to think about food." Come back to this language every single time someone describes a stall as not caring anymore.</div>
+  </div>
+
+  <div class="card">
+    <div class="kicker">Pattern 2</div>
+    <h3>Every day is data</h3>
+    <p>Here's the reframe that runs everything.</p>
+    <p>A day is not a win or a loss. It's a <strong>data point</strong>. That sounds like a nice way to feel better about a bad day, and it isn't — it's a mechanical claim about how this works.</p>
+    <p>The moment a day becomes a verdict, two things happen. You start avoiding the measurement, because who wants a verdict. And you start bailing early on things that were working, because a couple of bad readings feel like proof. Both of those <strong>corrupt the dataset</strong> — and the dataset is the only thing that tells us what to change at your next check-in.</p>
+    <p>A high day isn't a failure. It's information about a Tuesday. Ten Tuesdays is a pattern, and a pattern is something we can actually do something about. One Tuesday is noise.</p>
+    <div class="note ok"><p style="margin-bottom:0"><strong>The practical version:</strong> you never have to earn back a day. There is no compensating, no punishment session, no cutting tomorrow to make up for tonight. You log it and you move on. The engine handles the arithmetic.</p></div>
+  </div>
+
+  <div class="card">
+    <div class="kicker">Pattern 3</div>
+    <h3>The evening isn't about food</h3>
+    <p>You spend the day working, or buying and cooking and planning for everybody else. At night the house goes quiet and you want one thing that's yours. Food is available, immediate, and asks nothing of anyone.</p>
+    <p>That isn't a diet problem. It's an accounting problem — the day had nothing in it for you, and the balance gets settled at 9pm.</p>
+    <p><strong>Three things that help, in order of how much:</strong></p>
+    <ul class="clean">
+      <li>A budgeted evening slot with food you actually like. Removes the transgression, keeps the ritual.</li>
+      <li>More protein earlier. Makes the pull smaller. Doesn't remove it. <span class="tag t-b">Moderate</span></li>
+      <li>Something else in the day that's yours. This is the one that actually solves it, and it isn't a nutrition intervention.</li>
+    </ul>
+    <p class="quiet">Sleep matters more here than meal timing does — short sleep raises next-day intake by a few hundred calories, which is larger than almost anything else on this page. <span class="tag t-a">Strong</span></p>
+  </div>
+
+  <div class="card">
+    <div class="kicker">Pattern 4</div>
+    <h3>The scale is an instrument</h3>
+    <p>Your weight moves 2&ndash;4 lb in a day from water, food volume, sodium, glycogen and sleep. Meanwhile you're losing about a pound a week of actual fat. <strong>The daily number is mostly noise.</strong> The trend is the only readable signal, and even one week of trend is marginal — two weeks is where it gets reliable.</p>
+    <p>That's not reassurance. It's arithmetic, and it's the reason a single reading is not allowed to mean anything.</p>
+    <div id="mindScale"></div>
+  </div>
+
+  <div class="card">
+    <div class="kicker">Pattern 5</div>
+    <h3>What you need to see to believe it's working</h3>
+    <p>Some people live and die by the scale. Others need to see the shape of the thing improving — what they can lift, how they move in week ten versus week two, whether they're still standing in the third game.</p>
+    <p>Those are different people and they need different feedback. If the scale is your instrument, we watch the trend. If it isn't, we watch performance, and the scale becomes almost incidental.</p>
+    <p class="quiet">Tell your coach which one you are. If you don't know yet, you'll find out around week six, and that's a perfectly good time to switch.</p>
+    <div class="coach"><span class="cl">Coach note</span>Run this deliberately around week 6&ndash;8 rather than waiting to find out during a stall. Scale people and performance people need different feedback, and giving the wrong one to either is how good clients quietly disengage.</div>
+  </div>
+</section>
+
+<!-- ============ SEASON ============ -->
+<section class="panel" id="p-season">
+  <div class="card">
+    <div class="kicker">The season</div>
+    <h2>24 weeks, and what each one is actually for</h2>
+    <p class="lede">The skeleton here is a good one and it's kept on purpose: you learn one skill at a time, in an order that builds, instead of having everything dropped on you in week one. What's changed is what's inside it.</p>
+    <div class="note">
+      <p style="margin-bottom:0"><strong>What moved:</strong> protein and lifting are now week one instead of week nine. The calorie tiers are gone, replaced by numbers derived from you. The cleanse phase is gone entirely. Daily weighing is your choice rather than a mandate.</p>
+    </div>
+  </div>
+  <div id="seasonOut"></div>
+</section>
+
+<!-- ============ CHECK-IN ============ -->
+<section class="panel" id="p-checkin">
+  <div class="card">
+    <div class="kicker">Check-in</div>
+    <h2>The engine that decides what changes</h2>
+    <p class="lede">This is the actual product. Every two weeks you put in real numbers and it tells you what to adjust and why — so the decision is made by a rule you agreed to in advance, not by how the last fortnight felt.</p>
+    <div class="coach"><span class="cl">Coach note</span>Ben — this is your trading brain applied to a body. The rule is written before the emotion. The most important rule in here is the adherence gate: <strong>never adjust a plan that wasn't followed.</strong> Changing calories after a 60%-adherence fortnight is how coaches end up chasing noise and clients end up eating 1,200 calories by month five.</div>
+  </div>
+
+  <div class="card">
+    <h3>Log this fortnight</h3>
+    <div class="row r2">
+      <div class="field"><label>Trend weight now (lb)</label><input type="number" step="0.1" id="c_now" placeholder="7-day average, not today's number"></div>
+      <div class="field"><label>Trend weight 2 weeks ago (lb)</label><input type="number" step="0.1" id="c_then"></div>
+    </div>
+    <div class="row r2">
+      <div class="field"><label>Average daily calories actually eaten</label><input type="number" id="c_kcal" placeholder="honest average, including weekends"></div>
+      <div class="field"><label>Days you hit your protein target (out of 14)</label><input type="number" id="c_pro" max="14"></div>
+    </div>
+    <div class="row r3">
+      <div class="field"><label>Lifting sessions done (of 4&ndash;6)</label><input type="number" id="c_lift"></div>
+      <div class="field"><label>Court sessions</label><input type="number" id="c_court"></div>
+      <div class="field"><label>Nights of decent sleep (of 14)</label><input type="number" id="c_sleep"></div>
+    </div>
+    <div class="field"><label>How's your energy?</label><div class="choice" id="c_energy"></div></div>
+    <div class="field"><label>How's your hunger?</label><div class="choice" id="c_hunger"></div></div>
+    <div class="field"><label>Are the lifts still going up?</label><div class="choice" id="c_str"></div></div>
+    <div class="field"><label>Anything else worth saying</label><textarea id="c_notes" rows="2" placeholder="the thing you'd tell a friend about the last two weeks"></textarea></div>
+    <div class="btnrow"><button class="btn gold" onclick="runCheckin()">Run the check-in</button><button class="btn ghost sm" onclick="printPanel()">Print for my coach</button></div>
+  </div>
+
+  <div id="ciOut"></div>
+
+  <div class="card">
+    <h3>History</h3>
+    <div id="ciHist"><p class="quiet">Nothing logged yet.</p></div>
+  </div>
+</section>
+
+<!-- ============ TRUTH ============ -->
+<section class="panel" id="p-truth">
+  <div class="card">
+    <div class="kicker">The truth tab</div>
+    <h2>Everything I told you, and how sure I am</h2>
+    <p class="lede">You're going to hear the opposite of some of this from people with more followers than your coach. Here's what the actual evidence says, including where it says "we don't know."</p>
+  </div>
+
+  <div class="card">
+    <div class="kicker">Things that are true</div>
+    <h3>Load-bearing claims</h3>
+    <div class="scroll"><table>
+      <thead><tr><th>Claim</th><th>Grade</th><th>The honest version</th></tr></thead>
+      <tbody>
+        <tr><td>Resistance training preserves lean mass while you lose weight</td><td><span class="tag t-a">Strong</span></td><td>Roughly halves the lean tissue lost per kilo of bodyweight. The single best-supported statement in this program.</td></tr>
+        <tr><td>Losing slowly protects muscle better than losing fast</td><td><span class="tag t-b">Moderate</span></td><td>In the one direct trial, 0.7%/week gained lean mass while 1.4%/week lost it — same total weight lost.</td></tr>
+        <tr><td>More protein preserves muscle in a deficit</td><td><span class="tag t-b">Moderate</span></td><td>Above ~1.3 g/kg predicts muscle maintenance; below 1.0 g/kg predicts loss. But it did <em>not</em> translate into better strength or function, and it only works alongside training.</td></tr>
+        <tr><td>Strength training prevents injuries</td><td><span class="tag t-a">Strong</span></td><td>~68% reduction across 26,000 athletes. But those athletes were 12&ndash;40 and playing team sports; applying it to a 48-year-old pickleball player is reasoning, not proof.</td></tr>
+        <tr><td>High protein is safe for healthy kidneys</td><td><span class="tag t-a">Strong</span></td><td>1,358 people across 28 studies. No effect on kidney function. This does not apply if you have existing kidney disease.</td></tr>
+        <tr><td>Protein doesn't harm bone</td><td><span class="tag t-a">Strong</span></td><td>The "protein leaches calcium" idea is backwards — the signal is neutral to mildly protective.</td></tr>
+        <tr><td>Daily weighing helps weight outcomes on average</td><td><span class="tag t-a">Strong</span></td><td>On average. Averages are not people, and for some people it does measurable harm. Hence it being your choice.</td></tr>
+      </tbody>
+    </table></div>
+  </div>
+
+  <div class="card">
+    <div class="kicker">Things that are not true</div>
+    <h3>The list</h3>
+    <div class="scroll"><table>
+      <thead><tr><th>You'll hear</th><th>Grade</th><th>Reality</th></tr></thead>
+      <tbody>
+        <tr><td>"Your metabolism crashes at menopause"</td><td><span class="tag t-e">Not true</span></td><td>Total and resting energy expenditure are stable from about 20 to 60, across 6,400 people in 29 countries. The decline starts after 60, at under 1% a year. Menopause is not a step change. To the extent midlife metabolism drops, it's mostly lost muscle and reduced movement — both of which you can do something about.</td></tr>
+        <tr><td>"Processed food sits in your gut for months or years"</td><td><span class="tag t-e">Not true</span></td><td>Mouth to toilet is roughly 1&ndash;2 days. Even in disease it doesn't approach a week. The colon lining replaces itself every 3&ndash;5 days; there's no surface for anything to stick to. The "mucoid plaque" in cleanse before-and-after photos is the psyllium and bentonite from the cleanse product itself. It has never appeared in any colonoscopy or autopsy in someone not taking the product.</td></tr>
+        <tr><td>"Your body spends 80% of its energy digesting"</td><td><span class="tag t-e">Not true</span></td><td>It's about 10%. Protein is 20&ndash;30% of its own calories, carbs 5&ndash;10%, fat basically nothing. Going from a low-protein to a high-protein diet buys you roughly 45&ndash;50 calories a day. Real, worth having, not the reason protein works.</td></tr>
+        <tr><td>Cleanses, detoxes, gut resets</td><td><span class="tag t-e">Not true</span></td><td>No trial shows any commercial cleanse removes any named toxin. The literature is mostly case reports — including electrolyte disturbances and liver injury in healthy people, and products found to contain undeclared pharmaceuticals. <strong>The fair part:</strong> people genuinely feel better on one. That's real, and it comes from dropping alcohol, ultra-processed food and late-night eating for a week. You can have all of that without buying anything.</td></tr>
+        <tr><td>Parasite protocols</td><td><span class="tag t-e">Not true</span></td><td>Not "the trials were negative" — nobody has run them, because the premise doesn't survive basic epidemiology. If you genuinely think you have a parasite, that's a stool test your doctor orders, not a supplement. Wormwood is neurotoxic at sufficient dose; these things are not inert.</td></tr>
+        <tr><td>"Adrenal fatigue"</td><td><span class="tag t-e">Not true</span></td><td>A systematic review of 58 studies concluded flatly that it is a myth, and no endocrinology society recognises it. <strong>The fair part:</strong> real adrenal disease exists and real fatigue deserves a real workup — which is your doctor, not a $80/month powder. Chronic stress genuinely affects sleep, appetite and body composition. The problem is the fake diagnosis, not taking it seriously.</td></tr>
+        <tr><td>Apple cider vinegar for weight loss</td><td><span class="tag t-e">Not true</span></td><td>The flagship trial behind every viral post was <strong>retracted in 2025</strong> for improbable data. What's left is a small, low-quality glycemic literature in diabetic and PCOS populations. No credible weight-loss evidence. Also erodes tooth enamel.</td></tr>
+        <tr><td>Collagen for skin</td><td><span class="tag t-e">Not true</span></td><td>Across 23 trials it looks like it works — until you split by funding and quality. Independently funded studies: no effect. High-quality studies: no effect. That pattern is the signature of a null result surviving on bias. <strong>Joints and tendon are a different question</strong> — modest, real-ish, worth a 12-week trial if you want. Don't count it toward your protein; it has almost no leucine.</td></tr>
+        <tr><td>Greens powders</td><td><span class="tag t-d">Reasoning</span></td><td>There's no trial of any commercial greens powder on any clinical outcome. Not harmful, not a scam — it's an expensive multivitamin with grass in it, delivering roughly one or two servings of vegetables and no fibre, for $60&ndash;100 a month. Buy vegetables. Watch the kelp content if you have any thyroid history.</td></tr>
+        <tr><td>Probiotics for weight</td><td><span class="tag t-b">Moderate, and tiny</span></td><td>About half a kilogram. For <em>bloating</em> in diagnosed IBS they're modestly useful — but only specific named strains at studied doses. "Take a probiotic" is meaningless advice. Diet outranks the pill.</td></tr>
+        <tr><td>Berberine, "nature's Ozempic"</td><td><span class="tag t-b">Moderate for lipids, no for weight</span></td><td>Under 1 kg of weight loss, and the best-designed trial (337 people, 6 months, CT-measured) found <em>zero</em> effect on visceral fat. Genuinely useful for cholesterol markers, and notably more so in women. <strong>Safety:</strong> it interacts with statins, metformin and many other drugs. Doctor conversation, not a supplement-aisle one.</td></tr>
+        <tr><td>Seed cycling</td><td><span class="tag t-e">Not true</span></td><td>Every study is in women aged 15&ndash;49 with PMS or PCOS, nobody has ever tested the <em>cycling</em> part against just eating the seeds, and in menopause there's no cycle to time it to. Ground flaxseed is good food. The calendar is fiction.</td></tr>
+        <tr><td>"Metabolism boosters"</td><td><span class="tag t-b">Real but trivial</span></td><td>Caffeine and friends move total energy expenditure 2&ndash;5%, and you build tolerance. That's maybe 100 calories at the optimistic end. Your protein target moves more than that.</td></tr>
+        <tr><td>"Eating late makes you gain fat"</td><td><span class="tag t-e">Not true</span></td><td>Not independent of how much you eat overall. What is true: ultra-processed food makes people eat 300&ndash;800 more calories a day — because it's soft, dense and fast to chew, not because of when it's eaten.</td></tr>
+        <tr><td>"You can only use 20&ndash;30 g of protein per meal"</td><td><span class="tag t-e">Not true</span></td><td>A measurement artifact. 100 g in one sitting produced substantially more muscle protein synthesis than 25 g, with under 15% oxidised.</td></tr>
+        <tr><td>"Protein within 30 minutes of training"</td><td><span class="tag t-e">Not true</span></td><td>The effect disappears entirely once you control for total daily protein. The training effect lasts at least 24 hours.</td></tr>
+        <tr><td>"Menopausal women need 2.2 g/kg protein"</td><td><span class="tag t-d">Reasoning at best</span></td><td>No trial in peri- or postmenopausal women shows a benefit at those intakes. Your needs are modestly up because you're 48, in a deficit and training hard — not because of estrogen specifically. The increment is smaller than the internet says.</td></tr>
+        <tr><td>"Cardio kills your gains"</td><td><span class="tag t-e">Not true</span></td><td>Across 17 meta-analyses, no meaningful interference for strength or muscle. And in women specifically, lower-body strength showed <em>zero</em> impairment. The one real casualty is explosive power, which is why power work goes early in a session when you're fresh.</td></tr>
+        <tr><td>"10,000 steps"</td><td><span class="tag t-e">Not true</span></td><td>A 1960s Japanese pedometer marketing number. About 7,000 captures most of the benefit.</td></tr>
+        <tr><td>"1,200 calories is the floor"</td><td><span class="tag t-e">Not true</span></td><td>There's no trial identifying 1,200 as any kind of biological threshold — it's a micronutrient rule of thumb that hardened into a rule. Your actual floor is calculated in the Numbers tab, from your body and your training, and it's considerably higher.</td></tr>
+        <tr><td>"Exercise prevents fractures"</td><td><span class="tag t-d">Not demonstrated</span></td><td>No exercise trial has ever been powered for fracture outcomes. Bone density is a surrogate. The likely real mechanism is that strong people don't fall — and the strength gains in these trials dwarf the bone gains.</td></tr>
+        <tr><td>"Exercise fixes hot flushes"</td><td><span class="tag t-d">Insufficient</span></td><td>Cochrane, 5 trials, 733 women: evidence insufficient to say whether it helps.</td></tr>
+      </tbody>
+    </table></div>
+  </div>
+
+  <div class="card">
+    <div class="kicker">The short list</div>
+    <h3>Supplements actually worth the money</h3>
+    <ul class="clean">
+      <li><strong>Creatine monohydrate, 3&ndash;5 g a day.</strong> No loading, timing irrelevant, the cheapest well-evidenced thing in the category. It does not make women bulky, it does not cause hair loss, and it does not harm healthy kidneys. <span class="tag t-a">Strong for muscle</span> <strong>Do not buy it for bone</strong> — a two-year trial in postmenopausal women found no bone benefit over lifting alone. <span class="tag t-b">Moderate, negative</span></li>
+      <li><strong>Vitamin D</strong>, if your bloodwork says you're low. If it doesn't, it does nothing. Very high doses appear to be actively worse for bone in women, so more is not better here. <span class="tag t-b">Moderate</span></li>
+      <li><strong>Protein powder</strong>, if it's the difference between hitting your protein and not. It has no magic in it — it's a convenient delivery vehicle for the number in the Numbers tab.</li>
+      <li><strong>Creatine and protein are the entire list.</strong> Everything else is either "if your labs say so" or a conversation with your doctor.</li>
+    </ul>
+  </div>
+
+  <div class="card">
+    <div class="kicker">Where this program is guessing</div>
+    <h3>The honest gaps</h3>
+    <ul class="clean">
+      <li><strong>There is no trial of heavy lifting and impact work in perimenopausal women in their late forties.</strong> Everything in the Strength tab reasons downward in age from trials in women 60+. That reasoning is sound. It is not proof.</li>
+      <li><strong>The 24-week structure is professional judgment</strong>, assembled from evidence about its parts. Nobody has tested this exact program.</li>
+      <li><strong>Per-meal protein targets are a tool for hitting the daily number</strong>, not an independent requirement. The head-to-head trial comparing even versus skewed distribution found no difference at all.</li>
+      <li><strong>Reverse dieting has essentially no evidence base.</strong> The recovery phase at the end of this program is built on reasoning about adherence and psychology, and it's labeled that way rather than dressed up as metabolic protection.</li>
+      <li><strong>Nobody has tested any injury-prevention program in pickleball.</strong> Not one.</li>
+    </ul>
+    <p class="quiet">If that list makes you trust the program less, good — that's the correct response to being told what somebody doesn't know. It's also the reason the check-in engine exists: when the evidence can't tell us, your own data can.</p>
+  </div>
+</section>
+
+</main>
+
+<div class="savebar">
+  <span class="st" id="saveStatus">Not saved yet</span>
+  <button class="btn gold sm" onclick="saveFile()">Save my data</button>
+  <button class="btn ghost sm" style="border-color:#C7D3E4;color:#fff" onclick="document.getElementById('loadFile').click()">Load</button>
+  <input type="file" id="loadFile" class="hide" accept=".json" onchange="loadFromFile(event)">
+</div>
+
+<script>
+/* ============================================================
+   THE COMEBACK — single-file program engine
+   Data lives in this file only. Nothing is sent anywhere.
+   ============================================================ */
+
+/* ---------- FOOD LIBRARY ----------
+   n=name  s=serving  p/c/f=grams  k=kcal  t=P protein / C carb / V veg / F fat / E evening
+   b=1 breakfast-appropriate   v=1 vegetarian   q=1 quick/no-cook            */
+const FOODS=[
+/* --- protein anchors --- */
+{n:"Chicken breast",s:"6 oz cooked",p:52,c:0,f:6,k:274,t:"P"},
+{n:"Chicken thighs",s:"5 oz cooked",p:33,c:0,f:11,k:240,t:"P"},
+{n:"Rotisserie chicken",s:"5 oz",p:40,c:0,f:9,k:250,t:"P",q:1},
+{n:"Salmon",s:"6 oz",p:40,c:0,f:22,k:354,t:"P"},
+{n:"Cod",s:"6 oz",p:39,c:0,f:2,k:180,t:"P"},
+{n:"Halibut",s:"6 oz",p:42,c:0,f:5,k:250,t:"P"},
+{n:"Tilapia",s:"6 oz",p:40,c:0,f:4,k:200,t:"P"},
+{n:"Shrimp",s:"6 oz",p:36,c:1,f:2,k:180,t:"P",q:1},
+{n:"Scallops",s:"6 oz",p:29,c:6,f:1,k:160,t:"P"},
+{n:"Canned tuna",s:"1 can, drained",p:33,c:0,f:2,k:150,t:"P",q:1},
+{n:"Sirloin steak",s:"6 oz",p:46,c:0,f:12,k:300,t:"P"},
+{n:"Lean ground beef",s:"5 oz cooked, 90/10",p:35,c:0,f:14,k:270,t:"P"},
+{n:"Ground turkey",s:"5 oz cooked, 93/7",p:35,c:0,f:10,k:230,t:"P"},
+{n:"Pork tenderloin",s:"6 oz",p:40,c:0,f:7,k:230,t:"P"},
+{n:"Lean ham",s:"4 oz",p:24,c:2,f:5,k:150,t:"P",q:1,b:1},
+{n:"Turkey breast, deli",s:"4 oz",p:22,c:2,f:1,k:110,t:"P",q:1},
+{n:"Chicken sausage",s:"2 links",p:18,c:2,f:8,k:160,t:"P",b:1},
+{n:"Eggs",s:"3 large",p:19,c:1,f:15,k:215,t:"P",b:1,v:1},
+{n:"Egg whites + 1 whole",s:"1 cup + 1 egg",p:32,c:3,f:5,k:190,t:"P",b:1,v:1},
+{n:"Greek yogurt, plain",s:"1 cup nonfat",p:23,c:9,f:0,k:133,t:"P",b:1,v:1,q:1},
+{n:"Greek yogurt, 2%",s:"1 cup",p:20,c:8,f:5,k:165,t:"P",b:1,v:1,q:1},
+{n:"Skyr",s:"1 cup",p:24,c:8,f:0,k:140,t:"P",b:1,v:1,q:1},
+{n:"Cottage cheese",s:"1 cup, lowfat",p:28,c:8,f:5,k:183,t:"P",b:1,v:1,q:1},
+{n:"Ricotta, part-skim",s:"1 cup",p:28,c:13,f:19,k:340,t:"P",v:1,b:1},
+{n:"Whey protein",s:"1 scoop",p:25,c:3,f:2,k:130,t:"P",b:1,v:1,q:1},
+{n:"Protein shake, ready-made",s:"1 bottle",p:30,c:5,f:2,k:160,t:"P",b:1,v:1,q:1},
+{n:"Extra-firm tofu",s:"7 oz",p:20,c:4,f:11,k:190,t:"P",v:1},
+{n:"Tempeh",s:"4 oz",p:22,c:9,f:12,k:220,t:"P",v:1},
+{n:"Edamame",s:"1 cup shelled",p:18,c:14,f:8,k:190,t:"P",v:1,q:1},
+{n:"Lentils",s:"1 cup cooked",p:18,c:40,f:1,k:230,t:"P",v:1},
+{n:"Black beans",s:"1 cup",p:15,c:41,f:1,k:227,t:"P",v:1,q:1},
+{n:"Chickpeas",s:"1 cup",p:15,c:45,f:4,k:269,t:"P",v:1,q:1},
+/* --- carbs --- */
+{n:"Jasmine rice",s:"1 cup cooked",p:4,c:45,f:0,k:205,t:"C",v:1},
+{n:"Brown rice",s:"1 cup cooked",p:5,c:46,f:2,k:218,t:"C",v:1},
+{n:"Sweet potato",s:"1 medium",p:2,c:27,f:0,k:120,t:"C",v:1},
+{n:"Roast potatoes",s:"1 medium potato",p:4,c:37,f:0,k:160,t:"C",v:1},
+{n:"Quinoa",s:"1 cup cooked",p:8,c:39,f:4,k:222,t:"C",v:1},
+{n:"Farro",s:"1 cup cooked",p:8,c:47,f:1,k:220,t:"C",v:1},
+{n:"Couscous",s:"1 cup cooked",p:6,c:36,f:0,k:176,t:"C",v:1},
+{n:"Pasta",s:"1 cup cooked",p:8,c:43,f:1,k:220,t:"C",v:1},
+{n:"Polenta",s:"1 cup",p:3,c:30,f:1,k:145,t:"C",v:1},
+{n:"Oats",s:"1/2 cup dry",p:5,c:27,f:3,k:150,t:"C",b:1,v:1},
+{n:"Sourdough toast",s:"2 slices",p:6,c:36,f:1,k:180,t:"C",b:1,v:1,q:1},
+{n:"Sprouted-grain toast",s:"2 slices",p:8,c:30,f:1,k:160,t:"C",b:1,v:1,q:1},
+{n:"Flour tortilla",s:"1 large",p:6,c:36,f:6,k:210,t:"C",v:1,q:1},
+{n:"Corn tortillas",s:"3 small",p:4,c:33,f:2,k:160,t:"C",v:1,q:1},
+{n:"Thin bagel",s:"1",p:6,c:26,f:1,k:140,t:"C",b:1,v:1,q:1},
+{n:"Rice cakes",s:"3",p:1,c:15,f:0,k:70,t:"C",v:1,q:1},
+{n:"Banana",s:"1 medium",p:1,c:27,f:0,k:105,t:"C",fr:1,b:1,v:1,q:1},
+{n:"Berries",s:"1 cup",p:1,c:15,f:0,k:65,t:"C",fr:1,b:1,v:1,q:1},
+{n:"Apple",s:"1 medium",p:0,c:25,f:0,k:95,t:"C",fr:1,v:1,q:1},
+{n:"Orange",s:"1",p:1,c:15,f:0,k:62,t:"C",fr:1,v:1,q:1},
+{n:"Grapes",s:"1 cup",p:1,c:27,f:0,k:104,t:"C",fr:1,v:1,q:1},
+{n:"Mango",s:"1 cup",p:1,c:25,f:0,k:99,t:"C",fr:1,v:1,q:1},
+{n:"Pineapple",s:"1 cup",p:1,c:22,f:0,k:83,t:"C",fr:1,v:1,q:1},
+/* --- vegetables --- */
+{n:"Broccoli",s:"2 cups",p:5,c:12,f:1,k:60,t:"V",v:1},
+{n:"Green beans",s:"2 cups",p:4,c:16,f:0,k:70,t:"V",v:1},
+{n:"Asparagus",s:"1 bunch",p:5,c:9,f:0,k:45,t:"V",v:1},
+{n:"Spinach, wilted",s:"3 cups raw",p:3,c:3,f:0,k:21,t:"V",v:1},
+{n:"Big green salad",s:"3 cups",p:2,c:4,f:0,k:25,t:"V",v:1,q:1},
+{n:"Zucchini",s:"2 cups",p:3,c:8,f:0,k:40,t:"V",v:1},
+{n:"Roast peppers",s:"2 peppers",p:2,c:14,f:0,k:60,t:"V",v:1},
+{n:"Brussels sprouts",s:"1.5 cups",p:5,c:15,f:0,k:70,t:"V",v:1},
+{n:"Cauliflower",s:"2 cups",p:4,c:10,f:0,k:54,t:"V",v:1},
+{n:"Roast carrots",s:"1.5 cups",p:2,c:18,f:0,k:75,t:"V",v:1},
+{n:"Tomato salad",s:"1.5 cups",p:2,c:8,f:0,k:40,t:"V",v:1,q:1},
+{n:"Cucumber + tomato",s:"2 cups",p:2,c:9,f:0,k:45,t:"V",v:1,q:1},
+{n:"Sautéed kale",s:"2 cups",p:4,c:10,f:1,k:70,t:"V",v:1},
+{n:"Mushrooms",s:"2 cups",p:4,c:6,f:0,k:40,t:"V",v:1},
+{n:"Cabbage slaw",s:"2 cups",p:2,c:12,f:0,k:55,t:"V",v:1,q:1},
+{n:"Snap peas",s:"2 cups",p:5,c:14,f:0,k:80,t:"V",v:1,q:1},
+{n:"Roast squash",s:"1.5 cups",p:2,c:22,f:0,k:95,t:"V",v:1},
+{n:"Arugula + fennel",s:"3 cups",p:2,c:6,f:0,k:35,t:"V",v:1,q:1},
+/* --- fats --- */
+{n:"Olive oil",s:"1 tbsp",p:0,c:0,f:14,k:120,t:"F",v:1},
+{n:"Avocado",s:"1/2",p:2,c:9,f:15,k:160,t:"F",b:1,v:1,q:1},
+{n:"Almonds",s:"1 oz",p:6,c:6,f:14,k:164,t:"F",b:1,v:1,q:1},
+{n:"Walnuts",s:"1 oz",p:4,c:4,f:18,k:185,t:"F",b:1,v:1,q:1},
+{n:"Pumpkin seeds",s:"1 oz",p:9,c:4,f:13,k:158,t:"F",b:1,v:1,q:1},
+{n:"Peanut butter",s:"2 tbsp",p:8,c:7,f:16,k:190,t:"F",b:1,v:1,q:1},
+{n:"Tahini",s:"1 tbsp",p:3,c:3,f:8,k:89,t:"F",v:1},
+{n:"Feta",s:"1 oz",p:4,c:1,f:6,k:75,t:"F",b:1,v:1,q:1},
+{n:"Parmesan",s:"1 oz",p:10,c:1,f:7,k:110,t:"F",v:1,q:1},
+{n:"Sharp cheddar",s:"1 oz",p:7,c:1,f:9,k:113,t:"F",b:1,v:1,q:1},
+{n:"Goat cheese",s:"1 oz",p:5,c:0,f:6,k:75,t:"F",b:1,v:1,q:1},
+{n:"Pesto",s:"1 tbsp",p:1,c:1,f:8,k:80,t:"F",v:1,q:1},
+{n:"Butter",s:"1 tbsp",p:0,c:0,f:12,k:102,t:"F",b:1,v:1},
+{n:"Olives",s:"1/4 cup",p:0,c:2,f:6,k:60,t:"F",v:1,q:1},
+{n:"Hummus",s:"1/4 cup",p:4,c:9,f:8,k:110,t:"F",v:1,q:1},
+/* --- evening --- */
+{n:"Ice cream",s:"1/2 cup",p:3,c:16,f:7,k:140,t:"E",v:1,q:1},
+{n:"Higher-protein ice cream",s:"2/3 cup",p:8,c:17,f:3,k:180,t:"E",v:1,q:1},
+{n:"Dark chocolate",s:"2 squares",p:2,c:11,f:9,k:130,t:"E",v:1,q:1},
+{n:"Air-popped popcorn",s:"4 cups",p:4,c:25,f:2,k:125,t:"E",v:1,q:1},
+{n:"Popcorn with parmesan",s:"4 cups",p:8,c:25,f:7,k:215,t:"E",v:1,q:1},
+{n:"Potato chips",s:"1 oz",p:2,c:15,f:10,k:155,t:"E",v:1,q:1},
+{n:"Greek yogurt, berries, honey",s:"1 bowl",p:18,c:25,f:0,k:175,t:"E",v:1,q:1},
+{n:"Cottage cheese + pineapple",s:"1 bowl",p:24,c:20,f:5,k:215,t:"E",v:1,q:1},
+{n:"Cheese and crackers",s:"small plate",p:8,c:15,f:11,k:190,t:"E",v:1,q:1},
+{n:"Small cheese board",s:"1 plate",p:10,c:5,f:16,k:210,t:"E",v:1,q:1},
+{n:"Apple + peanut butter",s:"1 apple, 2 tbsp",p:8,c:32,f:16,k:285,t:"E",v:1,q:1},
+{n:"Frozen grapes",s:"1 cup",p:1,c:27,f:0,k:104,t:"E",v:1,q:1},
+{n:"Sorbet",s:"1/2 cup",p:0,c:30,f:0,k:120,t:"E",v:1,q:1},
+{n:"Rice pudding",s:"1 cup",p:4,c:30,f:4,k:170,t:"E",v:1,q:1},
+{n:"Dark chocolate almonds",s:"1 oz",p:4,c:13,f:13,k:180,t:"E",v:1,q:1},
+{n:"Protein hot chocolate",s:"1 mug",p:22,c:12,f:3,k:165,t:"E",v:1,q:1},
+{n:"Glass of wine",s:"5 oz",p:0,c:4,f:0,k:125,t:"E",v:1,q:1,d:1},
+{n:"Beer",s:"12 oz",p:2,c:13,f:0,k:150,t:"E",v:1,q:1,d:1}
+];
+
+/* ---------- RECIPES ----------
+   Macros are COMPUTED from ingredient weights, never typed by hand. Every recipe
+   is written to feed a household; the engine marks the portion that is yours.
+   n name · s slot B/L/D · sv servings · t minutes · g tags (v veg, q quick, f freezes)
+   k/p/c/f are PER SERVING · i ingredients [name, grams for the whole recipe] */
+const RECIPES=[
+{n:"Yogurt bowl with berries and almonds",s:"B",sv:4,t:5,g:"vq",k:288,p:22,c:30,f:10,i:[["greek yogurt",700],["berries",300],["almonds",60],["honey",40],["chia seeds",20]],m:["Divide the yogurt between bowls.","Top with berries, a scatter of almonds and chia, and a drizzle of honey.","That's it. Five minutes, no cooking, and it holds you until lunch."],note:"The fastest high-protein breakfast in this book. Buy plain yogurt, not the fruit kind — the fruit ones carry a surprising amount of sugar for the same calories."},
+{n:"Spinach and feta scramble on sourdough",s:"B",sv:4,t:15,g:"vq",k:440,p:29,c:37,f:19,i:[["eggs",400],["egg whites",240],["spinach",200],["feta",80],["olive oil",14],["sourdough bread",240],["cherry tomatoes",200]],m:["Wilt the spinach in a hot pan with the oil, about a minute, then push it to one side.","Beat the eggs and whites together, pour in, and stir gently over a low heat.","When they're still slightly wet, fold in the spinach and crumbled feta and take the pan off the heat — they finish cooking on their own.","Serve on toasted sourdough with the tomatoes alongside."],note:"The whole-egg-plus-whites split is what makes the protein work without the calories climbing. Straight whites taste like nothing; this tastes like eggs."},
+{n:"Overnight oats with peanut butter and banana",s:"B",sv:4,t:5,g:"vqf",k:465,p:24,c:63,f:14,i:[["rolled oats",200],["greek yogurt",400],["milk",300],["peanut butter",60],["banana",240],["chia seeds",20],["maple syrup",20]],m:["Stir everything except the banana together in a big container or four jars.","Refrigerate overnight, or at least four hours.","Slice the banana over the top in the morning."],note:"Make all four on Sunday and breakfast is handled until Wednesday. This is the single best answer to a morning where you have no time and no decisions left."},
+{n:"Cottage cheese protein pancakes",s:"B",sv:4,t:20,g:"v",k:415,p:24,c:51,f:13,i:[["cottage cheese",400],["eggs",200],["rolled oats",180],["baking powder",8],["vanilla extract",8],["berries",240],["maple syrup",40],["butter",14]],m:["Blitz the cottage cheese, eggs, oats, baking powder and vanilla in a blender until smooth. Let it sit five minutes.","Cook in a buttered non-stick pan over medium heat, about two minutes a side, until bubbles appear and the edges set.","Serve with berries and a little maple syrup."],note:"Genuinely tastes like a pancake. The batter keeps two days in the fridge, so this works on a weekday, not just a Sunday."},
+{n:"Smoked salmon and cream cheese toast",s:"B",sv:4,t:8,g:"q",k:394,p:23,c:40,f:15,i:[["smoked salmon",320],["cream cheese",120],["sourdough bread",280],["cucumber",200],["lemon juice",15],["fresh herbs",10]],m:["Toast the bread and spread with cream cheese.","Lay the salmon over, then the sliced cucumber.","Squeeze lemon over the top and scatter with herbs."],note:"No cooking at all, and it feels like something you'd order out. Good on a morning you want breakfast to be a small event."},
+{n:"Breakfast burritos",s:"B",sv:4,t:20,g:"vf",k:586,p:29,c:54,f:27,i:[["eggs",400],["black beans",240],["cheddar",100],["salsa",160],["flour tortillas",280],["bell peppers",200],["onion",100],["olive oil",14]],m:["Soften the peppers and onion in the oil, five minutes.","Add the beaten eggs and stir until just set, then fold in the beans and cheese off the heat.","Spoon into warmed tortillas with the salsa and roll up."],note:"Wrap them in foil and freeze. Ninety seconds in the microwave from frozen and you have a real breakfast on the worst possible morning."},
+{n:"Chicken, quinoa and roast veg bowl",s:"L",sv:4,t:35,g:"f",k:563,p:46,c:45,f:23,i:[["chicken breast",600],["quinoa, dry",180],["broccoli",400],["bell peppers",300],["olive oil",30],["tahini",60],["lemon juice",30],["garlic",8]],m:["Heat the oven to 425°F. Toss the broccoli and peppers with half the oil and roast 20–25 minutes.","Season the chicken, roast alongside for 18–20 minutes until cooked through, then slice.","Cook the quinoa in twice its volume of water, 15 minutes, then fluff.","Whisk the tahini with the lemon, crushed garlic, remaining oil and enough water to make it pourable.","Build bowls and spoon the dressing over."],note:"The template that carries this whole program: a protein, a grain, two roast vegetables, a sauce with a bit of acid. Swap any component and it still works."},
+{n:"Tuna, potato and green bean salad",s:"L",sv:4,t:25,g:"",k:439,p:38,c:36,f:17,i:[["canned tuna",400],["potatoes",600],["green beans",400],["eggs",200],["olives",80],["olive oil",30],["dijon mustard",20],["lemon juice",30],["salad greens",120]],m:["Boil the potatoes until tender, 15 minutes, dropping the green beans in for the last 4.","Boil the eggs 8 minutes, then cool and quarter them.","Whisk the oil, mustard and lemon into a dressing.","Toss everything through the greens while the potatoes are still warm — that's when they soak up the dressing."],note:"Better slightly warm than cold, and better still the next day. Genuinely good cold from a container, which most salads aren't."},
+{n:"Turkey and hummus wraps",s:"L",sv:4,t:10,g:"q",k:474,p:30,c:52,f:17,i:[["sliced turkey",400],["hummus",200],["flour tortillas",280],["bell peppers",240],["salad greens",120],["cucumber",200],["feta",60]],m:["Spread the hummus over the tortillas.","Layer the turkey, sliced peppers, cucumber, greens and crumbled feta down the middle.","Roll tightly, then cut on the diagonal."],note:"Ten minutes, no heat, packs well. The one to make when lunch is something you eat standing up."},
+{n:"Lentil soup with lemon",s:"L",sv:4,t:40,g:"vf",k:421,p:23,c:64,f:9,i:[["red lentils",300],["onion",150],["carrots",200],["garlic",15],["olive oil",30],["canned tomatoes",400],["cumin",6],["lemon juice",40],["spinach",150]],m:["Soften the onion, carrot and garlic in the oil for 8 minutes.","Add the cumin, stir for a minute, then the lentils, tomatoes and 1.5 litres of water.","Simmer 25 minutes until the lentils collapse.","Stir the spinach through, then the lemon juice — off the heat, and don't skip it. It's what makes the whole pot taste like something."],note:"Freezes perfectly and costs almost nothing. Doubles easily; make a big pot and you've bought yourself three lunches."},
+{n:"Shrimp rice bowl with avocado",s:"L",sv:4,t:20,g:"q",k:440,p:38,c:46,f:12,i:[["shrimp",600],["jasmine rice, dry",180],["cucumber",250],["avocado",200],["greek yogurt",120],["sriracha",30],["lime juice",25],["scallions",50],["olive oil",14]],m:["Cook the rice.","Sear the shrimp in the oil over a high heat, 2 minutes a side, until just pink. Don't push it further.","Stir the sriracha into the yogurt to make the sauce.","Build bowls with rice, shrimp, cucumber and avocado, then drizzle the sauce and scatter the scallions."],note:"Twenty minutes start to finish. Shrimp cook faster than almost any protein, which makes this the weeknight answer when nobody planned anything."},
+{n:"Chopped salad with chickpeas and feta",s:"L",sv:4,t:15,g:"vq",k:509,p:19,c:60,f:23,i:[["chickpeas",480],["cucumber",300],["cherry tomatoes",300],["bell peppers",200],["feta",120],["olives",60],["olive oil",40],["lemon juice",30],["fresh herbs",20],["pita bread",160]],m:["Chop everything to roughly the same size — this matters more than it sounds, it's what makes a chopped salad work.","Toss with the oil, lemon and herbs.","Crumble the feta over and serve with warm pita."],note:"Improves after an hour in the fridge, so it's a rare salad you can genuinely make ahead."},
+{n:"Sheet-pan lemon chicken with potatoes and green beans",s:"D",sv:4,t:45,g:"",k:515,p:40,c:39,f:22,i:[["chicken thighs",700],["potatoes",700],["green beans",400],["olive oil",40],["lemon juice",40],["garlic",20],["fresh herbs",15]],m:["Heat the oven to 425°F.","Toss the halved potatoes with half the oil and roast 20 minutes on a big tray.","Push them aside, add the chicken skin-side up with the garlic and lemon, roast another 20 minutes.","Throw the green beans on for the final 10.","Scatter the herbs and squeeze over more lemon."],note:"One tray, one wash-up. This is the recipe most likely to become a weekly fixture — leftovers are also the best cold lunch on this list."},
+{n:"Salmon with roast broccoli and rice",s:"D",sv:4,t:30,g:"",k:628,p:39,c:50,f:29,i:[["salmon fillet",640],["broccoli",500],["jasmine rice, dry",180],["olive oil",30],["soy sauce",30],["honey",20],["ginger",10],["garlic",10]],m:["Heat the oven to 425°F. Roast the broccoli with half the oil for 18 minutes until the edges catch.","Mix the soy, honey, grated ginger and garlic. Brush over the salmon.","Roast the salmon 10–12 minutes, until it flakes but is still slightly translucent in the middle.","Serve on rice with the pan juices."],note:"Take the salmon out earlier than feels right. It carries on cooking on the plate, and overcooked salmon is the most common way this dish gets ruined."},
+{n:"Turkey chili",s:"D",sv:6,t:50,g:"f",k:517,p:41,c:39,f:23,i:[["ground turkey",700],["kidney beans",480],["black beans",240],["canned tomatoes",800],["onion",200],["bell peppers",300],["garlic",20],["chili powder",20],["cumin",10],["olive oil",30],["cheddar",120],["greek yogurt",150]],m:["Brown the turkey in the oil in a big pot, breaking it up as you go.","Add the onion, peppers and garlic, cook 8 minutes until soft.","Stir in the spices for a minute, then the tomatoes and beans.","Simmer at least 30 minutes — longer is better, it's forgiving.","Serve topped with cheese and a spoon of yogurt instead of sour cream."],note:"Makes six portions on purpose. Better on day two, freezes for months, and feeds people who eat very differently from you without any special effort."},
+{n:"Beef and broccoli stir-fry",s:"D",sv:4,t:25,g:"",k:518,p:41,c:52,f:16,i:[["sirloin steak",600],["broccoli",500],["jasmine rice, dry",180],["soy sauce",50],["garlic",20],["ginger",15],["olive oil",25],["scallions",60],["honey",15]],m:["Cook the rice first — everything else takes 10 minutes.","Slice the beef thinly against the grain. Get the pan properly hot.","Sear the beef in two batches so it browns instead of steaming. Set aside.","Stir-fry the broccoli 4 minutes with a splash of water and a lid on, then add the garlic and ginger.","Return the beef, add the soy and honey, toss for a minute and finish with scallions."],note:"Two batches, not one. Crowding the pan is the difference between seared beef and grey beef, and it costs you ninety seconds."},
+{n:"Baked cod with tomatoes, olives and couscous",s:"D",sv:4,t:30,g:"",k:450,p:38,c:42,f:14,i:[["cod fillet",680],["cherry tomatoes",400],["olives",100],["capers",30],["couscous, dry",180],["olive oil",35],["garlic",15],["lemon juice",30],["fresh herbs",15]],m:["Heat the oven to 400°F.","Scatter the tomatoes, olives, capers and garlic in a baking dish with the oil, roast 12 minutes.","Nestle the cod into the tomatoes, spoon some over the top, and bake another 12–14 minutes.","Pour boiling water over the couscous, cover for 5 minutes, then fork it up.","Finish with lemon and herbs."],note:"Lean, quick, and it tastes far more involved than it is. Cod is one of the highest-protein-per-calorie foods there is, which makes this an easy night for the numbers."},
+{n:"Pork tenderloin with roast squash and slaw",s:"D",sv:4,t:40,g:"",k:481,p:43,c:33,f:22,i:[["pork tenderloin",700],["butternut squash",700],["red cabbage",300],["carrots",150],["olive oil",40],["dijon mustard",20],["lemon juice",30],["paprika",6],["pumpkin seeds",40]],m:["Heat the oven to 425°F. Roast the cubed squash in half the oil for 25 minutes.","Rub the pork with paprika and salt, sear it hard in a pan for 2 minutes a side, then roast 15–18 minutes until just cooked. Rest it 5 minutes before slicing.","Shred the cabbage and carrot, dress with the remaining oil, mustard and lemon.","Serve sliced pork with the squash and slaw, seeds scattered over."],note:"Pork tenderloin is as lean as chicken breast and most people never cook it. The rest is not optional — slicing it straight away loses all the juice."},
+{n:"Chicken fajita tray",s:"D",sv:4,t:35,g:"",k:630,p:48,c:58,f:24,i:[["chicken breast",700],["bell peppers",400],["onion",250],["corn tortillas",320],["olive oil",35],["cumin",8],["paprika",8],["salsa",200],["avocado",200],["lime juice",25]],m:["Heat the oven to 425°F.","Toss the sliced chicken, peppers and onion with the oil and spices on a big tray.","Roast 22–25 minutes, stirring once, until the edges char slightly.","Warm the tortillas and serve with salsa and sliced avocado."],note:"Everyone builds their own, which quietly solves the problem of cooking one thing for you and another for the family."},
+{n:"Red curry with tofu and vegetables",s:"D",sv:4,t:30,g:"vf",k:546,p:22,c:57,f:26,i:[["extra-firm tofu",600],["light coconut milk",600],["red curry paste",80],["jasmine rice, dry",180],["bell peppers",250],["green beans",250],["carrots",150],["olive oil",25],["soy sauce",25],["fresh herbs",20]],m:["Press the tofu between paper towels for 10 minutes, then cube and fry in the oil until golden on most sides.","Fry the curry paste in the same pan for a minute until it smells strong.","Add the coconut milk and vegetables, simmer 10 minutes.","Return the tofu, add the soy, and finish with herbs. Serve over rice."],note:"Pressing the tofu is the whole trick. Skip it and it stays spongy; do it and it crisps."},
+{n:"Turkey meatballs with marinara",s:"D",sv:4,t:40,g:"f",k:755,p:54,c:64,f:31,i:[["ground turkey",700],["eggs",100],["parmesan",60],["garlic",15],["fresh herbs",15],["marinara sauce",700],["pasta, dry",240],["olive oil",25],["spinach",150]],m:["Mix the turkey, egg, parmesan, crushed garlic and herbs. Roll into 20 balls.","Brown them in the oil in batches, 6–8 minutes, then set aside.","Pour in the marinara, return the meatballs, and simmer 15 minutes.","Stir the spinach through at the end. Serve over pasta."],note:"Freeze half the raw meatballs on a tray, then bag them. A future weeknight dinner in about the time it takes to boil pasta."},
+{n:"Steak with roast potatoes and a big salad",s:"D",sv:4,t:40,g:"",k:539,p:40,c:36,f:25,i:[["sirloin steak",640],["potatoes",700],["salad greens",180],["cherry tomatoes",250],["cucumber",200],["olive oil",45],["dijon mustard",15],["lemon juice",25],["butter",20]],m:["Heat the oven to 425°F. Roast the halved potatoes in 25 g of the oil for 35 minutes, turning once.","Get a heavy pan very hot. Season the steak and sear 3 minutes a side for medium-rare, adding the butter for the last minute and spooning it over.","Rest the steak 5 minutes. This is not optional.","Dress the salad with the remaining oil, mustard and lemon. Slice the steak against the grain."],note:"The Friday one. Steak is not a problem food — it's protein, and it fits the numbers comfortably. What matters is what's next to it."},
+{n:"Lentil bolognese with pasta",s:"D",sv:4,t:45,g:"vf",k:691,p:34,c:108,f:14,i:[["red lentils",250],["canned tomatoes",800],["onion",200],["carrots",200],["garlic",20],["olive oil",30],["pasta, dry",240],["parmesan",70],["fresh herbs",15]],m:["Soften the onion, carrot and garlic in the oil for 10 minutes — take your time here, it's most of the flavour.","Add the lentils, tomatoes and 400 ml water. Simmer 30 minutes until thick.","Cook the pasta and toss it through with a splash of the cooking water.","Finish with parmesan and herbs."],note:"Nobody at the table will notice there's no meat in it. Freezes in portions and reheats better than most things."},
+{n:"Black bean and sweet potato tray with lime yogurt",s:"D",sv:4,t:40,g:"vf",k:630,p:25,c:99,f:17,i:[["black beans",600],["sweet potatoes",700],["bell peppers",300],["onion",150],["olive oil",35],["cumin",8],["paprika",8],["greek yogurt",200],["lemon juice",30],["feta",80],["corn tortillas",240]],m:["Heat the oven to 425°F. Toss the cubed sweet potato, peppers and onion with the oil and spices.","Roast 25 minutes, then stir the beans through and give it another 8.","Mix the yogurt with the lemon juice and a pinch of salt.","Serve with warm tortillas, the lime yogurt and crumbled feta."],note:"Cheap, filling, and it reheats without going sad. The yogurt does the job sour cream usually does, for a fraction of the fat."},
+{n:"Tofu and edamame rice bowl",s:"L",sv:4,t:25,g:"v",k:507,p:32,c:56,f:18,i:[["extra-firm tofu",600],["edamame shelled",300],["jasmine rice, dry",180],["cucumber",250],["carrots",150],["soy sauce",40],["olive oil",25],["sriracha",25],["greek yogurt",120],["scallions",50]],m:["Press the tofu 10 minutes, cube, and fry in the oil until golden.","Cook the rice and the edamame.","Stir the sriracha into the yogurt for the sauce.","Build bowls with rice, tofu, edamame, cucumber and carrot, then sauce and scallions over the top."],note:"The pressing is what makes tofu good rather than sad. Ten minutes under a plate while the rice cooks."},
+{n:"Egg, avocado and grain bowl",s:"L",sv:4,t:25,g:"v",k:561,p:26,c:43,f:34,i:[["eggs",400],["farro, dry",180],["avocado",200],["spinach",150],["cherry tomatoes",250],["feta",80],["olive oil",25],["lemon juice",25],["pumpkin seeds",40]],m:["Cook the farro, 20 minutes, then drain.","Soft-boil the eggs — 7 minutes exactly — then cool and peel.","Toss the warm farro with the oil, lemon, spinach and tomatoes so the spinach just wilts.","Top with halved eggs, sliced avocado, feta and seeds."],note:"Seven minutes gives you a yolk that's still soft in the middle. Set a timer; this is the one thing here worth being fussy about."},
+{n:"Tofu and broccoli stir-fry with rice",s:"D",sv:4,t:25,g:"v",k:436,p:26,c:52,f:15,i:[["extra-firm tofu",700],["broccoli",500],["bell peppers",200],["jasmine rice, dry",160],["soy sauce",45],["garlic",20],["ginger",15],["olive oil",22],["scallions",50]],m:["Press the tofu 10 minutes while the rice cooks, then cube it.","Fry the tofu in the oil over a high heat until golden on most sides. Set aside.","Stir-fry the broccoli and peppers 4 minutes with a splash of water and a lid on.","Add the garlic and ginger for a minute, return the tofu, add the soy, and finish with scallions."],note:"The leanest dinner in here per gram of protein, which makes it the one that fits when the calorie budget is tight."},
+{n:"Cottage cheese, tomato and herb salad with pita",s:"L",sv:4,t:10,g:"vq",k:366,p:26,c:37,f:13,i:[["cottage cheese",700],["cherry tomatoes",350],["cucumber",250],["fresh herbs",25],["olive oil",20],["lemon juice",25],["pita bread",160],["pumpkin seeds",30]],m:["Chop the tomatoes and cucumber and toss with the oil, lemon and herbs.","Spoon the cottage cheese into bowls and pile the salad on top.","Scatter the seeds and serve with warm pita."],note:"Ten minutes and almost no calories for the protein it carries. If you've written cottage cheese off, buy a good full-flavour one — the cheap watery kind is why people think they don't like it."}
+];
+
+/* ---------- STATE ---------- */
+const DEF={
+  name:"", age:45, sex:"f", ft:5, inch:2, wt:180, goal:160, bf:null,
+  act:"light", sport:"pickleball", sportname:"", court:2, courtmin:60,
+  gym:"full", inj:[], notes:"",
+  coachEmail:"benjaminpoolio@gmail.com", coachName:"Benjamin Pool",
+  scale:"trend", event:"", eventwhen:"",
+  food:{},           /* name -> "no" | "fav"  (evening items and sides) */
+  meals:{},          /* recipe name -> "no" | "fav" */
+  checkins:[], week:1, coach:false, day:null, recent:[], done:{}, _step:1, _built:false
+};
+let S=JSON.parse(JSON.stringify(DEF));
+
+/* activity factor describes life OUTSIDE training — court and lifting are added separately */
+const ACTS=[["sed","Mostly seated","1.30"],["light","On my feet a fair bit","1.40"],["mod","Busy, moving most of the day","1.50"],["high","Physically demanding days","1.60"]];
+const SEXES=[["f","Female"],["m","Male"]];
+
+/* METs are from the compendium of physical activities; kcal/min = MET x 3.5 x kg / 200,
+   so the cost scales with the person instead of being a fixed number. */
+const SPORTS=[
+ {id:"pickleball",n:"Pickleball",met:4.1,unit:"court session",
+  lede:"Not a number on a scale — a season, with matches in it, played in a body that isn't arguing with you.",
+  costnote:"Measured in recreational players: around 70% of maximum heart rate, roughly 2,800–3,300 steps an hour, with 5–15 second rallies. <span class='tag t-b'>Moderate</span>",
+  risks:[
+   ["Achilles rupture","The mechanism is backpedalling for a lob and pushing off. Anyone converting from tennis is at extra risk — twenty years of conditioning says run it down. This is the one that ends a season."],
+   ["Wrist fracture from a fall onto an outstretched hand","The injury where being a woman is clearly the risk factor, and the one that makes a bone-density conversation with your doctor concrete rather than theoretical."],
+   ["Tennis elbow","Pickleball is not tennis. Shorter lever, no strings to absorb shock, more wrist, far more shots per hour. Converts from tennis are a specific at-risk group."],
+   ["Rotator cuff","From overhead volume, which is easy to let run away with you."],
+   ["Eyes","The one nobody mitigates, and most of it comes from falls rather than being hit. Eyewear is cheap."]],
+  hook:"Two direct consequences: the <strong>heavy calf work</strong> in your lifting block is Achilles insurance, not vanity. And if you have ever rolled an ankle, a lace-up brace during play is the highest-evidence, lowest-cost item in this entire document. <span class='tag t-a'>Strong</span>",
+  prep:"3 &times; split-step into a lateral shuffle and stop. 5 pogo hops. 5 drop-and-stick landings. 10 shadow swings getting progressively harder."},
+ {id:"tennis",n:"Tennis",met:6.5,unit:"match or hitting session",
+  lede:"Not a number on a scale — a season you can actually play through.",
+  costnote:"Singles runs meaningfully harder than doubles; both sit in the moderate-to-vigorous band for most of the time on court. <span class='tag t-b'>Moderate</span>",
+  risks:[
+   ["Rotator cuff and shoulder","Serving volume is the dominant variable. Cap serves in practice before you cap anything else."],
+   ["Tennis elbow","Grip size, string tension and shot volume, in that order, before any drill."],
+   ["Achilles and calf","Push-off from a wide stance and backpedalling for the overhead."],
+   ["Lower back","Rotation under load, especially on the serve."],
+   ["Ankle sprain","If you have ever rolled one, a lace-up brace is the best-evidenced thing available. <span class='tag t-a'>Strong</span>"]],
+  hook:"The heavy calf work and the anti-rotation core work in your lifting block are the two pieces that matter most here.",
+  prep:"3 &times; split-step into a lateral shuffle and stop. 5 pogo hops. 10 shadow swings building to full. 8 easy serves at half pace."},
+ {id:"running",n:"Running",met:9.8,unit:"run",
+  lede:"Not a number on a scale — a distance, at a pace, that feels like yours again.",
+  costnote:"Running is the most calorie-dense thing on this list per minute, which cuts both ways: it eats into your deficit fast, and it loads your legs hard while you are under-fuelled. <span class='tag t-a'>Strong</span>",
+  risks:[
+   ["Doing too much too soon","By a distance the number one cause of running injury. The tissue that fails is never the one that got fitter fastest."],
+   ["Achilles and calf","Especially with any recent jump in pace or hills."],
+   ["Runner's knee and IT band","Usually a hip-strength and cadence story, not a knee story."],
+   ["Shin splints and bone stress","Take this seriously in a deficit — low energy availability and bone stress injuries travel together."],
+   ["Plantar fascia","Footwear and load, in that order."]],
+  hook:"<strong>Special warning for this one:</strong> running plus a calorie deficit is the classic recipe for bone stress injury. Your energy-availability floor is not optional here — it is the single most important number in this file for you.",
+  prep:"5 minutes easy jogging, then 4 &times; 20 second strides building to about 80%, walking back between."},
+ {id:"cycling",n:"Cycling",met:7.5,unit:"ride",
+  lede:"Not a number on a scale — a ride you finish strong instead of surviving.",
+  costnote:"Low impact, which is why the volume can climb without warning. Long rides are where deliberate fuelling stops being optional. <span class='tag t-a'>Strong</span>",
+  risks:[
+   ["Low back and neck","Position and time in the saddle, not weakness."],
+   ["Knee (front of the kneecap)","Saddle height and gearing before anything else."],
+   ["Bone density","Cycling is non-impact, so it does nothing for your bones. The lifting and the jumping in your program are doing all that work. <span class='tag t-b'>Moderate</span>"],
+   ["Under-fuelling on long rides","The easiest sport on this list to accidentally starve yourself in."]],
+  hook:"Because cycling gives you no bone stimulus at all, the impact work in the Strength tab matters more for you than for anyone else using this program.",
+  prep:"10 minutes building from easy spinning, then 3 &times; 30 seconds at your target effort with easy spinning between."},
+ {id:"swimming",n:"Swimming",met:7.0,unit:"swim",
+  lede:"Not a number on a scale — a set you can hold the whole way through.",
+  costnote:"Easy on the joints, and like cycling it gives you no bone loading at all. <span class='tag t-b'>Moderate</span>",
+  risks:[
+   ["Swimmer's shoulder","Volume and stroke mechanics. The single dominant injury in the sport."],
+   ["Bone density","No impact means no bone stimulus. Your lifting and jumping carry all of it."],
+   ["Appetite after swimming","Well documented and worth knowing — cold water swimming in particular tends to drive intake up afterwards. <span class='tag t-b'>Moderate</span>"]],
+  hook:"Your shoulder work in the lifting block is not accessory work. For a swimmer it's the main event.",
+  prep:"Band pull-aparts and external rotations on deck, then 200–400 m building, with 4 &times; 25 m fast."},
+ {id:"golf",n:"Golf",met:4.8,unit:"round",
+  lede:"Not a number on a scale — eighteen holes that still feel good on the back nine.",
+  costnote:"Walking a round is a real amount of low-intensity work; riding a cart is not. Be honest about which one you do. <span class='tag t-c'>Observed</span>",
+  risks:[
+   ["Lower back","The dominant golf injury by a wide margin. Rotation speed against a stiff mid-back."],
+   ["Lead-side elbow and wrist","Volume at the range as much as on the course."],
+   ["Shoulder","Especially in the lead arm at the top of the backswing."]],
+  hook:"Rotational power and thoracic mobility carry more transfer here than anything else in the gym. Both are in your program.",
+  prep:"Trunk rotations, hip openers, 10 half swings and 10 three-quarter swings before the first full one."},
+ {id:"hiking",n:"Hiking or walking",met:5.3,unit:"walk",
+  lede:"Not a number on a scale — a day out that doesn't cost you the next one.",
+  costnote:"The most underrated thing on this list. Long, low-intensity, easy to recover from, and it adds up faster than people expect. <span class='tag t-a'>Strong</span>",
+  risks:[
+   ["Downhill, not uphill","Descending is where knees and quads get wrecked. Eccentric leg strength is the fix."],
+   ["Ankle rolls","On uneven ground, especially when tired."],
+   ["Blisters and feet","Boring, and the thing most likely to end a day."]],
+  hook:"The step-ups and split squats in your program are direct preparation for descending, which is the part that actually hurts.",
+  prep:"5–10 minutes easy walking on the flat before anything steep, plus ankle circles and a few bodyweight squats."},
+ {id:"team",n:"A team sport",met:7.0,unit:"session or game",
+  lede:"Not a number on a scale — a season where you are still on the pitch in the last ten minutes.",
+  costnote:"Stop-start and unpredictable, which makes it hard on connective tissue and hard to fuel precisely. <span class='tag t-b'>Moderate</span>",
+  risks:[
+   ["Hamstring strain","Sprinting, and almost always in the last twenty minutes when you are tired."],
+   ["Ankle sprain","If you have had one before, that is the strongest predictor of the next one. Brace it. <span class='tag t-a'>Strong</span>"],
+   ["Knee, including ACL","Cutting and landing. Deceleration strength is the trainable part."],
+   ["Groin and adductor","Change of direction under fatigue."]],
+  hook:"The strength work is the single best-evidenced injury prevention available to you — roughly a two-thirds reduction across 26,000 athletes in team sports specifically. This is the one population where that evidence is not an extrapolation. <span class='tag t-a'>Strong</span>",
+  prep:"A full neuromuscular warm-up: running, then lateral and backward movement, then hops and landings, then 3 &times; 20 m building to near-full speed."},
+ {id:"lifting",n:"Just the gym",met:4.0,unit:"extra session",
+  lede:"Not a number on a scale — a body that does what you ask it to, for decades.",
+  costnote:"If lifting is all you do, your training calories come almost entirely from the Strength tab and your daily movement matters more than usual. <span class='tag t-b'>Moderate</span>",
+  risks:[
+   ["Progressing too fast","Load ahead of tendon is the classic gym injury, and it usually shows up 6–10 weeks in."],
+   ["Lower back","Almost always fatigue and position, not the exercise itself."],
+   ["Shoulder","Pressing volume outrunning pulling volume. Keep rows ahead of presses."]],
+  hook:"With no sport in the mix, walking is your highest-leverage addition. Around 7,000 steps a day captures most of the health benefit — the 10,000 figure was a 1960s pedometer marketing number. <span class='tag t-a'>Strong</span>",
+  prep:"5 minutes of easy cardio, then two build-up sets of your first lift before your working weight."},
+ {id:"other",n:"Something else",met:6.0,unit:"session",
+  lede:"Not a number on a scale — being able to do the thing you actually care about, well.",
+  costnote:"Using a middle-of-the-road estimate for the energy cost. If your sessions are notably harder or easier than average, tell your coach and we'll adjust it.",
+  risks:[
+   ["Progressing too fast","Universal. The tissue that fails is never the one that got fitter fastest."],
+   ["Whatever you have hurt before","Previous injury is the strongest single predictor of the next one, in every sport that has been studied. <span class='tag t-a'>Strong</span>"],
+   ["Under-recovering","Sleep and food, not willpower."]],
+  hook:"The strength work is the best-evidenced injury prevention that exists, whatever your sport turns out to be.",
+  prep:"Raise your heart rate, move the joints you're about to use through their full range, then two or three progressively harder rehearsals of the thing itself."}
+];
+const sport=()=>SPORTS.find(x=>x.id===S.sport)||SPORTS[0];
+const sportName=()=>S.sport==='other'&&S.sportname? S.sportname : sport().n;
+
+const GYMS=[["full","Full gym"],["home","Home — dumbbells / bands"],["mix","A bit of both"]];
+const INJS=[["toe","Foot / big toe"],["back","Lower back"],["shoulder","Shoulder"],["knee","Knee"],["wrist","Wrist / elbow"],["none","Nothing"]];
+const SCALES=[["trend","Daily, trend only"],["weekly","Once a week"],["none","No scale at all"]];
+const SCALETEXT={
+ trend:`<div class="note"><p><strong>Daily, but you only ever see the seven-day average.</strong> Daily data is the least noisy way to track a body that swings 2&ndash;4 lb on water alone, and on average daily weighing does produce better outcomes. <span class="tag t-a">Strong</span></p><p style="margin-bottom:0"><strong>The condition:</strong> a single day's number is never interpreted and never acted on. If you find yourself doing arithmetic in your head after a high reading, that's the signal to switch — not a failure.</p></div>`,
+ weekly:`<div class="note"><p><strong>Once a week, same day, same time, straight out of bed.</strong> Simpler, and it takes the daily number out of your morning entirely.</p><p style="margin-bottom:0"><strong>The tradeoff, honestly:</strong> one weekly reading carries all the noise of whatever that particular morning happened to be. A bad Monday can define your whole fortnight. Compare across two weeks, not one.</p></div>`,
+ none:`<div class="note"><p><strong>No scale. We track waist, how clothes fit, what you can lift, and how you move in the third game.</strong></p><p style="margin-bottom:0"><strong>The tradeoff, honestly:</strong> feedback is slower and calorie adjustments get less precise — we'll lean harder on the tape measure and your lifting log. That's a real cost and it's a completely legitimate trade if the scale has a history with you.</p></div>`
+};
+
+/* ---------- helpers ---------- */
+const $=id=>document.getElementById(id);
+const round=(n,d=0)=>{const m=Math.pow(10,d);return Math.round(n*m)/m;};
+const lb2kg=l=>l*0.45359237, kg2lb=k=>k/0.45359237;
+function pick(arr){return arr[Math.floor(Math.random()*arr.length)];}
+
+/* ---------- derived numbers ---------- */
+const EA_MIN=32;            /* our working floor, above the clinical 30 line */
+function calc(){
+  const wtKg=lb2kg(S.wt), htCm=(S.ft*12+ +S.inch)*2.54, htM=htCm/100;
+  const male=S.sex==='m';
+  const rmr=10*wtKg+6.25*htCm-5*S.age+(male?5:-161);    /* Mifflin–St Jeor */
+  const af=+(ACTS.find(a=>a[0]===S.act)||ACTS[1])[2];
+  const base=rmr*af;                                    /* everything except training */
+
+  /* lean mass: DXA if we have it, otherwise the Boer estimate (better behaved
+     than BMI-based formulas at higher body fat, which overshoot badly) */
+  let ffm, bf;
+  if(S.bf){ bf=S.bf; ffm=wtKg*(1-bf/100); }
+  else { ffm=Math.max(25, male ? 0.407*wtKg + 0.267*htCm - 19.2
+                                : 0.252*wtKg + 0.473*htCm - 48.3);   /* Boer */
+         bf=(1-ffm/wtKg)*100; }
+
+  /* training cost */
+  const met=sport().met;
+  const courtKcal=Math.round(met*3.5*wtKg/200*S.courtmin);
+  const liftKcal=200, liftDays=2;
+  const exDaily=Math.round((S.court*courtKcal + liftDays*liftKcal)/7);
+  const tdee=Math.round(base+exDaily);
+
+  /* protein from bodyweight adjusted down to BMI 30 */
+  const adjKg=Math.min(wtKg,30*htM*htM);   /* protein scales to BMI-30 bodyweight */
+  const proLo=Math.round(adjKg*1.4/5)*5, proHi=Math.round(adjKg*1.8/5)*5;
+  const proTarget=Math.round((proLo+proHi)/2/5)*5;
+  const proFloor=Math.round(adjKg*1.25/5)*5;
+
+  /* intake: average target, then split so exercise calories are eaten back.
+     Because court calories are added back exactly, energy availability is the
+     same number on a court day as on a rest day — which is the whole point. */
+  const deficit=500;
+  let avg=base+exDaily-deficit;
+  let rest=avg-Math.round(S.court*courtKcal/7);
+  const eaFloor=Math.round(EA_MIN*ffm/10)*10;
+  let floored=false;
+  if(rest<eaFloor){ rest=eaFloor; floored=true; }
+  rest=Math.round(rest/10)*10;
+  const court=Math.round((rest+courtKcal)/10)*10;
+  const ea=round(rest/ffm,1);
+  const realAvg=Math.round(rest+S.court*courtKcal/7);
+  const realDef=Math.max(0,tdee-realAvg);
+  const lbWk=round(realDef*7/3500,2);
+  const pctWk=round(lbWk/S.wt*100,2);
+
+  const rateLo=round(S.wt*0.005,2), rateHi=round(S.wt*0.0075,2);
+  const toLose=Math.max(0,S.wt-S.goal);
+  const wksLo=lbWk>0?Math.round(toLose/lbWk):0;
+  const wksHi=lbWk>0?Math.round(toLose/(lbWk*0.75)):0;
+  return {rmr:Math.round(rmr),base:Math.round(base),tdee,af,exDaily,bf:round(bf,1),ffm:round(ffm,1),
+    proLo,proHi,proTarget,proFloor,intake:rest,courtIntake:court,eaFloor,ea,floored,
+    courtKcal,realAvg,realDef,lbWk,pctWk,rateLo,rateHi,toLose,wksLo,wksHi,
+    adjKg:round(adjKg,1),estimated:!S.bf,deficit,male,met};
+}
+
+/* ---------- nav ---------- */
+const TABS=[["start","Start here"],["setup","Setup"],["numbers","Numbers"],["kitchen","Kitchen"],
+            ["strength","Strength"],["court","Court"],["mind","Head"],["season","The season"],
+            ["checkin","Check-in"],["truth","Truth"]];
+function buildNav(){
+  $('nav').innerHTML=TABS.map(t=>`<button data-t="${t[0]}" onclick="go('${t[0]}')">${t[1]}</button>`).join('');
+}
+function go(t){
+  document.querySelectorAll('.panel').forEach(p=>p.classList.remove('on'));
+  $('p-'+t).classList.add('on');
+  document.querySelectorAll('#nav button').forEach(b=>b.classList.toggle('on',b.dataset.t===t));
+  window.scrollTo({top:0,behavior:'instant'});
+  if(t==='setup') wiz(S._step||1);
+  if(t==='numbers') renderNumbers();
+  if(t==='strength') renderLift();
+  if(t==='season') renderSeason();
+  if(t==='mind') renderMindScale();
+  if(t==='court') renderCourt();
+}
+
+/* ---------- wizard ---------- */
+function chips(elId,list,cur,cb,multi){
+  const el=$(elId); if(!el) return;
+  el.innerHTML=list.map(o=>{
+    const on=multi?(cur||[]).includes(o[0]):cur===o[0];
+    return `<button data-v="${o[0]}" class="${on?'on':''}">${o[1]}</button>`;
+  }).join('');
+  el.querySelectorAll('button').forEach(b=>b.onclick=()=>cb(b.dataset.v));
+}
+const WIZNAMES=["You","Your week","The scale","Food"];
+function wiz(n){
+  S._step=n;
+  for(let i=1;i<=4;i++) $('w'+i).classList.toggle('on',i===n);
+  $('wizDots').innerHTML=[1,2,3,4].map(i=>
+    `<button class="${i===n?'on':''}" onclick="wiz(${i})"><b>${i}</b>${WIZNAMES[i-1]}</button>`).join('');
+  window.scrollTo({top:0,behavior:'instant'});
+}
+/* two-tap confirm — no browser dialogs, and no accidental wipes */
+function arm(id,label,go){
+  const b=$(id);
+  if(b.dataset.armed){ b.dataset.armed=''; go(); return true; }
+  b.dataset.armed='1'; b.classList.add('armed'); b.textContent='Tap again to confirm';
+  setTimeout(()=>{ if(b.dataset.armed){ b.dataset.armed=''; b.classList.remove('armed'); b.textContent=label; } },5000);
+  return false;
+}
+function resetFood(){
+  if(!arm('rstFood','Reset just my food choices',()=>{
+    S.food={}; S.meals={}; renderFoodPicker(); S.day=null; S.recent=[]; renderDay(); save();
+    $('rstFood').classList.remove('armed'); $('rstFood').textContent='Food choices cleared';
+    setTimeout(()=>$('rstFood').textContent='Reset just my food choices',2500);
+  })) return;
+}
+function resetAll(){
+  if(!arm('rstAll','Reset everything and start over',()=>{
+    try{ localStorage.removeItem('comeback_v1'); }catch(e){}
+    S=JSON.parse(JSON.stringify(DEF));
+    boot(); wiz(1); go('setup');
+    $('saveStatus').textContent='Reset — starting fresh';
+  })) return;
+}
+function renderWizard(){
+  chips('s_sex',SEXES,S.sex,v=>{S.sex=v;renderWizard();paintHeader();renderNumbers();save();});
+  chips('s_sport',SPORTS.map(x=>[x.id,x.n]),S.sport,v=>{
+    S.sport=v; $('s_sportname').classList.toggle('hide',v!=='other');
+    $('lblCourt').textContent=sport().n==='Just the gym'?'Extra sessions per week':(sport().unit.charAt(0).toUpperCase()+sport().unit.slice(1)+'s per week');
+    renderWizard(); paintHeader(); renderNumbers(); save();});
+  chips('s_act',ACTS.map(a=>[a[0],a[1]]),S.act,v=>{S.act=v;renderWizard();});
+  chips('s_gym',GYMS,S.gym,v=>{S.gym=v;renderWizard();});
+  chips('s_inj',INJS,S.inj,v=>{
+    if(v==='none'){S.inj=['none'];}
+    else{ S.inj=S.inj.filter(x=>x!=='none');
+      S.inj.includes(v)?S.inj=S.inj.filter(x=>x!==v):S.inj.push(v);}
+    renderWizard();},true);
+  chips('s_scale',SCALES,S.scale,v=>{S.scale=v;renderWizard();});
+  $('scaleExplain').innerHTML=SCALETEXT[S.scale];
+  renderFoodPicker();
+}
+function renderFoodPicker(){
+  const slots=[["B","Breakfasts"],["L","Lunches"],["D","Dinners"]];
+  let h=slots.map(g=>{
+    const items=RECIPES.filter(r=>r.s===g[0]).map(r=>{
+      const st=S.meals[r.n]||"";
+      return `<button class="${st==='no'?'off':st==='fav'?'on':''}" data-r="${r.n}">${r.n}</button>`;
+    }).join('');
+    return `<h4 style="margin-top:16px">${g[1]}</h4><div class="foodpick">${items}</div>`;
+  }).join('');
+  const ev=FOODS.filter(f=>f.t==='E').map(f=>{
+    const st=S.food[f.n]||"";
+    return `<button class="${st==='no'?'off':st==='fav'?'on':''}" data-f="${f.n}">${f.n}</button>`;
+  }).join('');
+  h+=`<h4 style="margin-top:22px">Evening — the slot that's yours</h4><div class="foodpick">${ev}</div>`;
+  $('foodPicker').innerHTML=h;
+  $('foodPicker').querySelectorAll('button[data-r]').forEach(b=>b.onclick=()=>{
+    const n=b.dataset.r, st=S.meals[n]||"";
+    S.meals[n]= st===""?"no" : st==="no"?"fav" : "";
+    if(S.meals[n]==="") delete S.meals[n];
+    renderFoodPicker(); save();
+  });
+  $('foodPicker').querySelectorAll('button[data-f]').forEach(b=>b.onclick=()=>{
+    const n=b.dataset.f, st=S.food[n]||"";
+    S.food[n]= st===""?"no" : st==="no"?"fav" : "";
+    if(S.food[n]==="") delete S.food[n];
+    renderFoodPicker(); save();
+  });
+}
+function readWizard(){
+  S.name=$('s_name').value.trim(); S.age=+$('s_age').value||48;
+  S.ft=+$('s_ft').value||5; S.inch=+$('s_in').value||2;
+  S.wt=+$('s_wt').value||190; S.goal=+$('s_goal').value||0;
+  S.bf=$('s_bf').value?+$('s_bf').value:null;
+  S.court=+$('s_court').value||0; S.courtmin=+$('s_courtmin').value||60;
+  S.sportname=($('s_sportname').value||'').trim();
+  S.notes=$('s_notes').value;
+}
+function finishWiz(){
+  const first=!S._built;
+  readWizard(); S._built=true; paintHeader(); save(); renderDay();
+  if(!first) $('saveStatus').textContent='Updated · '+new Date().toLocaleTimeString();
+  go('numbers');
+}
+function paintHeader(){
+  $('hdrTitle').textContent = S.name? S.name+"'s Comeback" : "The Comeback";
+  const c=calc();
+  $('whoami').textContent = (S.goal&&S.goal<S.wt&&c.lbWk>0)
+    ? `${S.wt} lb today · heading for ${S.goal} · honestly ${c.wksLo}–${c.wksHi} weeks · ${c.proTarget} g protein a day`
+    : `Six months to the version of you that doesn't have to think about it.`;
+  const cn=$('lblCourt'); if(cn) cn.textContent = sport().id==='lifting'?'Extra sessions per week'
+    : (sport().unit.charAt(0).toUpperCase()+sport().unit.slice(1)+'s per week');
+  const nb=document.querySelector('#nav button[data-t="court"]');
+  if(nb) nb.textContent = sport().id==='lifting' ? 'Movement' : sportName();
+}
+
+/* ---------- NUMBERS ---------- */
+function renderNumbers(){
+  const c=calc();
+  $('numStats').innerHTML=`
+   <div class="stat"><span class="l">Ordinary day</span><span class="n">${c.intake}</span><div class="x">calories</div></div>
+   <div class="stat"><span class="l">${sport().unit.charAt(0).toUpperCase()+sport().unit.slice(1)} day</span><span class="n">${c.courtIntake}</span><div class="x">+${c.courtKcal} · you eat back what you do</div></div>
+   <div class="stat"><span class="l">Protein</span><span class="n">${c.proTarget} g</span><div class="x">floor ${c.proFloor} g · never below</div></div>
+   <div class="stat"><span class="l">Expected loss</span><span class="n">${c.lbWk} lb</span><div class="x">per week · ${c.pctWk}% of you</div></div>
+   <div class="stat"><span class="l">Energy availability</span><span class="n">${c.ea}</span><div class="x">floor is ${EA_MIN} · harm starts under 30</div></div>
+   <div class="stat"><span class="l">Honest timeline</span><span class="n">${c.wksLo}–${c.wksHi}</span><div class="x">weeks to ${S.goal||'goal'} lb</div></div>`;
+
+  $('errorBars').innerHTML=`
+   <div class="scroll"><table>
+    <thead><tr><th>What</th><th>Number</th><th>How much to trust it</th></tr></thead>
+    <tbody>
+     <tr><td>Resting metabolism (Mifflin&ndash;St Jeor)</td><td><strong>${c.rmr} kcal</strong></td>
+         <td>The most accurate equation there is for women, and it still lands within 10% only about 7 times in 10. Your true resting rate is most likely somewhere between <strong>${Math.round(c.rmr*0.8)}</strong> and <strong>${Math.round(c.rmr*1.2)}</strong>.</td></tr>
+     <tr><td>Daily burn — living (&times;${c.af}) plus training (+${c.exDaily})</td><td><strong>${c.tdee} kcal</strong></td>
+         <td>Much worse. Validated against gold-standard measurement, the best equations land within 10% for fewer than half of people. Honest range: <strong>${Math.round(c.tdee-550)}</strong> to <strong>${Math.round(c.tdee+550)}</strong>.</td></tr>
+     <tr><td>Lean mass ${c.estimated?'(estimated)':'(from your DXA)'}</td><td><strong>${round(kg2lb(c.ffm),0)} lb</strong> · ${c.bf}% fat</td>
+         <td>${c.estimated?'Estimated from height and weight. It\'s a reasonable formula and it is still a guess — a single DXA would tighten every number on this page, including the floor below.':'Measured. Every number on this page is better for it.'}</td></tr>
+    </tbody></table></div>`;
+
+  $('eaBox').innerHTML=`
+   <p>This is the number that explains what happened last time.</p>
+   <p>What matters isn't how many calories you eat — it's how many are <strong>left over after training</strong> for everything else your body has to do. Bone, hormones, thyroid, mood, repair. Sports science calls it energy availability, and it's measured per kilo of lean tissue.</p>
+   <div class="grid g3" style="margin:14px 0">
+     <div class="stat"><span class="l">Your lean mass</span><span class="n">${round(kg2lb(c.ffm),0)} lb</span><div class="x">${c.estimated?'estimated':'measured'}</div></div>
+     <div class="stat"><span class="l">Your energy availability</span><span class="n">${c.ea}</span><div class="x">kcal per kg of lean mass</div></div>
+     <div class="stat"><span class="l">Hard floor</span><span class="n">${c.eaFloor}</span><div class="x">kcal on an ordinary day</div></div>
+   </div>
+   <p><strong>This is why a training day gets ${c.courtKcal} extra calories rather than being a bonus deficit.</strong> If you train and don't eat it back, those calories come out of the pot your body needs for everything else. Adding them back keeps your energy availability at ${c.ea} on <em>both</em> kinds of day — which is the entire idea.</p>
+   ${c.floored?`<div class="note warn"><p style="margin-bottom:0"><strong>Note:</strong> the floor is currently binding — a standard deficit would have put you underneath it, so your intake was raised to meet it. That means you'll lose a little slower than the textbook rate. That's the correct trade and it's a deliberate one.</p></div>`:''}
+   <div class="note warn">
+     <p><strong>Here's the arithmetic that matters.</strong> A "1,400-calorie diet" plus a training session leaves you at roughly half the energy your body needs for everything that isn't exercise. In the lab, five days at that level is enough to disrupt reproductive hormones, suppress bone formation, and drop thyroid hormone about 22%. <span class="tag t-b">Moderate</span></p>
+     <p style="margin-bottom:0">If you have ever dieted hard and ended up exhausted, foggy and cold, that is almost certainly what happened. Not a broken metabolism. Not a personal failing. <strong>Arithmetic.</strong> And the fix is a floor you can see the working for.</p>
+   </div>
+   <p class="quiet">Honest caveat: the threshold this floor is built on comes from five-day laboratory studies in young, sedentary, normal-weight women. Nobody has run it in returning recreational athletes in midlife carrying extra fat mass. It is the best number available and it is a reasoned floor, not a proven one. <span class="tag t-d">Reasoning</span></p>`;
+
+  $('proBox').innerHTML=`
+   <div class="grid g3" style="margin-bottom:14px">
+     <div class="stat"><span class="l">Target</span><span class="n">${c.proTarget} g</span><div class="x">per day</div></div>
+     <div class="stat"><span class="l">Range</span><span class="n">${c.proLo}–${c.proHi}</span><div class="x">anywhere in here is fine</div></div>
+     <div class="stat"><span class="l">Floor</span><span class="n">${c.proFloor} g</span><div class="x">below this you lose muscle</div></div>
+   </div>
+   <p>Roughly <strong>${Math.round(c.proTarget/4)} g at each of three or four meals</strong>. A palm of meat or fish is about 30&ndash;40 g. A cup of Greek yogurt is about 23. A scoop of whey is 25.</p>
+   <p><strong>How this was calculated, since you should know:</strong> it's based on your bodyweight adjusted down to a BMI of 30 &mdash; ${c.adjKg} kg &mdash; not your scale weight. Fat tissue doesn't need feeding with protein, so scaling protein to total bodyweight over-prescribes for anyone carrying extra. This method self-corrects: as you get lighter, the adjustment disappears and the target comes down with you.</p>
+   <div class="note">
+     <p><strong>What I'm not going to tell you:</strong> that you need 2.2 g/kg because of your age or your hormones. You'll read that everywhere. No trial in peri- or postmenopausal women has shown a benefit at those intakes, and the one meta-analysis that looked specifically at whether women show more age-related anabolic resistance came back <em>non-significant</em>. <span class="tag t-d">Reasoning at best</span></p>
+     <p style="margin-bottom:0"><strong>And the part that actually matters:</strong> in every trial where extra protein helped, there was resistance training alongside it. In the trials without training, extra protein did nothing. <strong>The lifting is the mechanism. The protein is insurance.</strong> <span class="tag t-a">Strong</span></p>
+   </div>`;
+
+  const per=c.toLose&&c.lbWk>0? `${c.wksLo}&ndash;${c.wksHi} weeks — call it ${Math.max(1,Math.round(c.wksLo/4.3))}&ndash;${Math.round(c.wksHi/4.3)} months` : '—';
+  $('paceBox').innerHTML=`
+   <p>Target band: <strong>${c.rateLo}&ndash;${c.rateHi} lb per week</strong>, which is 0.5&ndash;0.75% of your bodyweight. Where these numbers put you: <strong>about ${c.lbWk} lb a week</strong> (${c.pctWk}%), from an average daily deficit of roughly ${c.realDef} calories.</p>
+   <p>${c.toLose? `From ${S.wt} to ${S.goal} is ${c.toLose} lb, which honestly takes <strong>${per}</strong>.`:''} That's the real answer, and it's slower than any advert you've ever seen. Here's why it's the right one.</p>
+   <p>In the only trial that directly compared loss rates, athletes losing at 0.7% a week <strong>gained</strong> lean mass while athletes losing at 1.4% a week lost it. Same total weight down. Completely different bodies at the end. <span class="tag t-b">Moderate</span></p>
+   <div class="note">
+     <p style="margin-bottom:0"><strong>One honest nuance:</strong> carrying more fat mass genuinely does mean you could tolerate a bigger deficit with less muscle cost than a lean athlete could. <span class="tag t-a">Strong</span> So why aren't we doing that? Because a faster rate drops your intake below the energy-availability floor above — and that specific hole is the one you've already fallen into once. The pace isn't limited by your body composition. It's limited by what has to still be true in month nine.</p>
+   </div>
+   <p class="quiet">Also worth knowing: the "3,500 calories equals a pound" rule systematically overpredicts. It ignores the fact that a smaller body costs less to run. Real-world programmes average about 8% bodyweight down at six months, and that's with everything going right.</p>`;
+}
+</script>
+
+<script>
+/* ============================================================
+   KITCHEN — dish-based, protein-first
+   The unit is a real meal, not a pile of ingredients. The engine picks a
+   dish, scales YOUR portion of it, and adds a side only if the day needs
+   the calories. Protein is solved first; calories are the envelope.
+   ============================================================ */
+const SLOTS=[
+ {id:"breakfast",name:"Breakfast",code:"B",ps:.24,ks:.24},
+ {id:"lunch",    name:"Lunch",    code:"L",ps:.28,ks:.28},
+ {id:"dinner",   name:"Dinner",   code:"D",ps:.32,ks:.33},
+ {id:"evening",  name:"Evening — yours",code:"E",ps:.16,ks:.15}
+];
+const snap=(m,lo,hi)=>Math.min(hi,Math.max(lo,Math.round(m*4)/4));
+/* the portion that hits this slot's protein share — but never more than about
+   a third over its calorie budget, or a single dish swallows the whole day */
+function fitM(r,slotP,slotK){
+  const byP=slotP/Math.max(r.p,1);
+  const capK=(slotK*1.3)/Math.max(r.k,1);
+  return snap(Math.min(byP,Math.max(capK,0.5)),.5,2);
+}
+const kOf=it=>(it.r?it.r.k:it.f.k)*it.m;
+const pOf=it=>(it.r?it.r.p:it.f.p)*it.m;
+const sumK=a=>a.reduce((s,i)=>s+kOf(i),0);
+const sumP=a=>a.reduce((s,i)=>s+pOf(i),0);
+const totK=()=>S.day.slots.reduce((s,sl)=>s+sumK(sl.items),0);
+const totP=()=>S.day.slots.reduce((s,sl)=>s+sumP(sl.items),0);
+
+function usedRecipes(){
+  const u=new Set();
+  if(S.day) S.day.slots.forEach(sl=>sl.items.forEach(i=>{if(i.r)u.add(i.r.n);}));
+  return u;
+}
+/* dishes available for a slot, honouring what they said they won't eat */
+function dishPool(code,notName){
+  let a=RECIPES.filter(r=>r.s===code && S.meals[r.n]!=='no');
+  if(notName) a=a.filter(r=>r.n!==notName);
+  const u=usedRecipes(); const fresh=a.filter(r=>!u.has(r.n));
+  if(fresh.length>=2) a=fresh;
+  if(!a.length) a=RECIPES.filter(r=>r.s===code);
+  return a;
+}
+/* Pick a dish that actually FITS the slot, not just any dish.
+   For each candidate we work out the portion that hits its protein share,
+   then see how far that lands from the slot's calorie budget. A 750-calorie
+   dinner is a fine meal and a poor fit for a 500-calorie budget — this is
+   what stops the day overshooting before the calorie pass ever runs. */
+function pickDish(code,slotP,slotK,notName){
+  const a=dishPool(code,notName);
+  if(a.length===1) return a[0];
+  const scored=a.map(r=>{
+    const m=fitM(r,slotP,slotK);
+    const d=(r.k*m-slotK)/Math.max(slotK,1);
+    /* overshooting is punished harder than undershooting: a small meal can be
+       topped up with a side, an oversized one cannot be un-eaten */
+    let miss=d>0? d*1.9 : -d;
+    if(S.meals[r.n]==='fav') miss*=0.55;
+    return {r,miss};
+  }).sort((x,y)=>x.miss-y.miss);
+  /* keep everything within a reasonable band of the best fit, so there is
+     still genuine variety rather than the same three meals forever */
+  const best=scored[0].miss;
+  let ok=scored.filter(x=>x.miss<=Math.max(best+0.12,0.18));
+  if(ok.length<2) ok=scored.slice(0,Math.min(3,scored.length));
+  return pick(ok).r;
+}
+/* sides are ordinary foods used only to close a calorie gap */
+function sidePool(kind,notName){
+  let a=FOODS.filter(f=>kind.includes(f.t) && S.food[f.n]!=='no' && f.n!==notName);
+  if(!a.length) a=FOODS.filter(f=>kind.includes(f.t));
+  return a;
+}
+function eveningPool(notName){
+  let a=FOODS.filter(f=>f.t==='E' && S.food[f.n]!=='no' && f.n!==notName);
+  if(!a.length) a=FOODS.filter(f=>f.t==='E');
+  const fav=a.filter(f=>S.food[f.n]==='fav');
+  return a.concat(fav,fav);
+}
+const eMult=(f,kT)=>f.d?Math.max(1,Math.round(kT/f.k)):Math.min(2,Math.max(.5,Math.round(kT/f.k*2)/2));
+
+function buildDay(training){
+  const c=calc();
+  const kT=training?c.courtIntake:c.intake;
+  S.day={training:!!training,kcalTarget:kT,proTarget:c.proTarget,slots:[]};
+  SLOTS.forEach(def=>{
+    const slot={def,items:[]}; S.day.slots.push(slot);
+    if(def.code==='E'){
+      const e=pick(eveningPool()); slot.items.push({f:e,m:eMult(e,kT*def.ks)});
+      if(kT*def.ks-sumK(slot.items)>150){
+        const e2=pick(eveningPool(e.n));
+        if(e2.n!==e.n) slot.items.push({f:e2,m:eMult(e2,kT*def.ks-sumK(slot.items))});
+      }
+    } else {
+      const r=pickDish(def.code, c.proTarget*def.ps, kT*def.ks);
+      slot.items.push({r,m:fitM(r,c.proTarget*def.ps,kT*def.ks)});
+    }
+  });
+  adjustDay(); renderDay(); stashDay(); save();
+}
+
+function swapItem(si,ii){
+  const sl=S.day.slots[si], it=sl.items[ii];
+  if(it.r){
+    const r=pickDish(sl.def.code, S.day.proTarget*sl.def.ps, S.day.kcalTarget*sl.def.ks, it.r.n);
+    it.r=r; it.m=fitM(r,S.day.proTarget*sl.def.ps,S.day.kcalTarget*sl.def.ks);
+  } else if(it.f.t==='E'){
+    const f=pick(eveningPool(it.f.n)); it.f=f; it.m=eMult(f,S.day.kcalTarget*sl.def.ks);
+  } else {
+    const p=sidePool(['C','V','F'],it.f.n); it.f=pick(p); it.m=1;
+  }
+  adjustDay(); renderDay(); save();
+}
+function dropSide(si,ii){ S.day.slots[si].items.splice(ii,1); adjustDay(); renderDay(); save(); }
+
+function adjustDay(){
+  proteinPass(); caloriePass(); proteinPass(); caloriePass();
+  /* If protein and calories genuinely can't both be met — which happens on
+     vegetarian days at a low calorie target, because plant dishes cost roughly
+     twice the calories per gram of protein — calories win and we say so.
+     Overshooting calories is the failure that stops progress; landing slightly
+     under the protein target is the lesser evil, and 1.25 g/kg still protects
+     muscle. We never go below that floor, and we never hide the trade. */
+  const c=calc(), kT=S.day.kcalTarget;
+  S.day.tight=null;
+  for(let i=0;i<24 && totK()>kT+90;i++){
+    /* trim the least protein-efficient calories first — a bowl of rice before
+       a piece of chicken. Cutting the dish is the last resort, not the first. */
+    const eff=x=>{const s=x.r||x.f; return (s.k*x.m)/(1+s.p*x.m);};
+    const cands=S.day.slots.flatMap(sl=>sl.items)
+      .filter(x=>x.m>0.5 && (x.r||x.f.t!=='E'))
+      .sort((a,b)=>eff(b)-eff(a));
+    const t=cands[0]; if(!t) break;
+    const src=t.r||t.f;
+    if(totP()-src.p*0.25 < c.proFloor) break;
+    t.m=round(t.m-.25,2);
+  }
+  if(totP() < S.day.proTarget-8){
+    S.day.tight={p:Math.round(totP()),floor:c.proFloor};
+  }
+}
+
+function proteinPass(){
+  const pT=S.day.proTarget;
+  for(let i=0;i<30;i++){
+    if(totP()>=pT-4) break;
+    let best=null;
+    const room=S.day.kcalTarget-totK();
+    S.day.slots.forEach(sl=>sl.items.forEach(it=>{
+      if(!it.r || it.m>=2) return;
+      if(it.r.k*0.25 > room+120) return;            /* no headroom for this one */
+      if(!best || it.r.p/it.r.k > best.r.p/best.r.k) best=it;   /* leanest first */
+    }));
+    if(!best) break;
+    best.m=round(best.m+.25,2);
+  }
+  /* Still short — top up with lean protein on the side. This is what actual
+     people do, and it matters most on vegetarian days, where dishes carry
+     less protein per calorie and scaling the dish alone can't get there. */
+  const kT=S.day.kcalTarget;
+  for(let n=0;n<3;n++){
+    if(totP()>=pT-6) break;
+    const bump=FOODS.filter(f=>['Greek yogurt, plain','Skyr','Cottage cheese','Whey protein','Protein shake, ready-made','Edamame'].includes(f.n)&&S.food[f.n]!=='no');
+    if(!bump.length) break;
+    const sl=S.day.slots.filter(s=>s.def.code!=='E')
+      .sort((a,b)=>(kT*b.def.ks-sumK(b.items))-(kT*a.def.ks-sumK(a.items)))[0];
+    const cand=bump.filter(f=>!sl.items.some(x=>x.f&&x.f.n===f.n));
+    if(!cand.length) break;
+    const t=pick(cand);
+    sl.items.push({f:t,m:snap((pT-totP())/t.p,.5,2)});
+  }
+}
+function caloriePass(){
+  const kT=S.day.kcalTarget, pT=S.day.proTarget;
+  const sides=()=>{const a=[];S.day.slots.forEach(sl=>sl.items.forEach(it=>{
+      if(it.f && it.f.t!=='E' && it.f.p<10) a.push(it);}));return a;};
+  const leanP=()=>{const a=[];S.day.slots.forEach(sl=>sl.items.forEach(it=>{
+      if(it.f && it.f.t!=='E' && it.f.p>=10) a.push(it);}));return a;};
+  const evening=()=>{const a=[];S.day.slots.forEach(sl=>sl.items.forEach(it=>{
+      if(it.f && it.f.t==='E' && !it.f.d) a.push(it);}));return a;};
+
+  for(let i=0;i<40;i++){
+    const gap=kT-totK();
+    if(Math.abs(gap)<=60) break;
+    if(gap>0){
+      /* grow an existing side, else add one to the meal with the most room */
+      const grow=sides().filter(x=>x.m<3).sort((a,b)=>b.f.k-a.f.k)[0];
+      if(grow && gap<grow.f.k*1.4){ grow.m=round(grow.m+.25,2); continue; }
+      const target=S.day.slots.filter(sl=>sl.def.code!=='E')
+        .sort((a,b)=>(kT*b.def.ks-sumK(b.items))-(kT*a.def.ks-sumK(a.items)))[0];
+      const kind = gap>230?['C']:['F','V'];
+      const p=sidePool(kind).filter(f=>!target.items.some(x=>x.f&&x.f.n===f.n));
+      if(!p.length) break;
+      const f=pick(p);
+      target.items.push({f,m:snap(gap/f.k,.5,2.5)});
+    } else {
+      /* trim sides, then the evening, then dish portions — but never below the protein target */
+      const s=sides().filter(x=>x.m>0.5).sort((a,b)=>b.f.k*b.m-a.f.k*a.m)[0];
+      if(s){ s.m=round(s.m-.25,2); if(s.m<0.5) dropSideRef(s); continue; }
+      const evK=S.day.slots.filter(s=>s.def.code==='E').reduce((t,s)=>t+sumK(s.items),0);
+      const e=evening().filter(x=>x.m>0.5).sort((a,b)=>b.f.k*b.m-a.f.k*a.m)[0];
+      if(e && evK>kT*0.09){ e.m=round(e.m-.25,2); continue; }
+      const d=S.day.slots.flatMap(sl=>sl.items).filter(x=>x.r&&x.m>0.5)
+        .sort((a,b)=>b.r.k*b.m-a.r.k*a.m)[0];
+      if(d && totP()-d.r.p*0.25 >= pT){ d.m=round(d.m-.25,2); continue; }
+      const lp=leanP().filter(x=>x.m>0.5).sort((a,b)=>b.f.k*b.m-a.f.k*a.m)[0];
+      if(lp && totP()-lp.f.p*0.25 >= pT){ lp.m=round(lp.m-.25,2); continue; }
+      break;
+    }
+  }
+}
+function dropSideRef(ref){
+  S.day.slots.forEach(sl=>{const i=sl.items.indexOf(ref); if(i>-1) sl.items.splice(i,1);});
+}
+
+/* ---------- rendering ---------- */
+const fmtM=m=>m===1?"1 portion":(m===.5?"½ portion":m===1.5?"1½ portion":m===2.5?"2½ portions":m+" portions");
+const fmtS=m=>m===1?"":(m===.5?"½ × ":m===1.5?"1½ × ":m+" × ");
+function gTag(g){
+  const t=[];
+  if(g.includes('v')) t.push('<span class="pill">vegetarian</span>');
+  if(g.includes('q')) t.push('<span class="pill">quick</span>');
+  if(g.includes('f')) t.push('<span class="pill">freezes</span>');
+  return t.join('');
+}
+/* Shopping amounts in the units people actually buy in. Countable things get
+   counted, spoonable things get spoons, and everything else gets ounces and
+   pounds — nobody shops in grams. */
+const UNITS={
+ "eggs":[50,"egg","eggs"], "egg whites":[33,"egg white","egg whites"],
+ "sourdough bread":[40,"slice","slices"], "flour tortillas":[70,"tortilla","tortillas"],
+ "corn tortillas":[30,"tortilla","tortillas"], "pita bread":[60,"pita","pitas"],
+ "banana":[120,"banana","bananas"], "avocado":[100,"half","halves"],
+ "onion":[110,"onion","onions"], "garlic":[3,"clove","cloves"],
+ "bell peppers":[120,"pepper","peppers"], "sweet potatoes":[150,"sweet potato","sweet potatoes"],
+ "potatoes":[170,"potato","potatoes"], "lemon juice":[15,"tbsp","tbsp"],
+ "lime juice":[15,"tbsp","tbsp"], "olive oil":[14,"tbsp","tbsp"],
+ "butter":[14,"tbsp","tbsp"], "peanut butter":[16,"tbsp","tbsp"],
+ "tahini":[15,"tbsp","tbsp"], "honey":[21,"tbsp","tbsp"],
+ "maple syrup":[20,"tbsp","tbsp"], "soy sauce":[16,"tbsp","tbsp"],
+ "pesto":[16,"tbsp","tbsp"], "sriracha":[15,"tbsp","tbsp"],
+ "dijon mustard":[15,"tbsp","tbsp"], "red curry paste":[16,"tbsp","tbsp"],
+ "chia seeds":[12,"tbsp","tbsp"], "cumin":[6,"tsp","tsp"], "paprika":[7,"tsp","tsp"],
+ "chili powder":[8,"tsp","tsp"], "baking powder":[4,"tsp","tsp"],
+ "vanilla extract":[4,"tsp","tsp"], "capers":[15,"tbsp","tbsp"],
+ "ginger":[6,"tsp grated","tsp grated"], "fresh herbs":[8,"small handful","small handfuls"],
+ "scallions":[15,"scallion","scallions"], "light coconut milk":[400,"can","cans"],
+ "canned tomatoes":[400,"can","cans"], "black beans":[240,"can","cans"],
+ "kidney beans":[240,"can","cans"], "chickpeas":[240,"can","cans"],
+ "canned tuna":[140,"can","cans"], "milk":[240,"cup","cups"],
+ "marinara sauce":[350,"jar","jars"], "salsa":[240,"cup","cups"]
+};
+function niceNum(x){
+  const r=Math.round(x*2)/2;
+  if(r===Math.round(r)) return String(Math.round(r));
+  return (Math.floor(r))+"½";
+}
+function grams(g,name){
+  const u=UNITS[name];
+  if(u){
+    const measure=/tbsp|tsp|cup|can|jar|handful/.test(u[1]);
+    let n=g/u[0];
+    if(!measure) n=Math.max(1,Math.round(n));      /* half an egg is not a thing */
+    if(n>=0.5) return (measure?niceNum(n):n)+' '+(n<1.5?u[1]:u[2]);
+  }
+  const oz=g/28.35;
+  if(oz>=16) return (oz/16).toFixed(oz/16<10?1:0).replace(/\.0$/,'')+' lb';
+  if(oz>=1)  return niceNum(oz)+' oz';
+  return Math.round(g)+' g';
+}
+function renderDay(){
+  const d=S.day; if(!d){$('dayOut').innerHTML='';return;}
+  let k=0,p=0,c=0,f=0;
+  d.slots.forEach(sl=>sl.items.forEach(i=>{
+    const src=i.r||i.f; k+=src.k*i.m; p+=src.p*i.m; c+=src.c*i.m; f+=src.f*i.m;}));
+  const pOK=p>=d.proTarget-8, kOK=Math.abs(k-d.kcalTarget)<=110;
+  let h=`<div class="card">
+    <div class="kicker">${d.training?'Training day':'Ordinary day'}</div>
+    <div class="totbar">
+      <div><b class="${kOK?'hit':'miss'}">${Math.round(k)}</b><span>calories · target ${d.kcalTarget}</span></div>
+      <div><b class="${pOK?'hit':'miss'}">${Math.round(p)} g</b><span>protein · target ${d.proTarget}</span></div>
+      <div><b>${Math.round(c)} g</b><span>carbs</span></div>
+      <div><b>${Math.round(f)} g</b><span>fat</span></div>
+    </div>`;
+  d.slots.forEach((sl,si)=>{
+    const sk=Math.round(sumK(sl.items)), sp=Math.round(sumP(sl.items));
+    h+=`<div class="meal"><div class="mh"><span class="name">${sl.def.name}</span><span class="mac">${sk} kcal · ${sp} g protein</span></div>`;
+    sl.items.forEach((it,ii)=>{
+      if(it.r){
+        const r=it.r, id=`rc${si}_${ii}`;
+        h+=`<div class="item">
+             <div><div class="fn">${r.n}</div>
+               <div class="fs">${fmtM(it.m)} · ${r.t} min · serves ${r.sv} ${gTag(r.g)}</div></div>
+             <div style="display:flex;align-items:center;gap:8px">
+               <span class="fm">${Math.round(r.k*it.m)} kcal · ${Math.round(r.p*it.m)}p</span>
+               <button class="swap" onclick="togRec('${id}')">recipe</button>
+               <button class="swap" onclick="swapItem(${si},${ii})">swap</button>
+             </div></div>
+           <div class="recipe hide" id="${id}">
+             <div class="rgrid">
+               <div><h4>Shopping — makes ${r.sv} servings</h4><ul class="ingl">`
+             + r.i.map(x=>`<li><span>${x[0]}</span><b>${grams(x[1],x[0])}</b></li>`).join('')
+             + `</ul></div>
+               <div><h4>Method</h4><ol class="meth">`+r.m.map(s=>`<li>${s}</li>`).join('')+`</ol></div>
+             </div>
+             <div class="note" style="margin:12px 0 0"><p style="margin:0"><strong>Your portion:</strong> ${fmtM(it.m)} of ${r.sv} — cook the whole thing, feed everyone, and serve yourself that much. ${r.note?'<br><br>'+r.note:''}</p></div>
+           </div>`;
+      } else {
+        h+=`<div class="item">
+             <div><div class="fn">${it.f.n}</div><div class="fs">${fmtS(it.m)}${it.f.s}${it.f.t!=='E'?' · on the side':''}</div></div>
+             <div style="display:flex;align-items:center;gap:8px">
+               <span class="fm">${Math.round(it.f.k*it.m)} kcal · ${Math.round(it.f.p*it.m)}p</span>
+               <button class="swap" onclick="swapItem(${si},${ii})">swap</button>
+             </div></div>`;
+      }
+    });
+    h+=`</div>`;
+  });
+  if(d.tight){
+    h+=`<div class="note warn"><p style="margin-bottom:0"><strong>Honest note about this day.</strong>
+      It landed at ${d.tight.p} g of protein rather than ${d.proTarget} g. With the meals you've
+      allowed, hitting the full target would have meant going roughly 300&ndash;400 calories over —
+      and eating over is what actually stops progress. So the calories won.
+      You're still above your ${d.tight.floor} g floor, which is the level that protects muscle.
+      <br><br>Two ways to close the gap if you want it: a scoop of protein powder is about 25 g for
+      130 calories, which is far cheaper than any food; or allow a few more of the higher-protein
+      meals in Setup. This is a real constraint of eating this way, not a fault in the plan.</p></div>`;
+  }
+  h+=`<p class="quiet" style="margin-top:6px">Every recipe is written to feed your household — cook the whole thing, and your portion is marked. Hit <strong>recipe</strong> to see the shopping list and method, <strong>swap</strong> to get a different meal that keeps your numbers.</p></div>`;
+  $('dayOut').innerHTML=h;
+}
+function togRec(id){ const e=$(id); if(e) e.classList.toggle('hide'); }
+
+function stashDay(){
+  if(!S.day) return;
+  S.recent=S.recent||[];
+  S.recent.unshift(S.day.slots.flatMap(sl=>sl.items.map(i=>i.r?{r:i.r.n}:{f:i.f.n})));
+  S.recent=S.recent.slice(0,7);
+}
+function makeList(){
+  const r=S.recent||[];
+  if(!r.length){$('shopOut').innerHTML='<p class="quiet">Build a few days first.</p>';return;}
+  const g={}, extras={};
+  r.flat().forEach(x=>{
+    if(x.r){ const rec=RECIPES.find(y=>y.n===x.r); if(rec) rec.i.forEach(([n,gr])=>g[n]=(g[n]||0)+gr); }
+    else extras[x.f]=(extras[x.f]||0)+1;
+  });
+  const rows=Object.entries(g).sort((a,b)=>b[1]-a[1])
+    .map(([n,gr])=>`<tr><td>${n}</td><td style="text-align:right"><b>${grams(gr,n)}</b></td></tr>`).join('');
+  $('shopOut').innerHTML=`<div class="scroll"><table><thead><tr><th>Ingredient</th><th style="text-align:right">Total</th></tr></thead><tbody>${rows}</tbody></table></div>`
+    + (Object.keys(extras).length?`<h4 style="margin-top:16px">Also</h4><div>`+Object.entries(extras).map(([n,c])=>`<span class="pill">${n} &times;${c}</span>`).join('')+`</div>`:'')
+    + `<p class="quiet" style="margin-top:12px">Totals across your last ${r.length} day${r.length>1?'s':''}, at full recipe size — so this feeds everyone, not just you. Buy for the pattern rather than the exact day; that's what the swap button is for.</p>`;
+}
+
+function printDay(){window.print();}
+function printPanel(){window.print();}
+
+/* ============================================================
+   STRENGTH
+   ============================================================ */
+function has(x){return S.inj.includes(x);}
+function EX(){
+  const home=S.gym==='home';
+  return {
+    squat: has('toe')? "Heel-elevated goblet squat (flat, stiff shoe)" : has('knee')? "Box squat" : home? "Goblet squat" : "Back squat",
+    hinge: has('back')? "Trap-bar deadlift" : home? "Dumbbell Romanian deadlift" : "Deadlift",
+    hpush: has('shoulder')? "Neutral-grip dumbbell floor press" : home? "Dumbbell floor press" : "Bench press",
+    vpush: has('shoulder')? "Landmine press" : home? "Half-kneeling dumbbell press" : "Overhead press",
+    hpull: has('back')? "Chest-supported row" : home? "One-arm dumbbell row" : "Barbell row",
+    vpull: home? "Band pulldown" : "Lat pulldown",
+    single: has('toe')? "Step-up, flat foot" : has('knee')? "Split squat, shortened range" : "Rear-foot elevated split squat",
+    calfA:"Standing calf raise (straight leg) — heavy",
+    calfB:"Seated calf raise (bent knee) — heavy",
+    coreA:"Pallof press", coreB:"Suitcase carry",
+    hipT: has('shoulder')? "Face pulls + side-lying external rotation" : "Face pulls"
+  };
+}
+const BLOCKS=[
+ {w:"Weeks 1–4",t:"Re-acquisition",sets:"2–3 sets × 8–12",load:"RPE 5–6 — you should finish every set thinking you had four more",
+  note:"Nothing heavy. This block exists so your tendons and joints catch up with a nervous system that already knows how to do this. It will feel too easy. That is the point, and skipping it is the single most common way a returning athlete gets hurt in month two.",imp:"None yet. Walking only."},
+ {w:"Weeks 5–8",t:"Load introduction",sets:"3 sets × 8–10",load:"about 60–70% of a hard single",
+  note:"Weight starts to matter. Add load only when every rep was clean on two sessions in a row.",imp:"10–20 low, flat, two-footed hops a day, 3 days a week — spread through the day, not all at once. Skip entirely if the toe objects."},
+ {w:"Weeks 9–16",t:"The heavy block",sets:"4–5 sets × 5",load:"about 75–85%",
+  note:"This is the block that does the work: lean mass protected, spine loaded properly, strength climbing even in a deficit. It's also the longest block, deliberately — adaptations here are slow and there is no shortcut through it.",imp:"Build toward 30–50 contacts a day, 3–4 days a week, still spread out."},
+ {w:"Weeks 17–24",t:"Consolidate and sharpen",sets:"5 × 5 on the two main lifts, plus speed work",load:"80%+ on the main lifts; 40–60% moved fast on the power work",
+  note:"Heavy work is maintained rather than pushed, and speed is added — 40–60% of your max moved as fast as you can. This is the quality that transfers to a split-step and a first move to the ball, and it's the one thing court play genuinely blunts, so it goes first in the session while you're fresh.",imp:"Add drop-and-stick landings if the toe is quiet. Otherwise hold at the week 9–16 dose."}
+];
+function renderLift(){
+  const e=EX();
+  let h='';
+  BLOCKS.forEach((b,bi)=>{
+    h+=`<div class="phase">${b.w} — ${b.t}</div>
+      <div class="card tight"><p style="margin-bottom:8px"><strong>${b.sets}</strong> · ${b.load}</p>
+      <p class="quiet" style="margin-bottom:0">${b.note}</p></div>
+      <div class="grid g2">
+        <div class="card tight"><h4>Day A</h4><ul class="clean">
+          <li>${e.squat}</li><li>${e.hpush}</li><li>${e.hpull}</li><li>${e.calfA}</li><li>${e.coreA}</li>
+          ${bi>=3?'<li><strong>Power first:</strong> 3 × 3 jump squats or med-ball slams, before everything else</li>':''}
+        </ul></div>
+        <div class="card tight"><h4>Day B</h4><ul class="clean">
+          <li>${e.hinge}</li><li>${e.vpush}</li><li>${e.vpull}</li><li>${e.single}</li><li>${e.calfB}</li><li>${e.coreB}</li>
+          ${bi>=3?'<li><strong>Power first:</strong> 3 × 5 lateral bounds, before everything else</li>':''}
+        </ul></div>
+      </div>
+      <div class="card tight"><h4>Impact / bone</h4><p class="quiet" style="margin-bottom:0">${b.imp}</p></div>`;
+  });
+  let flags=[];
+  if(has('shoulder')) flags.push("<strong>Shoulder:</strong> pressing is horizontal and neutral-grip before it's overhead, and the overhead work is a landmine rather than a barbell — the angle is kinder and the range is self-limiting. Rowing volume runs about 2:1 against pressing. Honest note: no exercise programme has ever been shown to reduce shoulder injury <em>rates</em> in any racquet sport. Managing your overhead volume on court will do more than any drill in here. <span class='tag t-d'>Reasoning</span>");
+  if(has('toe')) flags.push("<strong>Foot / big toe:</strong> everything that forces the big toe into deep bend under load is out — no deep lunges, no deep split squats, no sprint starts. Squats and deadlifts in flat, stiff shoes are usually fine because they ask almost nothing of the toe. Footwear does more here than exercise selection: a rigid forefoot or rocker sole is the highest-leverage change available.");
+  if(has('back')) flags.push("<strong>Lower back:</strong> hinging starts from a trap bar, which keeps the load closer to you and the spine more upright. Rows are chest-supported early on. Carries and anti-rotation work build the bracing that makes the heavy block possible.");
+  if(has('knee')) flags.push("<strong>Knee:</strong> squatting to a box gives a consistent depth and a controlled sit-back. Split-stance work runs in a shortened range until it's silent.");
+  if(has('wrist')) flags.push("<strong>Wrist / elbow:</strong> neutral-grip and dumbbell work over straight-bar wherever possible. If elbow pain shows up on court, it's paddle grip size, shot volume, and forearm strength — in that order.");
+  if(flags.length) h+=`<div class="card"><div class="kicker">Programmed around you</div><ul class="clean">${flags.map(f=>'<li>'+f+'</li>').join('')}</ul></div>`;
+
+  h+=`<div class="card"><div class="kicker">Tracker</div><h3>24 weeks, two sessions each</h3><div id="trk"></div></div>`;
+  $('liftOut').innerHTML=h;
+  let t='';
+  for(let w=1;w<=24;w++){
+    t+=`<div class="chk"><input type="checkbox" id="wk${w}a" ${S.done&&S.done['wk'+w+'a']?'checked':''} onchange="mark('wk${w}a')">
+        <label for="wk${w}a" style="text-transform:none;letter-spacing:0;font-weight:400;font-size:.9rem;color:var(--ink);margin:0" class="${S.done&&S.done['wk'+w+'a']?'done':''}">Week ${w} · Day A</label>
+        <input type="checkbox" id="wk${w}b" ${S.done&&S.done['wk'+w+'b']?'checked':''} onchange="mark('wk${w}b')" style="margin-left:14px">
+        <label for="wk${w}b" style="text-transform:none;letter-spacing:0;font-weight:400;font-size:.9rem;color:var(--ink);margin:0" class="${S.done&&S.done['wk'+w+'b']?'done':''}">Day B</label></div>`;
+  }
+  $('trk').innerHTML=t;
+}
+function mark(id){S.done=S.done||{};S.done[id]=!S.done[id];save();renderLift();}
+
+/* ============================================================
+   SEASON
+   ============================================================ */
+const SEASON=[
+ {p:"Phase 1 — Foundation (weeks 1–8)"},
+ {w:"Weeks 1–2",t:"Protein and lifting, from day one",b:["Hit your protein number. That's the whole nutrition task for two weeks — don't count anything else yet.","Two lifting sessions a week, deliberately too easy.","Pick your scale approach and start collecting. No interpreting.","Eat at the calorie number without weighing food. Use the engine."],
+  c:"The old programme spent eight weeks on a food list before protein appeared. Protein and lifting are the two levers with the best evidence, so they go first. Everything else is sequencing."},
+ {w:"Weeks 3–4",t:"Portions by hand",b:["Learn palm / fist / cupped hand / thumb so you can eat anywhere without a plan.","Lifting: still light, technique locked.","First check-in. Almost certainly: change nothing."],
+  c:"First check-in is usually a hold. Say so in advance so it doesn't read as failure."},
+ {w:"Weeks 5–6",t:"Precision, if you want it",b:["Optional: a food scale for a fortnight, to calibrate your eye. Optional means optional.","Load starts going on the bar.","Impact work begins, if the toe allows."],
+  c:"The old plan mandated a scale and MyFitnessPal here. For someone who says food shouldn't rule her life, a mandate is the wrong tool — it's offered as calibration, with a defined end date."},
+ {w:"Weeks 7–8",t:"Your real numbers",b:["Two weeks of honest intake logging — this is what replaces the equation.","Check-in: first adjustment based on your data rather than a formula."],
+  c:"This is where the equation gets thrown away. Pre-frame that the empirical number will differ by 200–400 kcal and that this is expected."},
+ {p:"Phase 2 — Build (weeks 9–16)"},
+ {w:"Weeks 9–10",t:"The heavy block begins",b:["Lifting moves to 4–5 sets of 5. This is the most important block in the programme.","Nutrition holds steady — one variable at a time."],
+  c:"Do not change calories in the same fortnight the training changes. You won't know which did what."},
+ {w:"Weeks 11–12",t:"Sport volume and fuelling",b:["Sport sessions up if recovery allows.","Learn the fuelling rules: under an hour, nothing. Over an hour, 30–60 g of carbs.","Run the sweat test once."]},
+ {w:"Weeks 13–14",t:"Maintenance fortnight",b:["Calories go up to maintenance for two weeks. On purpose. Not a break in the plan — part of it.","Training continues as normal.","Expect the scale to jump 1–2 lb of water. It is not fat."],
+  c:"Sold honestly as adherence and sanity, not metabolic protection. The evidence for scheduled diet breaks improving fat loss is genuinely mixed; the evidence that people stick with things longer when they get a breather is better."},
+ {w:"Weeks 15–16",t:"Back in, recalibrated",b:["Return to the deficit at the number your own data says, not the original one.","Retest a few lifts to see what the heavy block bought you."]},
+ {p:"Phase 3 — Season (weeks 17–24)"},
+ {w:"Weeks 17–18",t:"Sharpen",b:["Power work goes in at the front of every session.","Sport work gets specific: deceleration, changing direction, first-step speed.","Pick the event if you haven't."]},
+ {w:"Weeks 19–20",t:"Play",b:["Rehearse competition-day fuelling in a hard training session. Nothing new on the day.","Nutrition holds. Nobody sharpens and cuts at the same time."]},
+ {w:"Weeks 21–22",t:"Compete",b:["Play the thing.","Calories come up around competition. You cannot compete underfed."],
+  c:"This is the payoff and it should feel like one. The scale is irrelevant this fortnight."},
+ {w:"Weeks 23–24",t:"Exit properly",b:["Calories rise deliberately toward maintenance over 2–3 weeks, carbohydrate first.","Focus shifts from weight to what you can lift and how you move.","Decide together what the next six months look like."],
+  c:"Honest labelling matters here: reverse dieting has essentially no evidence base. Adding calories back gradually is defensible for adherence and for avoiding a panic when water weight returns. Don't sell it as repairing a metabolism."}
+];
+function renderSeason(){
+  $('seasonOut').innerHTML=SEASON.map(x=>{
+    if(x.p) return `<div class="phase">${x.p}</div>`;
+    return `<div class="week"><h4>${x.w} — ${x.t}</h4><ul class="clean">${x.b.map(b=>'<li>'+b+'</li>').join('')}</ul>
+      ${x.c?`<div class="coach"><span class="cl">Coach note</span>${x.c}</div>`:''}</div>`;
+  }).join('');
+}
+
+/* ============================================================
+   COURT / MIND helpers
+   ============================================================ */
+function renderCourt(){
+  const c=calc(), kg=lb2kg(S.wt), sp=sport(), nm=sportName();
+  $('sportKicker').textContent = sp.id==='lifting' ? 'Movement' : nm;
+  $('sportH').textContent = sp.id==='lifting'
+    ? 'The reason any of this matters' : `${nm} — the reason any of this matters`;
+  $('sportLede').innerHTML = sp.lede;
+  $('riskH').textContent = sp.id==='lifting'
+    ? 'What actually goes wrong in the gym' : `What actually hurts people who do ${nm.toLowerCase()}`;
+
+  const perHr=Math.round(sp.met*3.5*kg/200*60);
+  $('sportCost').innerHTML=`
+    <div class="grid g3" style="margin-top:16px">
+      <div class="stat"><span class="l">Per hour</span><span class="n">${perHr}</span><div class="x">calories, at your size</div></div>
+      <div class="stat"><span class="l">Your session</span><span class="n">${c.courtKcal}</span><div class="x">${S.courtmin} min</div></div>
+      <div class="stat"><span class="l">Per week</span><span class="n">${c.courtKcal*S.court}</span><div class="x">across ${S.court} session${S.court===1?'':'s'}</div></div>
+    </div>
+    <p class="quiet" style="margin-top:12px">${sp.costnote}</p>`;
+
+  $('warmRows').innerHTML=`
+    <tr><td><strong>Raise</strong></td><td>3 min</td><td>Easy movement — build gradually until you're genuinely warm and slightly out of breath.</td></tr>
+    <tr><td><strong>Mobilise</strong></td><td>3 min</td><td>Leg swings front-to-back and side-to-side, walking lunge with a torso turn, ankle rockers, doorway chest opener, arm circles. Moving, never held.</td></tr>
+    <tr><td><strong>Activate</strong></td><td>3 min</td><td>Banded lateral walks, single-leg balance with a reach, glute bridges, 15 band external rotations.</td></tr>
+    <tr><td><strong>Rehearse</strong></td><td>2 min</td><td>${sp.prep}</td></tr>`;
+
+  $('riskOut').innerHTML=`<ol>${sp.risks.map(r=>`<li><strong>${r[0]}.</strong> ${r[1]}</li>`).join('')}</ol>
+    <div class="note"><p style="margin-bottom:0">${sp.hook}</p></div>
+    <p class="quiet">One rule that holds across every sport that has been studied: <strong>previous injury is the strongest single predictor of the next one.</strong> Whatever you've hurt before deserves specific attention, not avoidance. <span class="tag t-a">Strong</span></p>`;
+
+  $('fuelOut').innerHTML=`<p>At your bodyweight, ${sp.id==='lifting'?'an extra session':'a '+sp.unit} costs roughly <strong>${perHr} calories an hour</strong> — about <strong>${c.courtKcal}</strong> for your usual ${S.courtmin} minutes. That number is already built into your ${sp.unit}-day calorie target.</p>`;
+  $('fuelShort').innerHTML=`You are not running out of fuel. Adding 40 g of carbs to a session that burned ${c.courtKcal} erases a large share of your deficit for zero performance benefit.`;
+
+  $('tt_pre').innerHTML=`<strong>${Math.round(kg*1)}–${Math.round(kg*2)} g of carbohydrate</strong> plus 20–40 g protein. Low fat, low fibre. Oatmeal, banana, honey and a scoop of whey does it.`;
+  $('tt_caf').innerHTML=`Caffeine around <strong>${Math.round(kg*3)} mg</strong> (roughly ${Math.max(1,Math.round(kg*3/95))} cup${Math.round(kg*3/95)>1?'s':''} of coffee) — good evidence for reaction time and perceived effort. Rehearse it first; never debut it here.`;
+  $('tt_gap').innerHTML=`<strong>${Math.round(kg*1.1)} g carbs per hour</strong> plus 20–30 g protein. Rice and chicken, a sandwich, or a shake and a banana.`;
+  $('tt_post').innerHTML=`Replace 1.2–1.5&times; the fluid you lost (weigh again), 30–40 g protein, and refill carbohydrate properly.`;
+
+  $('s_event').value=S.event||''; $('s_eventwhen').value=S.eventwhen||'';
+  $('s_event').onchange=e=>{S.event=e.target.value;save();};
+  $('s_eventwhen').onchange=e=>{S.eventwhen=e.target.value;save();};
+}
+function sweat(){
+  const pre=+$('sw_pre').value,post=+$('sw_post').value,dr=+$('sw_drank').value||0,hrs=+$('sw_hrs').value||1;
+  if(!pre||!post){$('sweatOut').innerHTML='';return;}
+  const lostLb=pre-post+dr/16;
+  const rate=lostLb/hrs;
+  const pct=((pre-post)/pre*100);
+  const ozHr=rate*16;
+  $('sweatOut').innerHTML=`<div class="note ${pct>2?'warn':'ok'}">
+    <p><strong>Sweat rate: about ${round(ozHr,0)} fl oz (${round(ozHr*29.6/1000,2)} L) per hour</strong> in these conditions.</p>
+    <p style="margin-bottom:0">You finished ${round(pct,1)}% down on bodyweight. ${pct>2?'<strong>That is past the 2% line</strong> — drink more during play, and add sodium if it was hot.':'Comfortably inside the 2% line. Keep doing what you did.'} To hold under 2% you want roughly <strong>${round(ozHr,0)} fl oz per hour</strong> going in.</p></div>`;
+}
+function renderMindScale(){
+  const t={trend:`<div class="note ok"><p style="margin-bottom:0"><strong>You chose: daily, trend only.</strong> Step on it, log it, and look at the seven-day average — never the day. If you catch yourself reacting to a single morning's number, or skipping the scale because you know it'll be up, tell your coach. Not as a confession. As a data point about the tool.</p></div>`,
+    weekly:`<div class="note ok"><p style="margin-bottom:0"><strong>You chose: once a week.</strong> Same day, same time, out of bed, before anything. Compare across two weeks rather than one — a single weekly reading carries whatever that particular morning happened to be.</p></div>`,
+    none:`<div class="note ok"><p style="margin-bottom:0"><strong>You chose: no scale.</strong> Then the instruments are your waist measurement, how clothes fit, your lifting log, and how you feel in the third game. Take the waist measurement every fortnight, same spot, first thing. And know you can add the scale back any week you want — that's a change of tool, not a change of heart.</p></div>`};
+  $('mindScale').innerHTML=t[S.scale]||t.trend;
+}
+
+/* ============================================================
+   CHECK-IN ENGINE
+   ============================================================ */
+const OPT_E=[["good","Good"],["ok","Okay"],["low","Flat"],["bad","Wrecked"]];
+const OPT_H=[["fine","Manageable"],["edge","Noticeable"],["hard","Hard, constant"]];
+const OPT_S=[["up","Still climbing"],["flat","Flat"],["down","Going backwards"]];
+let CI={energy:"ok",hunger:"fine",str:"up"};
+function renderCIChips(){
+  chips('c_energy',OPT_E,CI.energy,v=>{CI.energy=v;renderCIChips();});
+  chips('c_hunger',OPT_H,CI.hunger,v=>{CI.hunger=v;renderCIChips();});
+  chips('c_str',OPT_S,CI.str,v=>{CI.str=v;renderCIChips();});
+}
+function runCheckin(){
+  const c=calc();
+  const now=+$('c_now').value, then=+$('c_then').value, kcal=+$('c_kcal').value;
+  const proDays=+$('c_pro').value, lifts=+$('c_lift').value, sleep=+$('c_sleep').value;
+  if(!now||!then||!kcal){ $('ciOut').innerHTML='<div class="card"><p class="quiet">Fill in both trend weights and your average intake — the engine can\'t decide anything without them.</p></div>'; return; }
+  const lostTotal=then-now, perWk=lostTotal/2;
+  const ratePct=(perWk/now)*100;
+  const empTDEE=Math.round(kcal+perWk*500);
+  const adhPro=proDays/14, adhLift=Math.min(1,lifts/4);
+  const adherent = adhPro>=0.64 && adhLift>=0.75;
+  const flags=[];
+  if(CI.energy==='low'||CI.energy==='bad') flags.push('energy');
+  if(CI.str==='down') flags.push('strength');
+  if(sleep&&sleep<7) flags.push('sleep');
+  if(CI.hunger==='hard') flags.push('hunger');
+
+  let cls='v-hold',title='',body='',rule='',action='';
+  const floor = c.eaFloor;
+  const prev=(S.checkins||[])[0];
+  const prevSlow = prev && prev.ratePct < 0.4;   /* was the last fortnight also slow? */
+
+  if(!adherent){
+    cls='v-stop'; title='Change nothing. The plan wasn\'t run.';
+    action=`Hold at ${kcal>0?c.intake:c.intake} kcal and ${c.proTarget} g protein.`;
+    body=`Protein was hit on ${proDays} of 14 days and ${lifts} lifting sessions got done. That's not a criticism — it's a measurement problem. We genuinely do not know what this plan does yet, because it hasn't been run.<br><br><strong>Adjusting calories now would be guessing.</strong> The next fortnight has one job: find out what's actually in the way. Time? Food not in the house? The evening? Something else entirely?`;
+    rule="ADHERENCE GATE — protein <9/14 days or lifting <3 sessions. Never adjust a plan that wasn't followed. This is the rule that stops a client ratcheting down to 1,200 kcal over six months while the real problem was that nobody bought chicken.";
+  }
+  else if(flags.includes('strength')||flags.includes('energy')&&flags.includes('sleep')){
+    cls='v-add'; title='Eat more. Something is under-recovered.';
+    const add=150;
+    action=`Raise intake to about ${Math.round(kcal+add)} kcal. Protein unchanged at ${c.proTarget} g.`;
+    body=`You ran the plan properly, and ${CI.str==='down'?'your lifts are going backwards':'your energy and sleep are both struggling'}. Losing weight is supposed to cost you something; it is not supposed to cost you your training. Strength holds up fine in a deficit when the deficit is the right size — when it starts falling, the deficit is too big, or sleep is doing the damage.<br><br>Weight loss slows down for a fortnight. That is the correct trade.`;
+    rule=`RECOVERY OVERRIDE, fires before any rate rule. Strength decline or the combination of poor energy + poor sleep beats a good-looking rate every time. Sleep is the highest-leverage variable in this whole programme and it's also the one most likely to be disrupted at her age — build the plan to survive bad sleep weeks rather than punishing them.`;
+  }
+  else if(ratePct>1.0){
+    cls='v-add'; title='Too fast. Add calories.';
+    action=`Raise intake to about ${Math.round(kcal+175)} kcal.`;
+    body=`You came down ${round(perWk,2)} lb a week, which is ${round(ratePct,2)}% of your bodyweight — above the 0.5–0.75% band. Faster is not better here. In the one trial that compared them directly, the fast group lost the same total weight and lost lean mass doing it, while the slow group <em>gained</em> lean mass.<br><br>Nothing has gone wrong. We're just steering back into the lane.`;
+    rule="RATE HIGH (>1.0%/wk). Add ~175 kcal. Faster loss buys nothing and costs lean tissue.";
+  }
+  else if(ratePct>=0.4){
+    cls='v-hold'; title='Working. Change nothing.';
+    action=`Hold everything. ${Math.round(kcal)} kcal, ${c.proTarget} g protein.`;
+    body=`Down ${round(perWk,2)} lb a week — ${round(ratePct,2)}% of bodyweight, right in the band. Your own numbers say your real daily burn is around <strong>${empTDEE} kcal</strong>.<br><br>The hardest thing a coach does is nothing. When something is working, changing it is how you find out what was working.`;
+    rule="IN BAND (0.4–1.0%/wk) with adherence. Hold. Boredom is not a reason to adjust.";
+  }
+  else if(lostTotal < -0.4){
+    if(-lostTotal < 2.5 && !prevSlow){
+      cls='v-hold'; title='Up a little. Almost certainly water.';
+      action=`Hold at ${Math.round(kcal)} kcal. Confirm next fortnight.`;
+      body=`The trend is up ${round(-lostTotal,1)} lb over two weeks. Before we touch anything: a genuine two-pound fat gain would require eating about 7,000 calories more than you burned, which is not what happened here. Glycogen, sodium, gut contents and hormonal fluid shifts move a body several pounds without any fat changing hands.<br><br>So we do nothing, and we look again in two weeks. If it's still up then, it's real and we act on it.`;
+      rule="SMALL GAIN, FIRST OCCURRENCE. Do not act on one fortnight. A 2 lb 'gain' is roughly 7,000 kcal — implausible on a followed plan, and far more likely to be fluid. Escalates automatically if the next check-in is also slow or up.";
+    } else {
+      cls='v-cut'; title='Weight is up, and the plan was followed.';
+      const tgt=Math.max(floor, Math.min(kcal-200, empTDEE-350));
+      action=`Set intake to about ${Math.round(tgt)} kcal.`;
+      body=`Weight is up across ${prevSlow?'two check-ins now':'this fortnight'} while you ran the plan properly. That means the original calorie estimate was simply too high for you — which the Numbers tab warned about, because the honest error bar on any of those equations is around ±500 calories.<br><br>Your own data now puts your real burn nearer <strong>${empTDEE} kcal</strong>. So we use your number instead of the formula's, and the change is capped at 200 calories so we're not overcorrecting on noisy data. <strong>This is the equation being wrong, not you.</strong>`;
+      rule=`CONFIRMED GAIN WITH ADHERENCE. Rebuild from empirical TDEE, cut capped at 200 kcal, floored at the energy-availability minimum (${floor}). Cap and floor both matter — two weeks of scale data is noisy enough that an uncapped correction will overshoot.`;
+    }
+  }
+  else if(!prevSlow){
+    cls='v-hold'; title='Probably fine. Hold one more fortnight.';
+    action=`Hold at ${Math.round(kcal)} kcal.`;
+    body=`Down ${round(perWk,2)} lb a week. That's below target — but it is also well inside the range that water, gut contents and hormonal fluid shifts produce on their own. One slow fortnight is not a stall; it's noise wearing a costume.<br><br>If the next fortnight looks the same, we act. Two data points beat one, every time.`;
+    rule="SLOW BUT WITHIN NOISE (0.15–0.4%/wk), first occurrence. Require confirmation before acting. This is the rule that stops a coach chasing water weight — and note it checks the previous check-in, so a second slow fortnight in a row escalates automatically instead of holding forever.";
+  }
+  else {
+    const canCut = (kcal-120) >= floor;
+    if(canCut){
+      cls='v-cut'; title='Genuinely stalled. Small cut.';
+      action=`Drop intake to about ${Math.round(kcal-120)} kcal. Protein stays at ${c.proTarget} g.`;
+      body=`${prevSlow?'Two check-ins in a row now':'Two weeks, plan run properly'}, and essentially nothing moved. Your real burn appears to be around <strong>${empTDEE} kcal</strong>, lower than the starting estimate — normal, and exactly why we stopped using the formula.<br><br>The cut is small on purpose. Big cuts feel decisive, then cost you sleep, training quality and adherence, and you end up back here in a month with less room left to move.`;
+      rule=`STALL WITH ADHERENCE, headroom above the floor (${floor}). Cut ~120 kcal only, and only down to the floor. Small cuts preserve future room to manoeuvre; big ones spend it in one go.`;
+    } else {
+      cls='v-stop'; title='Stalled — and we are not cutting further.';
+      action=`Two weeks at maintenance, roughly ${Math.round(empTDEE)} kcal. Then back into a deficit.`;
+      body=`You're stalled, but you're already at or near the energy-availability floor of <strong>${floor} kcal</strong>. Cutting below that is where the fatigue, the poor sleep and the flat training came from last time, and it is not on the table.<br><br>So we go the other way: two weeks at maintenance, training unchanged. Expect the scale to rise 1–2 lb of water — that is water, not fat, and it comes back off. Then we restart the deficit from a better place.`;
+      rule=`STALL AT THE FLOOR. Never cut below the EA floor (${floor}). Prescribe a maintenance block instead. This is the branch that separates this programme from every plan that ratchets a woman down to 1,100 calories and calls it discipline.`;
+    }
+  }
+
+  let extra='';
+  if(flags.includes('sleep')&&cls!=='v-add') extra+=`<p><strong>Sleep flag:</strong> ${sleep} of 14 decent nights. Short sleep raises next-day intake by a few hundred calories on its own — bigger than most of the levers on this page. Whatever else changes, this is the one worth attacking.</p>`;
+  if(flags.includes('hunger')) extra+=`<p><strong>Hunger flag:</strong> constant hunger for a fortnight is a signal, not a character test. Usually it's protein, food volume, or an evening slot that's too small to do its job.</p>`;
+
+  $('ciOut').innerHTML=`
+   <div class="verdict ${cls}">
+     <h3>${title}</h3>
+     <p style="margin-bottom:8px"><strong>${action}</strong></p>
+     <p style="margin-bottom:0">${body}</p>
+     ${extra?'<div class="rule"></div>'+extra:''}
+   </div>
+   <div class="card">
+     <h3>The numbers behind that</h3>
+     <div class="grid g3">
+       <div class="stat"><span class="l">Trend change</span><span class="n">${lostTotal>0?'−':'+'}${Math.abs(round(lostTotal,1))} lb</span><div class="x">over 2 weeks</div></div>
+       <div class="stat"><span class="l">Rate</span><span class="n">${round(ratePct,2)}%</span><div class="x">per week · target 0.5–0.75</div></div>
+       <div class="stat"><span class="l">Your real burn</span><span class="n">${empTDEE}</span><div class="x">from your data, not a formula</div></div>
+       <div class="stat"><span class="l">Protein days</span><span class="n">${proDays}/14</span><div class="x">${adhPro>=0.64?'good':'this is the gap'}</div></div>
+       <div class="stat"><span class="l">Lifting</span><span class="n">${lifts}</span><div class="x">${adhLift>=0.75?'good':'this is the gap'}</div></div>
+       <div class="stat"><span class="l">Sleep</span><span class="n">${sleep||'—'}/14</span><div class="x">decent nights</div></div>
+     </div>
+     <div class="coach"><span class="cl">Rule that fired</span>${rule}</div>
+   </div>`;
+
+  S.checkins=S.checkins||[];
+  S.checkins.unshift({d:new Date().toISOString().slice(0,10),now,then,kcal,proDays,lifts,sleep,ratePct:round(ratePct,2),empTDEE,title,notes:$('c_notes').value});
+  save(); renderHist();
+}
+function renderHist(){
+  const h=S.checkins||[];
+  if(!h.length){$('ciHist').innerHTML='<p class="quiet">Nothing logged yet.</p>';return;}
+  $('ciHist').innerHTML=`<div class="scroll"><table><thead><tr><th>Date</th><th>Weight</th><th>Rate</th><th>Real burn</th><th>Call</th></tr></thead><tbody>`+
+    h.map(x=>`<tr><td>${x.d}</td><td>${x.now} lb</td><td>${x.ratePct}%</td><td>${x.empTDEE}</td><td>${x.title}</td></tr>`).join('')+
+    `</tbody></table></div>`;
+}
+
+/* ============================================================
+   SAVE / LOAD  (file-based; storage used only if available)
+   ============================================================ */
+function save(){
+  try{ localStorage.setItem('comeback_v1',JSON.stringify(S)); $('saveStatus').textContent='Saved on this device · '+new Date().toLocaleTimeString(); }
+  catch(e){ $('saveStatus').textContent='Use “Save my data” to keep a copy'; }
+}
+function saveFile(){
+  const blob=new Blob([JSON.stringify(S,null,2)],{type:'application/json'});
+  const a=document.createElement('a');
+  a.href=URL.createObjectURL(blob);
+  a.download=(S.name?S.name.toLowerCase().replace(/\W+/g,'-')+'-':'')+'comeback-'+new Date().toISOString().slice(0,10)+'.json';
+  a.click(); URL.revokeObjectURL(a.href);
+  $('saveStatus').textContent='Downloaded a copy';
+}
+function loadFromFile(ev){
+  const f=ev.target.files[0]; if(!f) return;
+  const r=new FileReader();
+  r.onload=()=>{ try{ S=Object.assign(JSON.parse(JSON.stringify(DEF)),JSON.parse(r.result)); boot(); $('saveStatus').textContent='Loaded'; }
+    catch(e){ alert('That file could not be read.'); } };
+  r.readAsText(f);
+}
+
+/* ============================================================
+   INIT
+   ============================================================ */
+function fillForm(){
+  const set=(id,v)=>{const e=$(id); if(e) e.value=(v===null||v===undefined)?'':v;};
+  set('s_sportname',S.sportname); set('s_coachname',S.coachName); set('s_coachemail',S.coachEmail);
+  const sn=$('s_sportname'); if(sn) sn.classList.toggle('hide',S.sport!=='other');
+  set('s_name',S.name); set('s_age',S.age); set('s_ft',S.ft); set('s_in',S.inch);
+  set('s_wt',S.wt); set('s_goal',S.goal); set('s_bf',S.bf); set('s_court',S.court);
+  set('s_courtmin',S.courtmin); set('s_notes',S.notes);
+}
+function injectAverager(){
+  const anchor=$('c_then'); if(!anchor||$('avgWrap')) return;
+  const w=document.createElement('div'); w.id='avgWrap'; w.className='card tight'; w.style.margin='0 0 14px';
+  w.innerHTML=`<h4>Work out a trend weight</h4>
+    <p class="quiet" style="margin-bottom:8px">Type in whatever daily weights you have. Blanks are fine. The average goes straight into the box above.</p>
+    <div class="row r4">${[0,1,2,3,4,5,6].map(i=>`<input type="number" step="0.1" class="avgin" placeholder="day ${i+1}">`).join('')}</div>
+    <div class="btnrow"><button class="btn ghost sm" onclick="doAvg()">Average these</button><span id="avgOut" class="quiet"></span></div>`;
+  anchor.closest('.row').after(w);
+}
+function doAvg(){
+  const v=[...document.querySelectorAll('.avgin')].map(i=>+i.value).filter(x=>x>0);
+  if(!v.length){$('avgOut').textContent='Enter at least one.';return;}
+  const a=round(v.reduce((s,x)=>s+x,0)/v.length,1);
+  $('c_now').value=a; $('avgOut').textContent=`Trend = ${a} lb (from ${v.length} day${v.length>1?'s':''})`;
+}
+function boot(){
+  const bn=$('brandName'); if(bn) bn.textContent=S.coachName||'your coach';
+  fillForm(); renderWizard(); paintHeader(); renderNumbers(); renderCIChips(); renderHist(); renderDay(); renderCourt();
+  ['rstFood','rstAll'].forEach(id=>{const b=$(id); if(b){b.dataset.armed='';b.classList.remove('armed');}});
+  const lbl={rstFood:'Reset just my food choices',rstAll:'Reset everything and start over'};
+  Object.keys(lbl).forEach(id=>{const b=$(id); if(b) b.textContent=lbl[id];});
+  const allowCoach=/[?&]coach\b/.test(location.search);
+  const on=allowCoach && !!S.coach;
+  $('coachChk').checked=on; document.body.classList.toggle('coachmode',on);
+}
+function init(){
+  buildNav();
+  /* Coach mode is for the coach, not the visitor. The toggle only appears when
+     the URL carries ?coach — bookmark that version and it's always there.
+     Everyone else gets a clean page with no idea it exists. */
+  try{
+    const wantCoach=/[?&]coach\b/.test(location.search);
+    const tog=document.querySelector('.coachtoggle');
+    if(tog && !wantCoach) tog.style.display='none';
+  }catch(e){}
+  try{ const raw=localStorage.getItem('comeback_v1'); if(raw) S=Object.assign(JSON.parse(JSON.stringify(DEF)),JSON.parse(raw)); }catch(e){}
+  $('coachChk').onchange=e=>{S.coach=e.target.checked;document.body.classList.toggle('coachmode',S.coach);save();};
+  ['s_name','s_age','s_ft','s_in','s_wt','s_goal','s_bf','s_court','s_courtmin','s_notes','s_sportname'].forEach(id=>{
+    const e=$(id); if(e) e.onchange=()=>{readWizard();paintHeader();renderNumbers();renderCourt();save();};
+  });
+  ['s_coachname','s_coachemail'].forEach(id=>{
+    const e=$(id); if(e) e.onchange=()=>{ S.coachName=$('s_coachname').value; S.coachEmail=$('s_coachemail').value; save(); };
+  });
+  injectAverager();
+  boot();
+  wiz(1);
+  go(S.name?'numbers':'start');
+}
+document.addEventListener('DOMContentLoaded',init);
+</script>
+</body>
+</html>
