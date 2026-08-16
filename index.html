@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>The Comeback — Training &amp; Nutrition Program</title>
+<title>The Long Way Forward — Training &amp; Nutrition</title>
 <style>
 :root{
   --navy:#0B1F3A; --navy2:#12294D; --navy3:#1B3A69; --gold:#C8A24B; --gold2:#E4C579;
@@ -139,6 +139,7 @@ tbody tr:last-child td{border-bottom:0}
 
 
 
+
 /* ---------- misc ---------- */
 .pill{display:inline-block;background:var(--soft);border:1px solid var(--line);border-radius:20px;padding:3px 10px;font-size:.78rem;margin:0 5px 5px 0}
 .week{border:1px solid var(--line);border-radius:10px;padding:14px;margin-bottom:10px;background:#fff}
@@ -214,10 +215,10 @@ button.btn.red.armed{background:var(--bad);color:#fff;border-color:var(--bad)}
 <header>
   <div class="hwrap">
     <div class="brand">
-      <h1 id="hdrTitle">The Comeback</h1>
-      <span class="sub">Training &amp; Nutrition</span>
+      <h1 id="hdrTitle">Training &amp; Nutrition</h1>
+      <span class="sub" id="hdrSub"></span>
     </div>
-    <div class="whoami" id="whoami">Six months to the version of you that doesn't have to think about it.</div>
+    <div class="whoami" id="whoami">Your program, built from your numbers.</div>
     <nav id="nav"></nav>
     
   </div>
@@ -229,7 +230,7 @@ button.btn.red.armed{background:var(--bad);color:#fff;border-color:var(--bad)}
 <section class="panel on" id="p-start">
   <div class="card">
     <div class="kicker">Start here</div>
-    <h2>You are not on a diet. You're in a comeback.</h2>
+    <h2>You are not on a diet. You're training — and this is the long way on purpose.</h2>
     <p class="lede">Everything you've tried before was subtraction: eat less, cut this out, give that up. This one works the other way round — it's built on <em>addition</em>. More protein, more strength, more of what your body can do. You eat to perform. You lift so you can move the way you want to move on a court. The scale stops being a verdict on you and becomes an instrument, like a serve speed.</p>
     <p>We're doing more than reframing this to sound motivating — we're going to change the actual programming. An athlete preparing for a season eats enough to train hard, protects muscle on purpose, and measures things to make decisions — not to feel good or bad about herself. That's what the next six months look like.</p>
     <div class="note">
@@ -871,7 +872,7 @@ button.btn.red.armed{background:var(--bad);color:#fff;border-color:var(--bad)}
 
 <script>
 /* ============================================================
-   THE COMEBACK — single-file program engine
+   THE LONG WAY FORWARD — single-file program engine
    Data lives in this file only. Nothing is sent anywhere.
    ============================================================ */
 
@@ -1342,12 +1343,38 @@ function finishWiz(){
   if(!first) $('saveStatus').textContent='Updated · '+new Date().toLocaleTimeString();
   go('numbers');
 }
+/* The line under the name. Four numbers separated by dots is not a sentence,
+   and it told a stranger nothing. This says where they are and where that's
+   going — and once there's a check-in logged, it stops describing the plan
+   and starts describing the movement. */
+function headerLine(c){
+  const goingDown = S.goal && S.goal < S.wt;
+  const h = S.checkins || [];
+  if(S._built && h.length && goingDown){
+    const now   = h[0].now;
+    const start = h[h.length-1].then;
+    const togo  = round(now - S.goal, 1);
+    const moved = round(start - now, 1);
+    if(togo <= 0) return `${now} lb — that's the number you came for. Now we hold it.`;
+    if(moved > 0)  return `${now} lb today, ${togo} to go — ${moved} lb down since you started.`;
+    if(moved < 0)  return `${now} lb today, ${togo} to go. The scale is up on where you began — the check-in tab will tell you whether that means anything yet.`;
+    return `${now} lb today, ${togo} to go. Level so far — early, and normal.`;
+  }
+  if(S._built && goingDown && c.lbWk > 0){
+    return `${S.wt} lb today, heading for ${S.goal} — honestly, about ${c.wksLo}–${c.wksHi} weeks.`;
+  }
+  if(S._built) return `Built from your numbers. The long way, because it's the one that holds.`;
+  return `Your program, built from your numbers.`;
+}
 function paintHeader(){
-  $('hdrTitle').textContent = S.name? S.name+"'s Comeback" : "The Comeback";
+  /* The name never takes a possessive — "Sarah's Long Way Forward" is a mouthful.
+     Her name goes on the line beneath it instead, which reads better anyway. */
+  const t=$('hdrTitle'); if(t) t.textContent='The Long Way Forward';
+  const sub=$('hdrSub');
+  if(sub) sub.textContent = S._built ? (S.name ? S.name+"'s program" : 'Your program')
+                                     : 'Training & Nutrition';
   const c=calc();
-  $('whoami').textContent = (S.goal&&S.goal<S.wt&&c.lbWk>0)
-    ? `${S.wt} lb today · heading for ${S.goal} · honestly ${c.wksLo}–${c.wksHi} weeks · ${c.proTarget} g protein a day`
-    : `Six months to the version of you that doesn't have to think about it.`;
+  $('whoami').textContent = headerLine(c);
   const cn=$('lblCourt'); if(cn) cn.textContent = sport().id==='lifting'?'Extra sessions per week'
     : (sport().unit.charAt(0).toUpperCase()+sport().unit.slice(1)+'s per week');
   const nb=document.querySelector('#nav button[data-t="court"]');
@@ -2107,7 +2134,7 @@ function saveFile(){
   const blob=new Blob([JSON.stringify(S,null,2)],{type:'application/json'});
   const a=document.createElement('a');
   a.href=URL.createObjectURL(blob);
-  a.download=(S.name?S.name.toLowerCase().replace(/\W+/g,'-')+'-':'')+'comeback-'+new Date().toISOString().slice(0,10)+'.json';
+  a.download=(S.name?S.name.toLowerCase().replace(/\W+/g,'-')+'-':'')+'program-'+new Date().toISOString().slice(0,10)+'.json';
   a.click(); URL.revokeObjectURL(a.href);
   $('saveStatus').textContent='Downloaded a copy';
 }
