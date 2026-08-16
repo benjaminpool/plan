@@ -215,8 +215,8 @@ button.btn.red.armed{background:var(--bad);color:#fff;border-color:var(--bad)}
 <header>
   <div class="hwrap">
     <div class="brand">
-      <h1 id="hdrTitle">Training &amp; Nutrition</h1>
-      <span class="sub" id="hdrSub"></span>
+      <h1 id="hdrTitle">The Long Way Forward</h1>
+      <span class="sub" id="hdrSub">Training &amp; Nutrition</span>
     </div>
     <div class="whoami" id="whoami">Your program, built from your numbers.</div>
     <nav id="nav"></nav>
@@ -865,6 +865,7 @@ button.btn.red.armed{background:var(--bad);color:#fff;border-color:var(--bad)}
 
 <div class="savebar">
   <span class="st" id="saveStatus">Not saved yet</span>
+  <button class="btn ghost sm hide" id="switchWho" style="border-color:#C7D3E4;color:#fff" onclick="askWho()">Switch person</button>
   <button class="btn gold sm" onclick="saveFile()">Save my data</button>
   <button class="btn ghost sm" style="border-color:#C7D3E4;color:#fff" onclick="document.getElementById('loadFile').click()">Load</button>
   <input type="file" id="loadFile" class="hide" accept=".json" onchange="loadFromFile(event)">
@@ -1277,7 +1278,10 @@ function resetFood(){
 }
 function resetAll(){
   if(!arm('rstAll','Reset everything and start over',()=>{
-    try{ localStorage.removeItem('comeback_v1'); }catch(e){}
+    /* Clears only this person's plan. Anyone else's on the same
+       browser is none of this button's business. */
+    if(PID){ lsDel(DB.pre+PID); setProfiles(profiles().filter(p=>p.id!==PID)); }
+    lsDel(DB.old); PID=null; SEEN=0;
     S=JSON.parse(JSON.stringify(DEF));
     boot(); wiz(1); go('setup');
     $('saveStatus').textContent='Reset — starting fresh';
@@ -2126,9 +2130,97 @@ function renderHist(){
 /* ============================================================
    SAVE / LOAD  (file-based; storage used only if available)
    ============================================================ */
+/* ------------------------------------------------------------
+   WHOSE PLAN THIS IS
+   One browser, more than one person: a couple sharing a laptop, or
+   a coach who filled it in once as a demo. The first build kept a
+   single saved plan per browser, so the second person to use it
+   wiped the first without a word. Plans are now filed under a name.
+   Nobody is asked to choose unless there is genuinely a choice.
+   ------------------------------------------------------------ */
+const DB={idx:'lwf_profiles', act:'lwf_active', pre:'lwf_p_', old:'comeback_v1'};
+let PID=null;   /* which plan this tab is editing */
+let SEEN=0;     /* the newest save-stamp this tab has laid eyes on */
+
+function ls(k){ try{return localStorage.getItem(k);}catch(e){return null;} }
+function lsSet(k,v){ try{localStorage.setItem(k,v);return true;}catch(e){return false;} }
+function lsDel(k){ try{localStorage.removeItem(k);}catch(e){} }
+function profiles(){ try{return JSON.parse(ls(DB.idx)||'[]');}catch(e){return [];} }
+function setProfiles(a){ lsSet(DB.idx,JSON.stringify(a)); }
+function newId(){ return 'p'+Date.now().toString(36)+Math.random().toString(36).slice(2,6); }
+
+/* Anyone who used the earlier build has a plan under the old key.
+   Carry it across on first run so nothing they entered is lost. */
+function migrate(){
+  const raw=ls(DB.old); if(!raw || profiles().length) return;
+  try{
+    const o=JSON.parse(raw), id=newId();
+    if(lsSet(DB.pre+id,raw)){ setProfiles([{id,name:o.name||'',sv:o._sv||0}]); lsSet(DB.act,id); }
+  }catch(e){}
+}
+function loadProfile(id){
+  const raw=ls(DB.pre+id); if(!raw) return false;
+  try{
+    S=Object.assign(JSON.parse(JSON.stringify(DEF)),JSON.parse(raw));
+    PID=id; SEEN=S._sv||0; lsSet(DB.act,id); return true;
+  }catch(e){ return false; }
+}
+/* Loading a file on a device that already holds plans: adopt the one
+   with the same name rather than making a duplicate of the person. */
+function adoptByName(){
+  const n=(S.name||'').trim().toLowerCase();
+  const m=n? profiles().find(p=>(p.name||'').trim().toLowerCase()===n) : null;
+  PID=m?m.id:null; SEEN=0;
+}
+function askWho(){
+  if($('whoBox')) return;
+  const list=profiles().sort((a,b)=>(b.sv||0)-(a.sv||0));
+  const box=document.createElement('div'); box.id='whoBox';
+  box.style.cssText='position:fixed;inset:0;background:var(--navy);color:#fff;z-index:998;display:flex;align-items:center;justify-content:center;padding:24px';
+  box.innerHTML=`<div style="max-width:460px;width:100%">
+    <div style="color:var(--gold2);font-size:.75rem;letter-spacing:.12em;text-transform:uppercase;font-weight:700;margin-bottom:8px">This browser holds more than one plan</div>
+    <h2 style="color:#fff;font-size:1.4rem;margin:0 0 10px">Whose program is this?</h2>
+    <p style="color:#C7D3E4;font-size:.92rem;margin:0 0 18px">Pick yours. These are all saved on this device and nothing is shared between them.</p>
+    <div id="whoList" style="display:flex;flex-wrap:wrap;gap:8px"></div>
+    <p style="color:#8FA3BE;font-size:.78rem;margin:18px 0 0;line-height:1.5">Anything saved in a browser can be cleared by the browser. If this plan matters to you, keep a copy with “Save my data”.</p>
+  </div>`;
+  document.body.appendChild(box);
+  const L=$('whoList');
+  list.forEach(p=>{
+    const b=document.createElement('button');
+    b.className='btn gold'; b.textContent=p.name||'Unnamed plan';
+    b.onclick=()=>{ loadProfile(p.id); box.remove(); boot(); wiz(1); go(S.name?'numbers':'start'); };
+    L.appendChild(b);
+  });
+  const n=document.createElement('button');
+  n.className='btn ghost'; n.style.cssText='border-color:#C7D3E4;color:#fff';
+  n.textContent='Someone new';
+  n.onclick=()=>{ S=JSON.parse(JSON.stringify(DEF)); PID=null; SEEN=0; box.remove(); boot(); wiz(1); go('start'); };
+  L.appendChild(n);
+}
+
 function save(){
-  try{ localStorage.setItem('comeback_v1',JSON.stringify(S)); $('saveStatus').textContent='Saved on this device · '+new Date().toLocaleTimeString(); }
-  catch(e){ $('saveStatus').textContent='Use “Save my data” to keep a copy'; }
+  if(!PID) PID=newId();
+  const k=DB.pre+PID, raw=ls(k);
+  /* A tab holding an older copy must never overwrite a newer save made
+     in another tab. Losing one edit is annoying; losing the plan is not. */
+  if(raw){
+    try{
+      const cur=JSON.parse(raw);
+      if(SEEN && cur._sv && cur._sv>SEEN){
+        $('saveStatus').textContent='This tab has an older copy than the one saved — reload the page to pick up the newer one.';
+        return;
+      }
+    }catch(e){}
+  }
+  S._sv=Date.now();
+  if(!lsSet(k,JSON.stringify(S))){ $('saveStatus').textContent='Use “Save my data” to keep a copy'; return; }
+  SEEN=S._sv;
+  const a=profiles().filter(p=>p.id!==PID);
+  a.push({id:PID,name:S.name||'',sv:S._sv});
+  setProfiles(a); lsSet(DB.act,PID);
+  const sw=$('switchWho'); if(sw) sw.classList.toggle('hide',profiles().length<2);
+  $('saveStatus').textContent='Saved on this device · '+new Date().toLocaleTimeString();
 }
 function saveFile(){
   const blob=new Blob([JSON.stringify(S,null,2)],{type:'application/json'});
@@ -2141,7 +2233,7 @@ function saveFile(){
 function loadFromFile(ev){
   const f=ev.target.files[0]; if(!f) return;
   const r=new FileReader();
-  r.onload=()=>{ try{ S=Object.assign(JSON.parse(JSON.stringify(DEF)),JSON.parse(r.result)); boot(); $('saveStatus').textContent='Loaded'; }
+  r.onload=()=>{ try{ S=Object.assign(JSON.parse(JSON.stringify(DEF)),JSON.parse(r.result)); adoptByName(); boot(); save(); $('saveStatus').textContent='Loaded'; }
     catch(e){ alert('That file could not be read.'); } };
   r.readAsText(f);
 }
@@ -2177,10 +2269,13 @@ function boot(){
   ['rstFood','rstAll'].forEach(id=>{const b=$(id); if(b){b.dataset.armed='';b.classList.remove('armed');}});
   const lbl={rstFood:'Reset just my food choices',rstAll:'Reset everything and start over'};
   Object.keys(lbl).forEach(id=>{const b=$(id); if(b) b.textContent=lbl[id];});
+  const sw=$('switchWho'); if(sw) sw.classList.toggle('hide',profiles().length<2);
 }
 function init(){
   buildNav();
-  try{ const raw=localStorage.getItem('comeback_v1'); if(raw) S=Object.assign(JSON.parse(JSON.stringify(DEF)),JSON.parse(raw)); }catch(e){}
+  migrate();
+  const P=profiles();
+  if(P.length===1) loadProfile(P[0].id);
   ['s_name','s_age','s_ft','s_in','s_wt','s_goal','s_bf','s_court','s_courtmin','s_notes','s_sportname'].forEach(id=>{
     const e=$(id); if(e) e.onchange=()=>{readWizard();paintHeader();renderNumbers();renderCourt();save();};
   });
@@ -2191,6 +2286,8 @@ function init(){
   boot();
   wiz(1);
   go(S.name?'numbers':'start');
+  /* Only ask when there's an actual choice to make. */
+  if(P.length>1) askWho();
 }
 document.addEventListener('DOMContentLoaded',init);
 </script>
