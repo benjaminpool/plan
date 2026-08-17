@@ -4,6 +4,18 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>The Long Way Forward — Training &amp; Nutrition</title>
+<meta name="description" content="A free training and nutrition program that builds itself from your numbers — real meals for the whole household, 24 weeks of lifting, and every claim graded by the actual evidence. No account, no signup; nothing you type leaves your browser.">
+<meta name="theme-color" content="#0B1F3A">
+<meta property="og:title" content="The Long Way Forward — Training &amp; Nutrition">
+<meta property="og:description" content="A free program built from your numbers: real meals, 24 weeks of strength, every claim graded by evidence. Nothing you type leaves your browser.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://benjaminpool.github.io/plan/">
+<meta property="og:image" content="https://benjaminpool.github.io/plan/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='12' fill='%230B1F3A'/%3E%3Cpath d='M12 44h14l10-20h16' fill='none' stroke='%23C8A24B' stroke-width='6' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E">
+<link rel="apple-touch-icon" href="https://benjaminpool.github.io/plan/apple-touch-icon.png">
 <style>
 :root{
   --navy:#0B1F3A; --navy2:#12294D; --navy3:#1B3A69; --gold:#C8A24B; --gold2:#E4C579;
@@ -162,9 +174,11 @@ tbody tr:last-child td{border-bottom:0}
 }
 .savebar button{font-size:.8rem;padding:7px 13px}
 .savebar .st{color:#C7D3E4;font-size:.78rem}
+@media(max-width:520px){.savebar{padding:6px 10px;gap:8px}.savebar .st{display:none}}
 @media print{
   header,nav,.savebar,.swap,button{display:none!important}
-  .panel{display:block!important;page-break-before:always}
+  .panel{display:none!important}
+  .panel.on{display:block!important}   /* print what's on screen, not all ten tabs */
   body{background:#fff}
   .card{border:1px solid #ccc;box-shadow:none}
 }
@@ -232,7 +246,7 @@ button.btn.red.armed{background:var(--bad);color:#fff;border-color:var(--bad)}
     <div class="kicker">Start here</div>
     <h2>You are not on a diet. You're training — and this is the long way on purpose.</h2>
     <p class="lede">Everything you've tried before was subtraction: eat less, cut this out, give that up. This one works the other way round — it's built on <em>addition</em>. More protein, more strength, more of what your body can do. You eat to perform. You lift so you can move the way you want to move on a court. The scale stops being a verdict on you and becomes an instrument, like a serve speed.</p>
-    <p>We're doing more than reframing this to sound motivating — we're going to change the actual programming. An athlete preparing for a season eats enough to train hard, protects muscle on purpose, and measures things to make decisions — not to feel good or bad about herself. That's what the next six months look like.</p>
+    <p>We're doing more than reframing this to sound motivating — we're going to change the actual programming. An athlete preparing for a season eats enough to train hard, protects muscle on purpose, and measures things to make decisions — not to feel good or bad about themselves. That's what the next six months look like.</p>
     <div class="note">
       <p><strong>The one sentence this whole program is built on:</strong> you like structure, and you want creative freedom inside it. So the structure handles every decision that doesn't need you — and leaves the ones that do.</p>
     </div>
@@ -303,6 +317,7 @@ button.btn.red.armed{background:var(--bad);color:#fff;border-color:var(--bad)}
       <li><strong>Nothing you type leaves your device.</strong> There is no server here. Everything is stored in your own browser, and the <em>Save my data</em> button at the bottom writes a file you keep. If you want a coach to see it, there's a button for that and you have to press it.</li>
       <li><strong>It will tell you when it doesn't know.</strong> Every claim is graded, including the ones where the honest answer is that the research hasn't been done.</li>
     </ul>
+    <p class="quiet" style="margin-bottom:12px"><strong>And the obvious thing, said plainly:</strong> this is education, not medical care, and it's written for adults. If you have a medical condition, take prescription medication, or it's been years since you trained, have one conversation with your doctor before you start — not because a lawyer made me say it, but because your doctor knows things about you that a file can't.</p>
     <p class="quiet">Built by <span id="brandName">Benjamin Pool</span>. If you want someone in your corner while you do this, there's a button at the bottom of the Numbers tab.</p>
     <div class="rule"></div>
     <p class="quiet" style="margin-bottom:0"><strong>Use of this program.</strong> Free for your own use — keep it, copy it, send it to a friend, use it forever. It is <strong>not</strong> licensed for commercial use: coaches, trainers and gyms may not use it, rebrand it or any part of it as part of a paid service without written permission. If you'd like to use it with your own clients, just ask.</p>
@@ -322,7 +337,7 @@ button.btn.red.armed{background:var(--bad);color:#fff;border-color:var(--bad)}
       <h3>1. You</h3>
       <div class="row r2">
         <div class="field"><label>First name (or whatever you want on this)</label><input type="text" id="s_name" placeholder="e.g. Sam"></div>
-        <div class="field"><label>Age</label><input type="number" id="s_age" value="45"></div>
+        <div class="field"><label>Age</label><input type="number" id="s_age" value="45" min="18" max="90"></div>
       </div>
       <div class="field">
         <label>Sex</label>
@@ -330,19 +345,19 @@ button.btn.red.armed{background:var(--bad);color:#fff;border-color:var(--bad)}
         <small class="quiet">Asked because the metabolism and lean-mass equations genuinely differ — using the wrong one is worth a few hundred calories a day. It changes nothing else in the program.</small>
       </div>
       <div class="row r3">
-        <div class="field"><label>Height — feet</label><input type="number" id="s_ft" value="5"></div>
-        <div class="field"><label>Height — inches</label><input type="number" id="s_in" value="2"></div>
-        <div class="field"><label>Weight today (lb)</label><input type="number" id="s_wt" value="180"></div>
+        <div class="field"><label>Height — feet</label><input type="number" id="s_ft" value="5" min="4" max="7"></div>
+        <div class="field"><label>Height — inches</label><input type="number" id="s_in" value="2" min="0" max="11"></div>
+        <div class="field"><label>Weight today (lb)</label><input type="number" id="s_wt" value="180" min="80" max="500"></div>
       </div>
       <div class="row r2">
         <div class="field">
           <label>Goal weight (lb) — optional</label>
-          <input type="number" id="s_goal" value="160">
+          <input type="number" id="s_goal" value="160" min="80" max="500">
           <small class="quiet">A direction, not a promise. We'll tell you honestly how long it takes.</small>
         </div>
         <div class="field">
           <label>Body fat % — only if you've had a DXA</label>
-          <input type="number" id="s_bf" placeholder="leave blank if unknown">
+          <input type="number" id="s_bf" placeholder="leave blank if unknown" min="5" max="65">
           <small class="quiet">Blank is fine. We'll estimate and say so.</small>
         </div>
       </div>
@@ -363,8 +378,8 @@ button.btn.red.armed{background:var(--bad);color:#fff;border-color:var(--bad)}
         <input type="text" id="s_sportname" placeholder="name it" class="hide" style="margin-top:8px;max-width:280px">
       </div>
       <div class="row r2">
-        <div class="field"><label id="lblCourt">Sessions per week (now)</label><input type="number" id="s_court" value="2"></div>
-        <div class="field"><label>Typical session length (minutes)</label><input type="number" id="s_courtmin" value="60"></div>
+        <div class="field"><label id="lblCourt">Sessions per week (now)</label><input type="number" id="s_court" value="2" min="0" max="14"></div>
+        <div class="field"><label>Typical session length (minutes)</label><input type="number" id="s_courtmin" value="60" min="10" max="300"></div>
       </div>
       <div class="field">
         <label>Where will you lift?</label>
@@ -1333,11 +1348,13 @@ function renderFoodPicker(){
   });
 }
 function readWizard(){
-  S.name=$('s_name').value.trim(); S.age=+$('s_age').value||48;
-  S.ft=+$('s_ft').value||5; S.inch=+$('s_in').value||2;
-  S.wt=+$('s_wt').value||190; S.goal=+$('s_goal').value||0;
-  S.bf=$('s_bf').value?+$('s_bf').value:null;
-  S.court=+$('s_court').value||0; S.courtmin=+$('s_courtmin').value||60;
+  const cl=(v,lo,hi)=>Math.min(hi,Math.max(lo,v));
+  S.name=$('s_name').value.trim(); S.age=cl(+$('s_age').value||45,18,90);
+  S.ft=cl(+$('s_ft').value||5,4,7); S.inch=cl(+$('s_in').value||2,0,11);
+  S.wt=cl(+$('s_wt').value||180,80,500);
+  const gl=+$('s_goal').value||0; S.goal=gl?cl(gl,80,500):0;
+  S.bf=$('s_bf').value?cl(+$('s_bf').value,5,65):null;
+  S.court=cl(+$('s_court').value||0,0,14); S.courtmin=cl(+$('s_courtmin').value||60,10,300);
   S.sportname=($('s_sportname').value||'').trim();
   S.notes=$('s_notes').value;
 }
@@ -1527,7 +1544,9 @@ function eveningPool(notName){
   const fav=a.filter(f=>S.food[f.n]==='fav');
   return a.concat(fav,fav);
 }
-const eMult=(f,kT)=>f.d?Math.max(1,Math.round(kT/f.k)):Math.min(2,Math.max(.5,Math.round(kT/f.k*2)/2));
+/* Drinks never scale up. One glass is an evening; the program does not pour
+   a second — if the budget has room left, food fills it. */
+const eMult=(f,kT)=>f.d?1:Math.min(2,Math.max(.5,Math.round(kT/f.k*2)/2));
 
 function buildDay(training){
   const c=calc();
@@ -1538,8 +1557,8 @@ function buildDay(training){
     if(def.code==='E'){
       const e=pick(eveningPool()); slot.items.push({f:e,m:eMult(e,kT*def.ks)});
       if(kT*def.ks-sumK(slot.items)>150){
-        const e2=pick(eveningPool(e.n));
-        if(e2.n!==e.n) slot.items.push({f:e2,m:eMult(e2,kT*def.ks-sumK(slot.items))});
+        const p2=eveningPool(e.n).filter(f=>!f.d);   /* second item is food, never a second drink */
+        if(p2.length){ const e2=pick(p2); slot.items.push({f:e2,m:eMult(e2,kT*def.ks-sumK(slot.items))}); }
       }
     } else {
       const r=pickDish(def.code, c.proTarget*def.ps, kT*def.ks);
@@ -1555,7 +1574,9 @@ function swapItem(si,ii){
     const r=pickDish(sl.def.code, S.day.proTarget*sl.def.ps, S.day.kcalTarget*sl.def.ks, it.r.n);
     it.r=r; it.m=fitM(r,S.day.proTarget*sl.def.ps,S.day.kcalTarget*sl.def.ks);
   } else if(it.f.t==='E'){
-    const f=pick(eveningPool(it.f.n)); it.f=f; it.m=eMult(f,S.day.kcalTarget*sl.def.ks);
+    let p=eveningPool(it.f.n);
+    if(sl.items.some(x=>x!==it&&x.f&&x.f.d)) p=p.filter(f=>!f.d);   /* one drink max per evening */
+    const f=pick(p); it.f=f; it.m=eMult(f,S.day.kcalTarget*sl.def.ks);
   } else {
     const p=sidePool(['C','V','F'],it.f.n); it.f=pick(p); it.m=1;
   }
@@ -1586,7 +1607,8 @@ function adjustDay(){
     t.m=round(t.m-.25,2);
   }
   if(totP() < S.day.proTarget-8){
-    S.day.tight={p:Math.round(totP()),floor:c.proFloor};
+    S.day.tight={p:Math.round(totP()),floor:c.proFloor,
+                 over:totK()>kT+110?Math.round(totK()-kT):0};
   }
 }
 
@@ -1664,8 +1686,10 @@ function dropSideRef(ref){
 }
 
 /* ---------- rendering ---------- */
-const fmtM=m=>m===1?"1 portion":(m===.5?"½ portion":m===1.5?"1½ portion":m===2.5?"2½ portions":m+" portions");
-const fmtS=m=>m===1?"":(m===.5?"½ × ":m===1.5?"1½ × ":m+" × ");
+const frac=m=>{const i=Math.floor(m+1e-9),r=Math.round((m-i)*4),F=['','¼','½','¾'];
+  if(r===4) return String(i+1); return i? i+F[r] : (F[r]||'0');};
+const fmtM=m=>m===1?"1 portion":frac(m)+" portion"+(m>1?"s":"");
+const fmtS=(m,s)=>m===1? s : (m<1? frac(m)+" of "+s : frac(m)+" × "+s);
 function gTag(g){
   const t=[];
   if(g.includes('v')) t.push('<span class="pill">vegetarian</span>');
@@ -1757,7 +1781,7 @@ function renderDay(){
            </div>`;
       } else {
         h+=`<div class="item">
-             <div><div class="fn">${it.f.n}</div><div class="fs">${fmtS(it.m)}${it.f.s}${it.f.t!=='E'?' · on the side':''}</div></div>
+             <div><div class="fn">${it.f.n}</div><div class="fs">${fmtS(it.m,it.f.s)}${it.f.t!=='E'?' · on the side':''}</div></div>
              <div style="display:flex;align-items:center;gap:8px">
                <span class="fm">${Math.round(it.f.k*it.m)} kcal · ${Math.round(it.f.p*it.m)}p</span>
                <button class="swap" onclick="swapItem(${si},${ii})">swap</button>
@@ -1767,7 +1791,16 @@ function renderDay(){
     h+=`</div>`;
   });
   if(d.tight){
-    h+=`<div class="note warn"><p style="margin-bottom:0"><strong>Honest note about this day.</strong>
+    h+= d.tight.over>0
+     ? `<div class="note warn"><p style="margin-bottom:0"><strong>Honest note about this day.</strong>
+      It landed at ${d.tight.p} g of protein rather than ${d.proTarget} g — and still about
+      ${d.tight.over} calories over target. With the meals you've allowed, those two could not both
+      be met: trimming further would have cut you below your ${d.tight.floor} g floor, the level
+      that protects muscle, so the engine stopped there instead.
+      <br><br>Two ways to give it room to fix both: a scoop of protein powder is about 25 g for
+      130 calories, which is far cheaper than any food; or allow a few more of the higher-protein
+      meals in Setup. This is a real constraint of eating this way, not a fault in the plan.</p></div>`
+     : `<div class="note warn"><p style="margin-bottom:0"><strong>Honest note about this day.</strong>
       It landed at ${d.tight.p} g of protein rather than ${d.proTarget} g. With the meals you've
       allowed, hitting the full target would have meant going roughly 300&ndash;400 calories over —
       and eating over is what actually stops progress. So the calories won.
@@ -2033,7 +2066,7 @@ function runCheckin(){
 
   if(!adherent){
     cls='v-stop'; title='Change nothing. The plan wasn\'t run.';
-    action=`Hold at ${kcal>0?c.intake:c.intake} kcal and ${c.proTarget} g protein.`;
+    action=`Hold at ${c.intake} kcal and ${c.proTarget} g protein.`;
     body=`Protein was hit on ${proDays} of 14 days and ${lifts} lifting sessions got done. That's not a criticism — it's a measurement problem. We genuinely do not know what this plan does yet, because it hasn't been run.<br><br><strong>Adjusting calories now would be guessing.</strong> The next fortnight has one job: find out what's actually in the way. Time? Food not in the house? The evening? Something else entirely?`;
     rule='';
   }
