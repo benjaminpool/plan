@@ -554,7 +554,7 @@ button.btn.red.armed{background:var(--bad);color:#fff;border-color:var(--bad)}
         <ul class="clean">
           <li><strong>Lifting does not build hip bone.</strong> In the trial everyone cites, femoral neck density rose 0.3% — statistically it beat the control group only because <em>they lost 2%</em>. It prevents loss there. It doesn't build. <span class="tag t-b">Moderate</span></li>
           <li><strong>No exercise trial has ever shown fracture reduction.</strong> Bone density is a stand-in. The likely real protection is that you get strong enough not to fall. <span class="tag t-d">Reasoning</span></li>
-          <li><strong>That trial studied women averaging 65, and excluded anyone within five years of menopause</strong> — meaning you'd have been screened out of it. Applying it to you is reasoning downward in age. Sensible, not proven. <span class="tag t-d">Reasoning</span></li>
+          <li><strong>That trial studied women averaging 65, and excluded anyone within five years of menopause</strong> — most people using this program would have been screened out of it. Applying it to you is extrapolation: down in age, and for men across sex as well. Sensible, not proven. <span class="tag t-d">Reasoning</span></li>
         </ul>
       </div>
     </div>
@@ -841,7 +841,7 @@ button.btn.red.armed{background:var(--bad);color:#fff;border-color:var(--bad)}
         <tr><td>"Eating late makes you gain fat"</td><td><span class="tag t-e">Not true</span></td><td>Not independent of how much you eat overall. What is true: ultra-processed food makes people eat 300&ndash;800 more calories a day — because it's soft, dense and fast to chew, not because of when it's eaten.</td></tr>
         <tr><td>"You can only use 20&ndash;30 g of protein per meal"</td><td><span class="tag t-e">Not true</span></td><td>A measurement artifact. 100 g in one sitting produced substantially more muscle protein synthesis than 25 g, with under 15% oxidised.</td></tr>
         <tr><td>"Protein within 30 minutes of training"</td><td><span class="tag t-e">Not true</span></td><td>The effect disappears entirely once you control for total daily protein. The training effect lasts at least 24 hours.</td></tr>
-        <tr><td>"Menopausal women need a gram of protein per pound"</td><td><span class="tag t-d">Reasoning at best</span></td><td>No trial in peri- or postmenopausal women shows a benefit at those intakes. Your needs are modestly up because you're 48, in a deficit and training hard — not because of estrogen specifically. The increment is smaller than the internet says.</td></tr>
+        <tr><td>"Menopausal women need a gram of protein per pound"</td><td><span class="tag t-d">Reasoning at best</span></td><td>No trial in peri- or postmenopausal women shows a benefit at those intakes. Your needs are modestly up because of your age, the deficit and the training — not because of estrogen specifically. The increment is smaller than the internet says.</td></tr>
         <tr><td>"Cardio kills your gains"</td><td><span class="tag t-e">Not true</span></td><td>Across 17 meta-analyzes, no meaningful interference for strength or muscle. And in women specifically, lower-body strength showed <em>zero</em> impairment. The one real casualty is explosive power, which is why power work goes early in a session when you're fresh.</td></tr>
         <tr><td>"10,000 steps"</td><td><span class="tag t-e">Not true</span></td><td>A 1960s Japanese pedometer marketing number. About 7,000 captures most of the benefit.</td></tr>
         <tr><td>"1,200 calories is the floor"</td><td><span class="tag t-e">Not true</span></td><td>There's no trial identifying 1,200 as any kind of biological threshold — it's a micronutrient rule of thumb that hardened into a rule. Your actual floor is calculated in the Numbers tab, from your body and your training, and it's considerably higher.</td></tr>
@@ -1070,7 +1070,7 @@ const SPORTS=[
   costnote:"Measured in recreational players: around 70% of maximum heart rate, roughly 2,800–3,300 steps an hour, with 5–15 second rallies. <span class='tag t-b'>Moderate</span>",
   risks:[
    ["Achilles rupture","The mechanism is backpedalling for a lob and pushing off. Anyone converting from tennis is at extra risk — twenty years of conditioning says run it down. This is the one that ends a season."],
-   ["Wrist fracture from a fall onto an outstretched hand","The injury where being a woman is clearly the risk factor, and the one that makes a bone-density conversation with your doctor concrete rather than theoretical."],
+   ["Wrist fracture from a fall onto an outstretched hand","The injury where sex matters most — women break wrists in these falls far more often, which makes a bone-density conversation with a doctor concrete rather than theoretical."],
    ["Tennis elbow","Pickleball is not tennis. Shorter lever, no strings to absorb shock, more wrist, far more shots per hour. Converts from tennis are a specific at-risk group."],
    ["Rotator cuff","From overhead volume, which is easy to let run away with you."],
    ["Eyes","The one nobody mitigates, and most of it comes from falls rather than being hit. Eyewear is cheap."]],
@@ -1418,7 +1418,7 @@ function renderNumbers(){
     <thead><tr><th>What</th><th>Number</th><th>How much to trust it</th></tr></thead>
     <tbody>
      <tr><td>Resting metabolism (Mifflin&ndash;St Jeor)</td><td><strong>${c.rmr} kcal</strong></td>
-         <td>The most accurate equation there is for women, and it still lands within 10% only about 7 times in 10. Your true resting rate is most likely somewhere between <strong>${Math.round(c.rmr*0.8)}</strong> and <strong>${Math.round(c.rmr*1.2)}</strong>.</td></tr>
+         <td>The most accurate of the standard equations, and it still lands within 10% only about 7 times in 10. Your true resting rate is most likely somewhere between <strong>${Math.round(c.rmr*0.8)}</strong> and <strong>${Math.round(c.rmr*1.2)}</strong>.</td></tr>
      <tr><td>Daily burn — living (&times;${c.af}) plus training (+${c.exDaily})</td><td><strong>${c.tdee} kcal</strong></td>
          <td>Much worse. Validated against gold-standard measurement, the best equations land within 10% for fewer than half of people. Honest range: <strong>${Math.round(c.tdee-550)}</strong> to <strong>${Math.round(c.tdee+550)}</strong>.</td></tr>
      <tr><td>Lean mass ${c.estimated?'(estimated)':'(from your DXA)'}</td><td><strong>${round(kg2lb(c.ffm),0)} lb</strong> · ${c.bf}% fat</td>
@@ -1439,7 +1439,7 @@ function renderNumbers(){
      <p><strong>Here's the math that matters.</strong> A "1,400-calorie diet" plus a training session leaves you at roughly half the energy your body needs for everything that isn't exercise. In the lab, five days at that level is enough to disrupt reproductive hormones, suppress bone formation, and drop thyroid hormone about 22%. <span class="tag t-b">Moderate</span></p>
      <p style="margin-bottom:0">If you have ever dieted hard and ended up exhausted, foggy and cold, that is almost certainly what happened. Not a broken metabolism. Not a personal failing. <strong>Math.</strong> And the fix is a floor you can see the working for.</p>
    </div>
-   <p class="quiet">Honest caveat: the threshold this floor is built on comes from five-day laboratory studies in young, sedentary, normal-weight women. Nobody has run it in returning recreational athletes in midlife carrying extra fat mass. It is the best number available and it is a reasoned floor, not a proven one. <span class="tag t-d">Reasoning</span></p>`;
+   <p class="quiet">Honest caveat: the threshold this floor is built on comes from five-day laboratory studies in young, sedentary, normal-weight women. ${c.male?'In men the data are thinner still — men appear to tolerate low energy availability somewhat better, but no male threshold has ever been established, so this floor is deliberately conservative for you.':'Nobody has re-run it in people returning to training later in life.'} It is the best number available and it is a reasoned floor, not a proven one. <span class="tag t-d">Reasoning</span></p>`;
 
   $('proBox').innerHTML=`
    <div class="grid g3" style="margin-bottom:14px">
@@ -1450,7 +1450,7 @@ function renderNumbers(){
    <p>Roughly <strong>${Math.round(c.proTarget/4)} g at each of three or four meals</strong>. A palm of meat or fish is about 30&ndash;40 g. A cup of Greek yogurt is about 23. A scoop of whey is 25.</p>
    <p><strong>How this was calculated, since you should know:</strong> it's based on your bodyweight adjusted down to a BMI of 30 &mdash; ${Math.round(kg2lb(c.adjKg))} lb &mdash; not your scale weight. Fat tissue doesn't need feeding with protein, so scaling protein to total bodyweight over-prescribes for anyone carrying extra. This method self-corrects: as you get lighter, the adjustment disappears and the target comes down with you.</p>
    <div class="note">
-     <p><strong>What I'm not going to tell you:</strong> that you need a gram of protein for every pound you weigh because of your age or your hormones. You'll read that everywhere. No trial in peri- or postmenopausal women has shown a benefit at that much, and the one meta-analysis that looked specifically at whether women show more age-related anabolic resistance came back <em>non-significant</em>. <span class="tag t-d">Reasoning at best</span></p>
+     <p><strong>What I'm not going to tell you:</strong> that you need a gram of protein for every pound you weigh because of your age or your hormones. You'll read that everywhere. ${c.male?'No trial shows a benefit from going that high — above the range this program uses, more protein has never been shown to add anything.':'No trial in peri- or postmenopausal women has shown a benefit at that much, and the one meta-analysis that looked specifically at whether women show more age-related anabolic resistance came back <em>non-significant</em>.'} <span class="tag t-d">Reasoning at best</span></p>
      <p style="margin-bottom:0"><strong>And the part that actually matters:</strong> in every trial where extra protein helped, there was resistance training alongside it. In the trials without training, extra protein did nothing. <strong>The lifting is the mechanism. The protein is insurance.</strong> <span class="tag t-a">Strong</span></p>
    </div>`;
 
