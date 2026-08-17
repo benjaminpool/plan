@@ -336,6 +336,7 @@ button.btn.red.armed{background:var(--bad);color:#fff;border-color:var(--bad)}
     <!-- step 1 -->
     <div class="wizstep on" id="w1">
       <h3>1. You</h3>
+      <div id="wizWarn" class="note warn hide" style="margin-bottom:14px"></div>
       <div class="row r2">
         <div class="field"><label>First name (or whatever you want on this)</label><input type="text" id="s_name" placeholder="e.g. Sam"></div>
         <div class="field"><label>Age</label><input type="number" id="s_age" placeholder="years" min="18" max="90"></div>
@@ -1459,13 +1460,25 @@ function finishWiz(){
   const first=!S._built;
   readWizard();
   const missing=[];
-  if(!S.age) missing.push('age'); if(!S.sex) missing.push('sex');
-  if(S.ft==null) missing.push('height'); if(!S.wt) missing.push('weight');
+  if(!S.age) missing.push(['s_age','age']);
+  if(!S.sex) missing.push(['s_sex','sex']);
+  if(S.ft==null) missing.push(['s_ft','height']);
+  if(!S.wt) missing.push(['s_wt','weight']);
+  const wf=$('wizWarn');
+  ['s_age','s_ft','s_wt','s_sex'].forEach(id=>{const x=$(id); if(x) x.style.outline='';});
   if(missing.length){
     wiz(1); save();
-    $('saveStatus').textContent='Still needed before the numbers can be honest: '+missing.join(', ');
+    const names=missing.map(m=>m[1]).join(', ');
+    if(wf){
+      wf.classList.remove('hide');
+      wf.innerHTML='<p style="margin-bottom:10px"><strong>Nearly there — the numbers still need your '+names+'.</strong> Everything else you\'ve entered is saved. Fill in the outlined bit'+(missing.length>1?'s':'')+' below, then:</p><div class="btnrow"><button class="btn gold sm" onclick="finishWiz()">Build my program</button></div>';
+    }
+    missing.forEach(m=>{const x=$(m[0]); if(x){x.style.outline='2px solid var(--bad)'; x.style.outlineOffset='3px'; if(m[0]==='s_sex') x.style.borderRadius='8px';}});
+    const f=$(missing[0][0]); if(f&&f.tagName==='INPUT') f.focus();
+    $('saveStatus').textContent='Still needed: '+names;
     return;
   }
+  if(wf) wf.classList.add('hide');
   S._built=true; paintHeader(); save(); renderDay();
   if(!first) $('saveStatus').textContent='Updated · '+new Date().toLocaleTimeString();
   go('numbers');
