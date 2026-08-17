@@ -317,6 +317,7 @@ button.btn.red.armed{background:var(--bad);color:#fff;border-color:var(--bad)}
       <li><strong>Nothing you type leaves your device.</strong> There is no server here. Everything is stored in your own browser, and the <em>Save my data</em> button at the bottom writes a file you keep. If you want a coach to see it, there's a button for that and you have to press it.</li>
       <li><strong>It will tell you when it doesn't know.</strong> Every claim is graded, including the ones where the honest answer is that the research hasn't been done.</li>
     </ul>
+    <p class="quiet hide" id="safariNote" style="margin-bottom:12px"><strong>iPhone and Safari note:</strong> Safari deletes a site's saved browser data after about seven days without a visit. Your plan lives in this browser — so on Apple devices especially, hit <strong>Save my data</strong> in the bottom bar and keep the file somewhere real. Loading it back is one tap, and any visit resets Safari's clock.</p>
     <p class="quiet" style="margin-bottom:12px"><strong>And the obvious thing, said plainly:</strong> this is education, not medical care, and it's written for adults. If you have a medical condition, take prescription medication, or it's been years since you trained, have one conversation with your doctor before you start — not because a lawyer made me say it, but because your doctor knows things about you that a file can't.</p>
     <p class="quiet">Built by <span id="brandName">Benjamin Pool</span>. If you want someone in your corner while you do this, there's a button at the bottom of the Numbers tab.</p>
     <div class="rule"></div>
@@ -416,6 +417,11 @@ button.btn.red.armed{background:var(--bad);color:#fff;border-color:var(--bad)}
       <h3>4. Food — the important one</h3>
       <p>These are the actual meals the program will cook for you. Tap anything you <strong>won't eat</strong> and it never appears. Tap again to mark a <strong>favorite</strong> and it turns up more often. Leave the rest alone — neutral is fine, and neutral should be most of them.</p>
       <p class="quiet">Tap once = won't eat. Tap twice = favorite. Tap three times = back to neutral.</p>
+      <div class="field" style="margin:2px 0 18px">
+        <label>Meals you actually eat</label>
+        <div class="choice" id="s_mealskip"></div>
+        <small class="quiet">Tap any meal off and the engine moves its protein and calories into the ones you keep — intermittent fasting fits here with no ceremony. Fewer meals does mean bigger servings; that's arithmetic, not a catch. On the evidence: meal timing and frequency have no effect on fat loss on their own — total intake and protein do. <span class="tag t-a">Strong</span></small>
+      </div>
       <div id="foodPicker"></div>
       <div class="btnrow"><button class="btn ghost" onclick="wiz(3)">Back</button><button class="btn gold" onclick="finishWiz()">Save &amp; rebuild my program</button></div>
     </div>
@@ -526,6 +532,14 @@ button.btn.red.armed{background:var(--bad);color:#fff;border-color:var(--bad)}
   </div>
 
   <div class="card">
+    <div class="kicker">The cookbook</div>
+    <h3>Every recipe, in one place</h3>
+    <p class="quiet">All the meals the engine can serve, browsable without building a day. Tap a name for the method and the shopping list. Mark anything <strong>won't eat</strong> or <strong>favorite</strong> here and the engine obeys everywhere — same taps as Setup.</p>
+    <div class="choice" id="cbFilter"></div>
+    <div id="cookbook" style="margin-top:12px"></div>
+  </div>
+
+  <div class="card">
     <div class="kicker">When you're out</div>
     <h3>No app, no scale, no numbers</h3>
     <p>You will be at restaurants. You'll be at your kid's tournament with a concession stand. Here's the whole system for those days, and it is deliberately crude:</p>
@@ -576,6 +590,11 @@ button.btn.red.armed{background:var(--bad);color:#fff;border-color:var(--bad)}
       <li><strong>Never progress load, training volume and sport volume in the same week.</strong> Pick one.</li>
       <li><strong>You do not need to train to failure.</strong> Leaving one or two reps in the tank produces the same adaptations with less wreckage. <span class="tag t-a">Strong</span></li>
     </ol>
+  </div>
+
+  <div class="card tight">
+    <h4>Before every lifting session</h4>
+    <p class="quiet" style="margin-bottom:0">Five minutes of easy cardio until you're genuinely warm, then two or three lighter build-up sets of your first exercise on the way to the working weight. That is the entire warm-up — for lifting, the build-up sets are the mobility work that matters.</p>
   </div>
 
   <div class="card">
@@ -1061,6 +1080,7 @@ const DEF={
   food:{},           /* name -> "no" | "fav"  (evening items and sides) */
   meals:{},          /* recipe name -> "no" | "fav" */
   extra:[],          /* other regular activities: [{id, perWk, min}] */
+  skip:{},           /* meals not eaten, e.g. {breakfast:true} — IF lives here */
   checkins:[], week:1, day:null, recent:[], done:{}, _step:1, _built:false
 };
 let S=JSON.parse(JSON.stringify(DEF));
@@ -1270,6 +1290,7 @@ function go(t){
   window.scrollTo({top:0,behavior:'instant'});
   if(t==='setup') wiz(S._step||1);
   if(t==='numbers') renderNumbers();
+  if(t==='kitchen') renderCookbook();
   if(t==='strength') renderLift();
   if(t==='season') renderSeason();
   if(t==='mind') renderMindScale();
@@ -1336,6 +1357,7 @@ function renderWizard(){
   chips('s_scale',SCALES,S.scale,v=>{S.scale=v;renderWizard();});
   $('scaleExplain').innerHTML=SCALETEXT[S.scale];
   renderExtraPicker();
+  renderMealSkip();
   renderFoodPicker();
 }
 function renderFoodPicker(){
@@ -1364,6 +1386,27 @@ function renderFoodPicker(){
     S.food[n]= st===""?"no" : st==="no"?"fav" : "";
     if(S.food[n]==="") delete S.food[n];
     renderFoodPicker(); save();
+  });
+}
+/* Meals the person doesn't eat. At least two meals must remain, and at least
+   one of them a real one — the engine needs somewhere to put the food. */
+function renderMealSkip(){
+  const el=$('s_mealskip'); if(!el) return;
+  S.skip=S.skip||{};
+  el.innerHTML=SLOTS.map(d=>{
+    const eaten=!S.skip[d.id];
+    return `<button data-v="${d.id}" class="${eaten?'on':''}">${d.id==='evening'?'Evening':d.name}</button>`;
+  }).join('');
+  el.querySelectorAll('button').forEach(b=>b.onclick=()=>{
+    const id=b.dataset.v, next=Object.assign({},S.skip);
+    if(next[id]) delete next[id]; else next[id]=true;
+    const left=SLOTS.filter(d=>!next[d.id]);
+    if(left.length<2 || !left.some(d=>'BLD'.includes(d.code))){
+      $('saveStatus').textContent='At least two meals, and one of them a real one — the food has to live somewhere.';
+      return;
+    }
+    S.skip=next; S.day=null;
+    renderMealSkip(); renderDay(); paintHeader(); renderNumbers(); save();
   });
 }
 /* Secondary activities: everything counts in the math; the sport tab still
@@ -1552,6 +1595,10 @@ const SLOTS=[
  {id:"evening",  name:"Evening — yours",code:"E",ps:.16,ks:.15}
 ];
 const snap=(m,lo,hi)=>Math.min(hi,Math.max(lo,Math.round(m*4)/4));
+/* share of the day this slot carries — normalized at build time when meals are
+   skipped; falls back to the raw share for days built before that existed */
+const sPS=sl=>sl.ps!=null?sl.ps:sl.def.ps;
+const sKS=sl=>sl.ks!=null?sl.ks:sl.def.ks;
 /* the portion that hits this slot's protein share — but never more than about
    a third over its calorie budget, or a single dish swallows the whole day */
 function fitM(r,slotP,slotK){
@@ -1628,17 +1675,21 @@ function buildDay(training){
   const c=calc();
   const kT=training?c.courtIntake:c.intake;
   S.day={training:!!training,kcalTarget:kT,proTarget:c.proTarget,slots:[]};
-  SLOTS.forEach(def=>{
-    const slot={def,items:[]}; S.day.slots.push(slot);
+  /* meals the person doesn't eat simply don't exist; their share of protein
+     and calories flows into the meals that do */
+  const active=SLOTS.filter(def=>!(S.skip&&S.skip[def.id]));
+  const psT=active.reduce((t,d)=>t+d.ps,0), ksT=active.reduce((t,d)=>t+d.ks,0);
+  active.forEach(def=>{
+    const slot={def,ps:def.ps/psT,ks:def.ks/ksT,items:[]}; S.day.slots.push(slot);
     if(def.code==='E'){
-      const e=pick(eveningPool()); slot.items.push({f:e,m:eMult(e,kT*def.ks)});
-      if(kT*def.ks-sumK(slot.items)>150){
+      const e=pick(eveningPool()); slot.items.push({f:e,m:eMult(e,kT*slot.ks)});
+      if(kT*slot.ks-sumK(slot.items)>150){
         const p2=eveningPool(e.n).filter(f=>!f.d);   /* second item is food, never a second drink */
-        if(p2.length){ const e2=pick(p2); slot.items.push({f:e2,m:eMult(e2,kT*def.ks-sumK(slot.items))}); }
+        if(p2.length){ const e2=pick(p2); slot.items.push({f:e2,m:eMult(e2,kT*slot.ks-sumK(slot.items))}); }
       }
     } else {
-      const r=pickDish(def.code, c.proTarget*def.ps, kT*def.ks);
-      slot.items.push({r,m:fitM(r,c.proTarget*def.ps,kT*def.ks)});
+      const r=pickDish(def.code, c.proTarget*slot.ps, kT*slot.ks);
+      slot.items.push({r,m:fitM(r,c.proTarget*slot.ps,kT*slot.ks)});
     }
   });
   adjustDay(); renderDay(); stashDay(); save();
@@ -1647,18 +1698,41 @@ function buildDay(training){
 function swapItem(si,ii){
   const sl=S.day.slots[si], it=sl.items[ii];
   if(it.r){
-    const r=pickDish(sl.def.code, S.day.proTarget*sl.def.ps, S.day.kcalTarget*sl.def.ks, it.r.n);
-    it.r=r; it.m=fitM(r,S.day.proTarget*sl.def.ps,S.day.kcalTarget*sl.def.ks);
+    const r=pickDish(sl.def.code, S.day.proTarget*sPS(sl), S.day.kcalTarget*sKS(sl), it.r.n);
+    it.r=r; it.m=fitM(r,S.day.proTarget*sPS(sl),S.day.kcalTarget*sKS(sl));
   } else if(it.f.t==='E'){
     let p=eveningPool(it.f.n);
     if(sl.items.some(x=>x!==it&&x.f&&x.f.d)) p=p.filter(f=>!f.d);   /* one drink max per evening */
-    const f=pick(p); it.f=f; it.m=eMult(f,S.day.kcalTarget*sl.def.ks);
+    const f=pick(p); it.f=f; it.m=eMult(f,S.day.kcalTarget*sKS(sl));
   } else {
     const p=sidePool(['C','V','F'],it.f.n); it.f=pick(p); it.m=1;
   }
   adjustDay(); renderDay(); save();
 }
 function dropSide(si,ii){ S.day.slots[si].items.splice(ii,1); adjustDay(); renderDay(); save(); }
+/* swap the WHOLE meal — new dish, sides cleared, numbers rebalanced */
+function swapMeal(si){
+  const sl=S.day.slots[si], kT=S.day.kcalTarget;
+  if(sl.def.code==='E'){
+    sl.items=[];
+    const e=pick(eveningPool()); sl.items.push({f:e,m:eMult(e,kT*sKS(sl))});
+    if(kT*sKS(sl)-sumK(sl.items)>150){
+      const p2=eveningPool(e.n).filter(f=>!f.d);
+      if(p2.length){ const e2=pick(p2); sl.items.push({f:e2,m:eMult(e2,kT*sKS(sl)-sumK(sl.items))}); }
+    }
+  } else {
+    const cur=sl.items.find(x=>x.r);
+    const r=pickDish(sl.def.code, S.day.proTarget*sPS(sl), kT*sKS(sl), cur?cur.r.n:null);
+    sl.items=[{r,m:fitM(r,S.day.proTarget*sPS(sl),kT*sKS(sl))}];
+  }
+  adjustDay(); renderDay(); save();
+}
+/* skip one meal on THIS day only — its budget flows into what's left */
+function skipToday(si){
+  if(S.day.slots.length<=2){ $('saveStatus').textContent='Two meals is the floor for a built day — to eat fewer every day, set it in Setup under Food.'; return; }
+  S.day.slots.splice(si,1);
+  adjustDay(); renderDay(); save();
+}
 
 function adjustDay(){
   proteinPass(); caloriePass(); proteinPass(); caloriePass();
@@ -1711,7 +1785,7 @@ function proteinPass(){
     const bump=FOODS.filter(f=>['Greek yogurt, plain','Skyr','Cottage cheese','Whey protein','Protein shake, ready-made','Edamame'].includes(f.n)&&S.food[f.n]!=='no');
     if(!bump.length) break;
     const sl=S.day.slots.filter(s=>s.def.code!=='E')
-      .sort((a,b)=>(kT*b.def.ks-sumK(b.items))-(kT*a.def.ks-sumK(a.items)))[0];
+      .sort((a,b)=>(kT*sKS(b)-sumK(b.items))-(kT*sKS(a)-sumK(a.items)))[0];
     const cand=bump.filter(f=>!sl.items.some(x=>x.f&&x.f.n===f.n));
     if(!cand.length) break;
     const t=pick(cand);
@@ -1735,7 +1809,7 @@ function caloriePass(){
       const grow=sides().filter(x=>x.m<3).sort((a,b)=>b.f.k-a.f.k)[0];
       if(grow && gap<grow.f.k*1.4){ grow.m=round(grow.m+.25,2); continue; }
       const target=S.day.slots.filter(sl=>sl.def.code!=='E')
-        .sort((a,b)=>(kT*b.def.ks-sumK(b.items))-(kT*a.def.ks-sumK(a.items)))[0];
+        .sort((a,b)=>(kT*sKS(b)-sumK(b.items))-(kT*sKS(a)-sumK(a.items)))[0];
       const kind = gap>230?['C']:['F','V'];
       const p=sidePool(kind).filter(f=>!target.items.some(x=>x.f&&x.f.n===f.n));
       if(!p.length) break;
@@ -1834,7 +1908,7 @@ function renderDay(){
     </div>`;
   d.slots.forEach((sl,si)=>{
     const sk=Math.round(sumK(sl.items)), sp=Math.round(sumP(sl.items));
-    h+=`<div class="meal"><div class="mh"><span class="name">${sl.def.name}</span><span class="mac">${sk} kcal · ${sp} g protein</span></div>`;
+    h+=`<div class="meal"><div class="mh"><span class="name">${sl.def.name}</span><span style="display:flex;gap:8px;align-items:center;flex-wrap:wrap"><span class="mac">${sk} kcal · ${sp} g protein</span><button class="swap" onclick="swapMeal(${si})">swap meal</button><button class="swap" onclick="skipToday(${si})">skip today</button></span></div>`;
     sl.items.forEach((it,ii)=>{
       if(it.r){
         const r=it.r, id=`rc${si}_${ii}`;
@@ -1890,6 +1964,46 @@ function renderDay(){
 }
 function togRec(id){ const e=$(id); if(e) e.classList.toggle('hide'); }
 
+/* ---------- the cookbook: browse everything, no day required ---------- */
+let CBF='all';
+function cycleMeal(n){
+  const st=S.meals[n]||'';
+  S.meals[n]= st===''?'no' : st==='no'?'fav' : '';
+  if(S.meals[n]==='') delete S.meals[n];
+  renderCookbook(); renderFoodPicker(); save();
+}
+function renderCookbook(){
+  const el=$('cookbook'); if(!el) return;
+  const F=[['all','All'],['B','Breakfasts'],['L','Lunches'],['D','Dinners'],['v','Vegetarian'],['q','Quick'],['f','Freezes']];
+  $('cbFilter').innerHTML=F.map(f=>`<button data-v="${f[0]}" class="${CBF===f[0]?'on':''}">${f[1]}</button>`).join('');
+  $('cbFilter').querySelectorAll('button').forEach(b=>b.onclick=()=>{CBF=b.dataset.v;renderCookbook();});
+  const list=RECIPES.filter(r=> CBF==='all' ? true : 'BLD'.includes(CBF) ? r.s===CBF : r.g.includes(CBF));
+  el.innerHTML=list.map((r,i)=>{
+    const st=S.meals[r.n]||'', id='cb'+i;
+    const slot=r.s==='B'?'breakfast':r.s==='L'?'lunch':'dinner';
+    const stStyle=st==='no'?'background:#FBF3F1;border-color:#E3D5D2;color:#B48A83'
+                 :st==='fav'?'background:#EFF6F2;border-color:#BFDCCF;color:#1F5C43':'';
+    return `<div class="meal">
+      <div class="mh"><span class="name" style="text-transform:none;letter-spacing:0">${r.n}</span>
+        <span class="mac">${r.k} kcal · ${r.p}p per serving · ${slot}</span></div>
+      <div class="item">
+        <div><div class="fs">serves ${r.sv} · ${r.t} min ${gTag(r.g)}</div></div>
+        <div style="display:flex;align-items:center;gap:8px">
+          <button class="swap" onclick="togRec('${id}')">recipe</button>
+          <button class="swap" style="${stStyle}" onclick="cycleMeal('${r.n}')">${st==='no'?"won't eat":st==='fav'?'favorite':'in rotation'}</button>
+        </div>
+      </div>
+      <div class="recipe hide" id="${id}">
+        <div class="rgrid">
+          <div><h4>Shopping — makes ${r.sv} servings</h4><ul class="ingl">${r.i.map(x=>`<li><span>${x[0]}</span><b>${grams(x[1],x[0])}</b></li>`).join('')}</ul></div>
+          <div><h4>Method</h4><ol class="meth">${r.m.map(s=>`<li>${s}</li>`).join('')}</ol></div>
+        </div>
+        ${r.note?`<div class="note" style="margin:12px 0 0"><p style="margin:0">${r.note}</p></div>`:''}
+      </div>
+    </div>`;
+  }).join('');
+}
+
 function stashDay(){
   if(!S.day) return;
   S.recent=S.recent||[];
@@ -1921,6 +2035,8 @@ function planText(){
   L.push(`${S.sex==='m'?'Male':S.sex==='f'?'Female':'(sex not set)'}, ${S.age||'—'}, ${S.ft!=null?S.ft+"'"+(S.inch||0)+'"':'—'}, ${S.wt||'—'} lb${S.goal?`, goal ${S.goal} lb`:''}`);
   L.push(`Sport: ${sportName()} — ${S.court} session${S.court===1?'':'s'} a week, about ${S.courtmin} min each`);
   if((S.extra||[]).length) L.push(`Also: `+S.extra.map(a=>{const sp=SPORTS.find(x=>x.id===a.id);return (a.id==='lifting'?'extra gym':(sp?sp.n:a.id))+` ×${a.perWk}/wk, ~${a.min} min`;}).join('; '));
+  const skp=SLOTS.filter(d=>S.skip&&S.skip[d.id]).map(d=>d.id);
+  if(skp.length) L.push(`Doesn't eat: ${skp.join(', ')} (moves those calories into the other meals)`);
   L.push(`Days outside training: ${(ACTS.find(x=>x[0]===S.act)||[])[1]||S.act}`);
   L.push(`Lifting at: ${(GYMS.find(g=>g[0]===S.gym)||[])[1]||S.gym}`);
   L.push(`Working around: ${(S.inj.length&&!S.inj.includes('none'))?S.inj.join(', '):'nothing flagged'}`);
@@ -2006,6 +2122,42 @@ function renderLift(){
   if(has('wrist')) flags.push("<strong>Wrist / elbow:</strong> neutral-grip and dumbbell work over straight-bar wherever possible. If elbow pain shows up on court, it's paddle grip size, shot volume, and forearm strength — in that order.");
   if(flags.length) h+=`<div class="card"><div class="kicker">Programd around you</div><ul class="clean">${flags.map(f=>'<li>'+f+'</li>').join('')}</ul></div>`;
 
+  const CUES={
+   "Back squat":"Bar on the upper back, brace, sit down between your heels, stand. Depth you control beats depth you don't.",
+   "Goblet squat":"Hold one dumbbell at your chest; elbows track inside the knees at the bottom.",
+   "Heel-elevated goblet squat (flat, stiff shoe)":"Heels on a small plate — keeps the shins forward and the big toe out of the argument.",
+   "Box squat":"Sit back to a box, touch it under control, stand. No bouncing off it.",
+   "Deadlift":"Bar over mid-foot, chest proud, push the floor away. The bar stays against you the whole way.",
+   "Trap-bar deadlift":"Stand inside the bar, neutral grips, drive through the floor — the friendliest hinge there is.",
+   "Dumbbell Romanian deadlift":"Soft knees, push the hips back until the hamstrings say stop, stand tall.",
+   "Bench press":"Feet planted, shoulder blades pinched under you, bar to mid-chest, press.",
+   "Dumbbell floor press":"Press lying on the floor; upper arms touch down each rep — a shoulder-friendly range by design.",
+   "Neutral-grip dumbbell floor press":"Same floor press with palms facing each other — the kindest pressing angle available.",
+   "Overhead press":"Glutes tight, ribs down, press past your face to a locked-out finish overhead.",
+   "Half-kneeling dumbbell press":"One knee down, press the opposite-side dumbbell; the kneeling keeps your back honest.",
+   "Landmine press":"One end of the bar wedged in a corner; press up-and-forward — overhead strength without overhead range.",
+   "Barbell row":"Hinge to about 45 degrees, pull the bar to the lower ribs. If you have to heave, it's too heavy.",
+   "One-arm dumbbell row":"Hand and knee on a bench, pull the dumbbell to your hip, not your armpit.",
+   "Chest-supported row":"Chest on an incline bench — the bench holds your back so the row can be heavy.",
+   "Lat pulldown":"Pull the bar toward the collarbone, elbows driving down and back.",
+   "Band pulldown":"Band anchored high, kneel, pull to the chest with the same elbows-down intent.",
+   "Rear-foot elevated split squat":"Back foot on a bench, drop the back knee straight down, drive up through the front heel.",
+   "Split squat, shortened range":"Both feet on the floor, half depth, dead quiet joints — pain-free range only.",
+   "Step-up, flat foot":"Whole foot on the box, stand up through the heel, and control the way down — that half matters more.",
+   "Standing calf raise (straight leg) — heavy":"Full stretch at the bottom, a one-beat pause at the top. Heavy means actually heavy.",
+   "Seated calf raise (bent knee) — heavy":"Knee bent shifts the work to the deeper calf — the Achilles insurance muscle.",
+   "Pallof press":"Band at chest height from the side; press it straight out and refuse to be turned.",
+   "Suitcase carry":"One heavy dumbbell, walk tall, no leaning. A plank that goes places.",
+   "Face pulls":"Rope to the bridge of your nose, elbows high, thumbs finishing by your ears.",
+   "Face pulls + side-lying external rotation":"Face pulls as above; then lie on your side, elbow pinned to your ribs, rotate a light dumbbell up."
+  };
+  const POWER=[["Jump squats","Bodyweight or a light bar. Jump, land soft, reset, repeat — height with control."],
+   ["Med-ball slams","Ball overhead, slam it through the floor. All speed, no grinding."],
+   ["Lateral bounds","Push sideways off one leg, stick the landing on the other before going back."]];
+  h+=`<div class="card"><div class="kicker">Form</div><h3>Each exercise, one line</h3><ul class="clean">`
+    +Object.values(e).map(n=>`<li><strong>${n}</strong> — ${CUES[n]||'new one: watch a demonstration before loading it.'}</li>`).join('')
+    +POWER.map(p=>`<li><strong>${p[0]}</strong> — ${p[1]}</li>`).join('')
+    +`</ul><p class="quiet" style="margin-bottom:0">A line is a reminder, not a teacher. If a movement is new to you, watch a proper demonstration or ask a coach before you load it — technique first is rule two for a reason.</p></div>`;
   h+=`<div class="card"><div class="kicker">Tracker</div><h3>24 weeks, two sessions each</h3><div id="trk"></div></div>`;
   $('liftOut').innerHTML=h;
   let t='';
@@ -2236,10 +2388,11 @@ function runCheckin(){
 function renderHist(){
   const h=S.checkins||[];
   if(!h.length){$('ciHist').innerHTML='<p class="quiet">Nothing logged yet.</p>';return;}
-  $('ciHist').innerHTML=`<div class="scroll"><table><thead><tr><th>Date</th><th>Weight</th><th>Rate</th><th>Real burn</th><th>Call</th></tr></thead><tbody>`+
-    h.map(x=>`<tr><td>${x.d}</td><td>${x.now} lb</td><td>${x.ratePct}%</td><td>${x.empTDEE}</td><td>${x.title}</td></tr>`).join('')+
-    `</tbody></table></div>`;
+  $('ciHist').innerHTML=`<div class="scroll"><table><thead><tr><th>Date</th><th>Weight</th><th>Rate</th><th>Real burn</th><th>Call</th><th></th></tr></thead><tbody>`+
+    h.map((x,i)=>`<tr><td>${x.d}</td><td>${x.now} lb</td><td>${x.ratePct}%</td><td>${x.empTDEE}</td><td>${x.title}</td><td><button class="swap" title="Remove this entry" onclick="dropCI(${i})">×</button></td></tr>`).join('')+
+    `</tbody></table></div><p class="quiet" style="margin-top:8px">× removes an entry — for typos and test runs, not for fortnights you didn't like. The engine needs the honest ones.</p>`;
 }
+function dropCI(i){ (S.checkins||[]).splice(i,1); save(); renderHist(); paintHeader(); }
 
 /* ============================================================
    SAVE / LOAD  (file-based; storage used only if available)
@@ -2387,6 +2540,7 @@ function boot(){
 }
 function init(){
   buildNav();
+  if(/apple/i.test(navigator.vendor||'')){ const e=$('safariNote'); if(e) e.classList.remove('hide'); }
   migrate();
   const P=profiles();
   if(P.length===1) loadProfile(P[0].id);
