@@ -337,7 +337,7 @@ button.btn.red.armed{background:var(--bad);color:#fff;border-color:var(--bad)}
       <h3>1. You</h3>
       <div class="row r2">
         <div class="field"><label>First name (or whatever you want on this)</label><input type="text" id="s_name" placeholder="e.g. Sam"></div>
-        <div class="field"><label>Age</label><input type="number" id="s_age" value="45" min="18" max="90"></div>
+        <div class="field"><label>Age</label><input type="number" id="s_age" placeholder="years" min="18" max="90"></div>
       </div>
       <div class="field">
         <label>Sex</label>
@@ -345,14 +345,14 @@ button.btn.red.armed{background:var(--bad);color:#fff;border-color:var(--bad)}
         <small class="quiet">Asked because the metabolism and lean-mass equations genuinely differ — using the wrong one is worth a few hundred calories a day. It changes nothing else in the program.</small>
       </div>
       <div class="row r3">
-        <div class="field"><label>Height — feet</label><input type="number" id="s_ft" value="5" min="4" max="7"></div>
-        <div class="field"><label>Height — inches</label><input type="number" id="s_in" value="2" min="0" max="11"></div>
-        <div class="field"><label>Weight today (lb)</label><input type="number" id="s_wt" value="180" min="80" max="500"></div>
+        <div class="field"><label>Height — feet</label><input type="number" id="s_ft" placeholder="ft" min="4" max="7"></div>
+        <div class="field"><label>Height — inches</label><input type="number" id="s_in" placeholder="in" min="0" max="11"></div>
+        <div class="field"><label>Weight today (lb)</label><input type="number" id="s_wt" placeholder="this morning's number" min="80" max="500"></div>
       </div>
       <div class="row r2">
         <div class="field">
           <label>Goal weight (lb) — optional</label>
-          <input type="number" id="s_goal" value="160" min="80" max="500">
+          <input type="number" id="s_goal" placeholder="optional" min="80" max="500">
           <small class="quiet">A direction, not a promise. We'll tell you honestly how long it takes.</small>
         </div>
         <div class="field">
@@ -380,6 +380,12 @@ button.btn.red.armed{background:var(--bad);color:#fff;border-color:var(--bad)}
       <div class="row r2">
         <div class="field"><label id="lblCourt">Sessions per week (now)</label><input type="number" id="s_court" value="2" min="0" max="14"></div>
         <div class="field"><label>Typical session length (minutes)</label><input type="number" id="s_courtmin" value="60" min="10" max="300"></div>
+      </div>
+      <div class="field">
+        <label>Anything else you do most weeks? (optional — tap all that apply)</label>
+        <div class="choice" id="s_extra"></div>
+        <div id="extraRows"></div>
+        <small class="quiet">The two strength sessions in this program are already counted. Only add training beyond them — extra gym days, a second sport, regular rides or runs.</small>
       </div>
       <div class="field">
         <label>Where will you lift?</label>
@@ -1047,13 +1053,14 @@ const RECIPES=[
 
 /* ---------- STATE ---------- */
 const DEF={
-  name:"", age:45, sex:"f", ft:5, inch:2, wt:180, goal:160, bf:null,
+  name:"", age:null, sex:null, ft:null, inch:null, wt:null, goal:0, bf:null,
   act:"light", sport:"pickleball", sportname:"", court:2, courtmin:60,
   gym:"full", inj:[], notes:"",
   coachEmail:"benjaminpoolio@gmail.com", coachName:"Benjamin Pool",
   scale:"trend", event:"", eventwhen:"",
   food:{},           /* name -> "no" | "fav"  (evening items and sides) */
   meals:{},          /* recipe name -> "no" | "fav" */
+  extra:[],          /* other regular activities: [{id, perWk, min}] */
   checkins:[], week:1, day:null, recent:[], done:{}, _step:1, _built:false
 };
 let S=JSON.parse(JSON.stringify(DEF));
@@ -1185,9 +1192,13 @@ function pick(arr){return arr[Math.floor(Math.random()*arr.length)];}
 /* ---------- derived numbers ---------- */
 const EA_MIN=32;            /* our working floor, above the clinical 30 line */
 function calc(){
-  const wtKg=lb2kg(S.wt), htCm=(S.ft*12+ +S.inch)*2.54, htM=htCm/100;
+  /* Pre-setup, calc runs on neutral internals so nothing divides by zero.
+     Every surface that DISPLAYS these numbers is gated on S._built, so a
+     visitor never sees a figure that wasn't computed from them. */
+  const wt=S.wt||170, age=S.age||45, ftv=S.ft==null?5:S.ft, inv=S.inch==null?6:+S.inch;
+  const wtKg=lb2kg(wt), htCm=(ftv*12+inv)*2.54, htM=htCm/100;
   const male=S.sex==='m';
-  const rmr=10*wtKg+6.25*htCm-5*S.age+(male?5:-161);    /* Mifflin–St Jeor */
+  const rmr=10*wtKg+6.25*htCm-5*age+(male?5:-161);    /* Mifflin–St Jeor */
   const af=+(ACTS.find(a=>a[0]===S.act)||ACTS[1])[2];
   const base=rmr*af;                                    /* everything except training */
 
@@ -1199,11 +1210,17 @@ function calc(){
                                 : 0.252*wtKg + 0.473*htCm - 48.3);   /* Boer */
          bf=(1-ffm/wtKg)*100; }
 
-  /* training cost */
+  /* training cost — primary sport, this program's two lifting sessions, and
+     any other regular activity. Extras are averaged into every day exactly
+     like the lifting; only the primary sport is eaten back on its own day. */
   const met=sport().met;
   const courtKcal=Math.round(met*3.5*wtKg/200*S.courtmin);
   const liftKcal=200, liftDays=2;
-  const exDaily=Math.round((S.court*courtKcal + liftDays*liftKcal)/7);
+  const extraWk=(S.extra||[]).reduce((t,a)=>{
+    const sp=SPORTS.find(x=>x.id===a.id); if(!sp) return t;
+    return t + sp.met*3.5*wtKg/200*(a.min||60)*(a.perWk||0);
+  },0);
+  const exDaily=Math.round((S.court*courtKcal + liftDays*liftKcal + extraWk)/7);
   const tdee=Math.round(base+exDaily);
 
   /* protein from bodyweight adjusted down to BMI 30 */
@@ -1227,13 +1244,13 @@ function calc(){
   const realAvg=Math.round(rest+S.court*courtKcal/7);
   const realDef=Math.max(0,tdee-realAvg);
   const lbWk=round(realDef*7/3500,2);
-  const pctWk=round(lbWk/S.wt*100,2);
+  const pctWk=round(lbWk/wt*100,2);
 
-  const rateLo=round(S.wt*0.005,2), rateHi=round(S.wt*0.0075,2);
-  const toLose=Math.max(0,S.wt-S.goal);
+  const rateLo=round(wt*0.005,2), rateHi=round(wt*0.0075,2);
+  const toLose=Math.max(0,wt-(S.goal||0));
   const wksLo=lbWk>0?Math.round(toLose/lbWk):0;
   const wksHi=lbWk>0?Math.round(toLose/(lbWk*0.75)):0;
-  return {rmr:Math.round(rmr),base:Math.round(base),tdee,af,exDaily,bf:round(bf,1),ffm:round(ffm,1),
+  return {rmr:Math.round(rmr),base:Math.round(base),tdee,af,exDaily,extraDaily:Math.round(extraWk/7),bf:round(bf,1),ffm:round(ffm,1),
     proLo,proHi,proTarget,proFloor,intake:rest,courtIntake:court,eaFloor,ea,floored,
     courtKcal,realAvg,realDef,lbWk,pctWk,rateLo,rateHi,toLose,wksLo,wksHi,
     adjKg:round(adjKg,1),estimated:!S.bf,deficit,male,met};
@@ -1305,7 +1322,8 @@ function resetAll(){
 function renderWizard(){
   chips('s_sex',SEXES,S.sex,v=>{S.sex=v;renderWizard();paintHeader();renderNumbers();save();});
   chips('s_sport',SPORTS.map(x=>[x.id,x.n]),S.sport,v=>{
-    S.sport=v; $('s_sportname').classList.toggle('hide',v!=='other');
+    S.sport=v; S.extra=(S.extra||[]).filter(a=>a.id!==v);
+    $('s_sportname').classList.toggle('hide',v!=='other');
     $('lblCourt').textContent=sport().n==='Just the gym'?'Extra sessions per week':(sport().unit.charAt(0).toUpperCase()+sport().unit.slice(1)+'s per week');
     renderWizard(); paintHeader(); renderNumbers(); save();});
   chips('s_act',ACTS.map(a=>[a[0],a[1]]),S.act,v=>{S.act=v;renderWizard();});
@@ -1317,6 +1335,7 @@ function renderWizard(){
     renderWizard();},true);
   chips('s_scale',SCALES,S.scale,v=>{S.scale=v;renderWizard();});
   $('scaleExplain').innerHTML=SCALETEXT[S.scale];
+  renderExtraPicker();
   renderFoodPicker();
 }
 function renderFoodPicker(){
@@ -1347,20 +1366,64 @@ function renderFoodPicker(){
     renderFoodPicker(); save();
   });
 }
+/* Secondary activities: everything counts in the math; the sport tab still
+   follows the primary sport, where the injury and fueling detail matters. */
+function renderExtraPicker(){
+  const el=$('s_extra'); if(!el) return;
+  S.extra=S.extra||[];
+  const label=o=>o.id==='lifting'?'Extra gym sessions':o.n;
+  el.innerHTML=SPORTS.filter(x=>x.id!==S.sport&&x.id!=='other').map(o=>{
+    const on=S.extra.some(a=>a.id===o.id);
+    return `<button data-v="${o.id}" class="${on?'on':''}">${label(o)}</button>`;
+  }).join('');
+  el.querySelectorAll('button').forEach(b=>b.onclick=()=>{
+    const id=b.dataset.v;
+    if(S.extra.some(a=>a.id===id)) S.extra=S.extra.filter(a=>a.id!==id);
+    else S.extra.push({id,perWk:2,min:60});
+    renderExtraPicker(); paintHeader(); renderNumbers(); save();
+  });
+  $('extraRows').innerHTML=S.extra.map((a,i)=>{
+    const sp=SPORTS.find(x=>x.id===a.id)||{n:a.id};
+    return `<div class="row r3" style="margin-top:10px">
+      <div class="field" style="margin-bottom:0"><label>${a.id==='lifting'?'Extra gym':sp.n}</label></div>
+      <div class="field" style="margin-bottom:0"><label>Sessions / week</label><input type="number" min="1" max="14" value="${a.perWk}" onchange="setExtra(${i},'perWk',this.value,1,14)"></div>
+      <div class="field" style="margin-bottom:0"><label>Minutes each</label><input type="number" min="10" max="300" value="${a.min}" onchange="setExtra(${i},'min',this.value,10,300)"></div>
+    </div>`;
+  }).join('');
+}
+function setExtra(i,k,v,lo,hi){
+  if(!S.extra||!S.extra[i]) return;
+  S.extra[i][k]=Math.min(hi,Math.max(lo,+v||lo));
+  paintHeader(); renderNumbers(); save();
+}
 function readWizard(){
   const cl=(v,lo,hi)=>Math.min(hi,Math.max(lo,v));
-  S.name=$('s_name').value.trim(); S.age=cl(+$('s_age').value||45,18,90);
-  S.ft=cl(+$('s_ft').value||5,4,7); S.inch=cl(+$('s_in').value||2,0,11);
-  S.wt=cl(+$('s_wt').value||180,80,500);
-  const gl=+$('s_goal').value||0; S.goal=gl?cl(gl,80,500):0;
-  S.bf=$('s_bf').value?cl(+$('s_bf').value,5,65):null;
-  S.court=cl(+$('s_court').value||0,0,14); S.courtmin=cl(+$('s_courtmin').value||60,10,300);
+  /* blank stays blank — nothing here defaults to some other person's number */
+  const num=(id,lo,hi)=>{const r=$(id).value, v=+r; return r===''||!isFinite(v)?null:cl(v,lo,hi);};
+  S.name=$('s_name').value.trim();
+  S.age=num('s_age',18,90);
+  S.ft=num('s_ft',4,7);
+  S.inch=num('s_in',0,11); if(S.inch==null&&S.ft!=null) S.inch=0;
+  S.wt=num('s_wt',80,500);
+  const gl=num('s_goal',80,500); S.goal=gl||0;
+  S.bf=num('s_bf',5,65);
+  S.court=num('s_court',0,14); if(S.court==null) S.court=2;
+  S.courtmin=num('s_courtmin',10,300); if(S.courtmin==null) S.courtmin=60;
   S.sportname=($('s_sportname').value||'').trim();
   S.notes=$('s_notes').value;
 }
 function finishWiz(){
   const first=!S._built;
-  readWizard(); S._built=true; paintHeader(); save(); renderDay();
+  readWizard();
+  const missing=[];
+  if(!S.age) missing.push('age'); if(!S.sex) missing.push('sex');
+  if(S.ft==null) missing.push('height'); if(!S.wt) missing.push('weight');
+  if(missing.length){
+    wiz(1); save();
+    $('saveStatus').textContent='Still needed before the numbers can be honest: '+missing.join(', ');
+    return;
+  }
+  S._built=true; paintHeader(); save(); renderDay();
   if(!first) $('saveStatus').textContent='Updated · '+new Date().toLocaleTimeString();
   go('numbers');
 }
@@ -1404,6 +1467,14 @@ function paintHeader(){
 
 /* ---------- NUMBERS ---------- */
 function renderNumbers(){
+  if(!S._built){
+    $('numStats').innerHTML=`<div class="stat" style="grid-column:1/-1;padding:22px"><span class="l">Waiting on Setup</span><div class="x" style="margin:8px 0 12px">Everything on this page is calculated from you, so there is nothing honest to show yet.</div><button class="btn gold sm" onclick="go('setup')">Do the five-minute Setup</button></div>`;
+    $('errorBars').innerHTML='';
+    $('eaBox').innerHTML='<p class="quiet" style="margin-bottom:0">Appears after Setup.</p>';
+    $('proBox').innerHTML='<p class="quiet" style="margin-bottom:0">Appears after Setup.</p>';
+    $('paceBox').innerHTML='<p class="quiet" style="margin-bottom:0">Appears after Setup.</p>';
+    return;
+  }
   const c=calc();
   $('numStats').innerHTML=`
    <div class="stat"><span class="l">Ordinary day</span><span class="n">${c.intake}</span><div class="x">calories</div></div>
@@ -1411,7 +1482,8 @@ function renderNumbers(){
    <div class="stat"><span class="l">Protein</span><span class="n">${c.proTarget} g</span><div class="x">floor ${c.proFloor} g · never below</div></div>
    <div class="stat"><span class="l">Expected loss</span><span class="n">${c.lbWk} lb</span><div class="x">per week · ${c.pctWk}% of you</div></div>
    <div class="stat"><span class="l">Energy availability</span><span class="n">${c.ea}</span><div class="x">floor is ${EA_MIN} · harm starts under 30</div></div>
-   <div class="stat"><span class="l">Honest timeline</span><span class="n">${c.wksLo}–${c.wksHi}</span><div class="x">weeks to ${S.goal||'goal'} lb</div></div>`;
+   <div class="stat"><span class="l">Honest timeline</span><span class="n">${c.wksLo}–${c.wksHi}</span><div class="x">weeks to ${S.goal||'goal'} lb</div></div>`
+   + ((S.extra||[]).length?`<div class="stat" style="grid-column:1/-1;text-align:left;padding:10px 14px"><span class="x">Also counted: ${S.extra.map(a=>{const sp=SPORTS.find(x=>x.id===a.id);return (a.id==='lifting'?'extra gym':(sp?sp.n.toLowerCase():a.id))+' ×'+a.perWk+'/wk'}).join(', ')} — about ${c.extraDaily} calories a day, averaged in the same way as the lifting.</span></div>`:'');
 
   $('errorBars').innerHTML=`
    <div class="scroll"><table>
@@ -1549,6 +1621,10 @@ function eveningPool(notName){
 const eMult=(f,kT)=>f.d?1:Math.min(2,Math.max(.5,Math.round(kT/f.k*2)/2));
 
 function buildDay(training){
+  if(!S._built){
+    $('dayOut').innerHTML=`<div class="card"><p class="quiet" style="margin-bottom:8px">The kitchen cooks to your numbers, and it doesn't have them yet.</p><div class="btnrow"><button class="btn gold sm" onclick="go('setup')">Do the five-minute Setup</button></div></div>`;
+    return;
+  }
   const c=calc();
   const kT=training?c.courtIntake:c.intake;
   S.day={training:!!training,kcalTarget:kT,proTarget:c.proTarget,slots:[]};
@@ -1842,8 +1918,9 @@ function makeList(){
 function planText(){
   const L=[];
   L.push(`Name: ${S.name||'(not given)'}`);
-  L.push(`${S.sex==='m'?'Male':'Female'}, ${S.age}, ${S.ft}'${S.inch}", ${S.wt} lb${S.goal?`, goal ${S.goal} lb`:''}`);
+  L.push(`${S.sex==='m'?'Male':S.sex==='f'?'Female':'(sex not set)'}, ${S.age||'—'}, ${S.ft!=null?S.ft+"'"+(S.inch||0)+'"':'—'}, ${S.wt||'—'} lb${S.goal?`, goal ${S.goal} lb`:''}`);
   L.push(`Sport: ${sportName()} — ${S.court} session${S.court===1?'':'s'} a week, about ${S.courtmin} min each`);
+  if((S.extra||[]).length) L.push(`Also: `+S.extra.map(a=>{const sp=SPORTS.find(x=>x.id===a.id);return (a.id==='lifting'?'extra gym':(sp?sp.n:a.id))+` ×${a.perWk}/wk, ~${a.min} min`;}).join('; '));
   L.push(`Days outside training: ${(ACTS.find(x=>x[0]===S.act)||[])[1]||S.act}`);
   L.push(`Lifting at: ${(GYMS.find(g=>g[0]===S.gym)||[])[1]||S.gym}`);
   L.push(`Working around: ${(S.inj.length&&!S.inj.includes('none'))?S.inj.join(', '):'nothing flagged'}`);
@@ -1974,7 +2051,7 @@ function renderSeason(){
    COURT / MIND helpers
    ============================================================ */
 function renderCourt(){
-  const c=calc(), kg=lb2kg(S.wt), sp=sport(), nm=sportName();
+  const c=calc(), kg=lb2kg(S.wt||170), sp=sport(), nm=sportName();
   $('sportKicker').textContent = sp.id==='lifting' ? 'Movement' : nm;
   $('sportH').textContent = sp.id==='lifting'
     ? 'The reason any of this matters' : `${nm} — the reason any of this matters`;
@@ -1983,7 +2060,7 @@ function renderCourt(){
     ? 'What actually goes wrong in the gym' : `What actually hurts people who do ${nm.toLowerCase()}`;
 
   const perHr=Math.round(sp.met*3.5*kg/200*60);
-  $('sportCost').innerHTML=`
+  $('sportCost').innerHTML= !S._built ? '<p class="quiet" style="margin-top:12px">Session costs at your size appear once Setup is done.</p>' : `
     <div class="grid g3" style="margin-top:16px">
       <div class="stat"><span class="l">Per hour</span><span class="n">${perHr}</span><div class="x">calories, at your size</div></div>
       <div class="stat"><span class="l">Your session</span><span class="n">${c.courtKcal}</span><div class="x">${S.courtmin} min</div></div>
@@ -2001,7 +2078,7 @@ function renderCourt(){
     <div class="note"><p style="margin-bottom:0">${sp.hook}</p></div>
     <p class="quiet">One rule that holds across every sport that has been studied: <strong>previous injury is the strongest single predictor of the next one.</strong> Whatever you've hurt before deserves specific attention, not avoidance. <span class="tag t-a">Strong</span></p>`;
 
-  $('fuelOut').innerHTML=`<p>At your bodyweight, ${sp.id==='lifting'?'an extra session':'a '+sp.unit} costs roughly <strong>${perHr} calories an hour</strong> — about <strong>${c.courtKcal}</strong> for your usual ${S.courtmin} minutes. That number is already built into your ${sp.unit}-day calorie target.</p>`;
+  $('fuelOut').innerHTML= !S._built ? '<p class="quiet">Appears after Setup.</p>' : `<p>At your bodyweight, ${sp.id==='lifting'?'an extra session':'a '+sp.unit} costs roughly <strong>${perHr} calories an hour</strong> — about <strong>${c.courtKcal}</strong> for your usual ${S.courtmin} minutes. That number is already built into your ${sp.unit}-day calorie target.</p>`;
   $('fuelShort').innerHTML=`You are not running out of fuel. Adding 40 g of carbs to a session that burned ${c.courtKcal} erases a large share of your deficit for zero performance benefit.`;
 
   $('tt_pre').innerHTML=`<strong>${Math.round(kg*1)}–${Math.round(kg*2)} g of carbohydrate</strong> plus 20–40 g protein. Low fat, low fiber. Oatmeal, banana, honey and a scoop of whey does it.`;
@@ -2044,6 +2121,10 @@ function renderCIChips(){
   chips('c_str',OPT_S,CI.str,v=>{CI.str=v;renderCIChips();});
 }
 function runCheckin(){
+  if(!S._built){
+    $('ciOut').innerHTML='<div class="card"><p class="quiet" style="margin-bottom:0">Do Setup first — the check-in engine decides against your numbers, and it doesn\'t have them yet.</p></div>';
+    return;
+  }
   const c=calc();
   const now=+$('c_now').value, then=+$('c_then').value, kcal=+$('c_kcal').value;
   const proDays=+$('c_pro').value, lifts=+$('c_lift').value, sleep=+$('c_sleep').value;
@@ -2279,7 +2360,7 @@ function fillForm(){
   set('s_sportname',S.sportname); set('s_coachname',S.coachName); set('s_coachemail',S.coachEmail);
   const sn=$('s_sportname'); if(sn) sn.classList.toggle('hide',S.sport!=='other');
   set('s_name',S.name); set('s_age',S.age); set('s_ft',S.ft); set('s_in',S.inch);
-  set('s_wt',S.wt); set('s_goal',S.goal); set('s_bf',S.bf); set('s_court',S.court);
+  set('s_wt',S.wt); set('s_goal',S.goal||''); set('s_bf',S.bf); set('s_court',S.court);
   set('s_courtmin',S.courtmin); set('s_notes',S.notes);
 }
 function injectAverager(){
